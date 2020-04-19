@@ -21,9 +21,6 @@ exit
 
 ## Install in local
 
-Jormungandr is served witk nginx and passenger.
-We use a postgresql database, already installen on the server.
-
 ```
 virtualenv Jormungandr
 cd Jormungandr
