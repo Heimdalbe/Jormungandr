@@ -1,0 +1,16 @@
+/* Intranet */
+div.noBullet ul {
+    list-style: none;
+}
+
+.custAlert{
+    position:relative;
+    padding:.75rem 1.25rem;
+    margin-bottom:1rem;
+    border:1px solid transparent;
+    border-radius:.25rem
+}
+
+.body-padding {
+    padding: 5em 0 10em 0;
+}

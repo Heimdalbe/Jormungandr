@@ -1,0 +1,50 @@
+{% extends 'Intranet/base.html' %}
+{% block title %} | Intranet{% endblock %}
+{% block body %}
+<div class="body-padding">
+    <section id="services" class="services">
+        <div class="container">
+            <h1 class="pb-5">Welkom {{ user.username }}</h1>
+            <p>
+                Zoals onze praeses al verkondigde in onderstaand bericht zal alles een beetje digitaler moeten, zo ook onze werking.
+                De beste WEB-ICT van Gent heeft hier een site ineen gestoken om dat te vergemakkelijken. <br><br>
+            </p>
+
+            <p class="pl-5"> Geachte leden,<br><br>
+
+            In teken van de COVID-19-pandemie besliste de Vergadering der Konventsvoorzitters om duidelijkheid te
+            verschaffen aan zijn studentenverenigingen. Hierbij worden alle niet-digitale activiteiten van
+            studentenverenigingen opgeschort in het kader van de volksgezondheid en dit zeker tot en met zaterdag 4 juli.<br><br>
+
+            Dit houdt in dat wij alle activiteiten staken tot deze restricties worden opgeheven. <br><br>
+
+            </p>
+            <!-- Module Icons Section -->
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100" style="text-align: center;">
+                        <h4 class="card-header">Profiel</h4>
+                        <div class="card-body">
+                          <p class="card-text">Profiel aanpassen</p>
+                        </div>
+                        <div class="card-footer" style="text-align: center;">
+                          <a href="{% url 'Intranet:edit_profile' %}" class="btn btn-primary">Meer</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100" style="text-align: center;">
+                        <h4 class="card-header">Stemmen</h4>
+                        <div class="card-body">
+                            <p class="card-text">Verkiezingsmodule</p>
+                        </div>
+                        <div class="card-footer" style="text-align: center;">
+                          <a href="{% url 'Intranet:voting' %}" class="btn btn-primary">Meer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

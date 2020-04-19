@@ -1,0 +1,18 @@
+{% extends 'Jormungandr/base.html' %}
+{% load user_tags %}
+{% load static %}
+{% block title %} | {{ page.title }}{% endblock %}
+{% block body %}
+<!-- ======= Services Section ======= -->
+<div class="body-padding">
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+                <h2>{{ page.title }}</h2>
+                <p>{{ page.description|markdown }}</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

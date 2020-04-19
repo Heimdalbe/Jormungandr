@@ -1,0 +1,91 @@
+{% extends 'Intranet/base.html' %}
+{% block title %} | Profiel{% endblock %}
+
+{% block body %}
+<div class="body-padding">
+    <section id="services" class="services">
+        <div class="container">
+            <div class="row pb-5">
+                <div class="col-sm-12">
+                    <h3>Profiel</h3><br>
+                    <ul>
+                    {% if error %}
+                        <li><p style="color:red;"><strong>{{ error }}</strong></p></li>
+                    {% endif %}
+                    {% for error in user_form.errors %}
+                        <li><p style="color:red;"><strong>{{ error|escape }}</strong></p></li>
+                    {% endfor %}
+                    {% for error in profile_form.errors %}
+                        {% if error == "geboortedatum" %}
+                        <li><p style="color:red;"><strong>Geboortedatum is een verplicht veld, van het formaat JJJJ-MM-DD (Jaar-Maand-Dag)</strong></p></li>
+                        {% else %}
+                        <li><p style="color:red;"><strong>{{ error|escape }}</strong></p></li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                    <form method="post">
+                        {%  csrf_token %}
+                        <div class="form-group row col-sm-12">
+                            <label class="control-label col-sm-2" for="id_first_name">Voornaam<span style="color: red">*</span>: </label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="id_first_name" maxlength="30" name="first_name" type="text" value="{% if user_form.first_name.value != None %}{{ user_form.first_name.value }}{% endif %}" />
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-12">
+                            <label class="control-label col-sm-2" for="id_last_name">Achternaam<span style="color: red">*</span>:</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="id_last_name" maxlength="30" name="last_name" type="text" value="{% if user_form.last_name.value != None %}{{ user_form.last_name.value }}{% endif %}"  />
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-12">
+                            <label class="control-label col-sm-2" for="id_email">Emailadres<span style="color: red">*</span>:</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="id_email" maxlength="254" name="email" type="email" value="{% if user_form.email.value != None %}{{ user_form.email.value }}{% endif %}" />
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-12">
+                            <label class="control-label col-sm-2" for="{{ profile_form.gsm.id_for_label }}">GSM nummer:</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="id_gsm" maxlength="254" name="gsm" type="text" value="{% if profile_form.gsm.value != None %}{{ profile_form.gsm.value }}{% endif %}" />
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-12">
+                            <label class="control-label col-sm-2" for="{{ profile_form.interesses.id_for_label }}">Interesses<span style="color: red">*</span>:</label>
+                            <div class="col-sm-6 noBullet">
+                                {{ profile_form.interesses }}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-12">
+                            <label class="control-label col-sm-2" for="{{ profile_form.geslacht.id_for_label }}">Geslacht:</label>
+                            <div class="col-sm-6">
+                                {{ profile_form.geslacht }}
+                             </div>
+                        </div>
+                        <div class="form-group row col-sm-12 pt-3">
+                            <label class="control-label col-sm-6" for="id_mails">Ik geef Heimdal toestemming om mij mails te sturen:</label>
+                            <div class="col-sm-2">
+                                {{ profile_form.mails }}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-12 pt-3">
+                            <label class="control-label col-sm-6" for="id_policy_approved">Ik heb de <a href="https://www.hermesgent.be/policy/">Privacy Policy</a> gelezen en ben akkoord<span style="color: red">*</span>:</label>
+                            <div class="col-sm-2">
+                                {{ profile_form.policy_approved }}
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-12 pt-3">
+                            <label class="control-label col-sm-12" for="id_password">Wachtwoord: Om te veranderen klik <a href="{% url 'Intranet:edit_password' %}">hier</a>.</label>
+                        </div>
+                        <div class="offset-md-2 col-sm-4">
+                            <button class="btn btn-block btn-success" type="submit">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+

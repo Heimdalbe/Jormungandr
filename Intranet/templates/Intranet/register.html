@@ -1,0 +1,65 @@
+{% extends 'Intranet/base.html' %}
+{% block title %} | Registreer{% endblock %}
+
+{% block body %}
+<div class="body-padding">
+    <section id="services" class="services">
+        <div class="container">
+            <div class="row pb-5">
+                <div class="col-sm-12">
+                    <h3>Register for an Account</h3><br>
+                    <ul>
+                        {% for error in form.errors %}
+                        {% if error == "username" %}
+                             <li><p style="color:red;"><strong>De gebruikersnaam moet uniek zijn, degene die je ingegeven hebt is al genomen.</strong></p></li>
+                        {% elif error == "password2" %}
+                             <li><p style="color:red;"><strong>De wachtwoorden komen niet overeen.</strong></p></li>
+                        {% else %}
+                             <li><p style="color:red;"><strong>{{ error|escape }}</strong></p></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="id_username">
+                                Gebruikersnaam:
+                            </label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="id_username" maxlength="30" name="username" type="text">
+                                <small id="id_username" class="form-text text-muted">Gebruikersnaam moet 1 woord zijn, zonder spaties.</small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="id_password1">
+                                Wachtwoord:
+                            </label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="id_password1" maxlength="30" name="password1" type="password">
+                                <small id="id_username" class="form-text text-muted">Wachtwoord moet minstens 8 karakters zijn.</small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="id_password2">
+                                Wachtwoord bevestigen:
+                            </label>
+                            <div class="col-sm-4">
+                                <input class="form-control" id="id_password2" maxlength="30" name="password2" type="password">
+                            </div>
+                        </div>
+                        <div class="offset-md-2 col-sm-4 pt-4">
+                            <button class="btn btn-block btn-success" type="submit">Registreren</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="pt-5">
+                    Al een account? Klik<a href="{% url 'Intranet:login_user' %}"> hier</a> om in te loggen.
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+

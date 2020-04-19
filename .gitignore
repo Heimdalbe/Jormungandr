@@ -1,0 +1,13 @@
+*.pyc
+*.py~
+*.html~
+*.css~
+*.md~
+
+db.sqlite3
+files/
+.idea/
+secrets.py
+/static/
+.vscode/
+/Backend/migrations/

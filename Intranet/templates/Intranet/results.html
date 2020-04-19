@@ -1,0 +1,52 @@
+{% extends 'Intranet/base.html' %}
+{% block title %} | Resultaten{% endblock %}
+{% block body %}
+<div class="body-padding">
+    <section id="services" class="services">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'Intranet:voting' %}">Rondes</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ round.election.titel }} - {{ round.titel }}</li>
+                </ol>
+            </nav>
+            <h1 class="mb-3">Resultaten voor:</h1>
+            <h2 class="mb-5">{{ round.election.titel }}: {{ round.titel }}</h2>
+            <table class="table mb-5">
+                <thead>
+                    <tr>
+                        <th scope="col">Keuze</th>
+                        <th scope="col">Aantal stemmen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for choice in round.choice_set.all %}
+                    <tr>
+                        <td scope="col">{{ choice.keuze }}</td>
+                        <td scope="col">{{ choice.votes }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+            <h2>Mensen die gestemd hebben</h2>
+            <table class="table mb-5">
+                <thead>
+                    <tr>
+                        <th scope="col">Naam</th>
+                        <th scope="col">Aantal stemmen gespendeerd</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for persoon in round.round_votes.all %}
+                    <tr>
+                        <td scope="col">{{ persoon.user.last_name }} {{ persoon.user.first_name }}</td>
+                        <td scope="col">{{ persoon.votes }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+{% endblock %}
