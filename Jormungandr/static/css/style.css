@@ -10,7 +10,7 @@
 --------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
-  color: #444444;
+  color: #000000;
 }
 
 a {
@@ -24,6 +24,7 @@ a:hover {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
+  color: #000000;
 }
 
 /*--------------------------------------------------------------
@@ -37,8 +38,8 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50px;
   right: 15px;
   bottom: 15px;
-  background: #67b0d1;
-  color: #fff;
+  background: gray;
+  color: #FFFFFF;
   transition: display 0.5s ease-in-out;
   z-index: 99999;
 }
@@ -51,8 +52,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .back-to-top:hover {
-  color: #fff;
-  background: #86c0da;
+  color: #000000;
+  background: lightgrey;
   transition: background 0.2s ease-in-out;
 }
 
@@ -68,7 +69,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header.header-scrolled {
-  background: rgba(103, 176, 209, 0.8);
+  background: rgba(0, 0, 0, 0.8);
   height: 60px;
   padding: 10px 0;
 }
@@ -117,7 +118,7 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
   float: left;
   margin-top: -10px;
-  background: rgba(255, 255, 255, 0.2);
+  /*background: rgba(0, 0, 0, 0.2);*/
 }
 
 .nav-menu a {
@@ -144,10 +145,21 @@ h1, h2, h3, h4, h5, h6 {
 .header-scrolled .nav-menu a {
   color: #fff;
 }
+.header-scrolled .nav-menu a:after {
+  color: #FFD700;
+}
 
 .header-scrolled .nav-menu a:hover, .header-scrolled .nav-menu .active > a, .header-scrolled .nav-menu li:hover > a {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.5);
 }
+
+.header-scrolled .nav-menu .drop-down ul{
+  background: rgba(0, 0, 0, 0.8);
+  }
+
+.header-scrolled .nav-menu .drop-down ul a{
+  color: #FFFFFF;
+  }
 
 .nav-menu .drop-down ul {
   display: block;
@@ -158,7 +170,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0;
   visibility: hidden;
   padding: 10px 0;
-  background: #fff;
+  background: lightgray; /*rgba(0, 0, 0, 0.2)*/
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: ease all 0.3s;
 }
@@ -179,17 +191,18 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
   font-weight: 500;
   text-transform: none;
-  color: #25607a;
+  color: #2f4d5a;
 }
 
 .nav-menu .drop-down ul a:hover, .nav-menu .drop-down ul .active > a, .nav-menu .drop-down ul li:hover > a {
-  color: #67b0d1;
+  /*color: #67b0d1;*/
 }
 
 .nav-menu .drop-down > a:after {
   content: "\ea99";
   font-family: IcoFont;
   padding-left: 5px;
+
 }
 
 .nav-menu .drop-down .drop-down ul {
@@ -241,9 +254,11 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   text-align: right;
 }
-
-.mobile-nav-toggle i {
-  color: #fff;
+.header-scrolled .icofont-navigation-menu {
+  color: #FFFFFF!important;
+}
+.icofont-navigation-menu{
+  color: #000000;
 }
 
 .mobile-nav {
@@ -375,6 +390,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   font-weight: 700;
   text-shadow: -1px 0 2px #2f4d5a;
+  max-width: 80%;
 }
 
 #hero .btn-get-started {
@@ -435,7 +451,7 @@ section {
   font-weight: bold;
   position: relative;
   margin-bottom: 30px;
-  color: #2f4d5a;
+  color: #000000;
   z-index: 2;
 }
 
@@ -447,7 +463,7 @@ section {
   transform: translate(-50%, -50%);
   width: 122px;
   height: 66px;
-  background: url(../img/section-title-bg.png) no-repeat;
+  background: url(../img/section-title-bg-gray.png) no-repeat;
   z-index: -1;
 }
 
@@ -908,7 +924,7 @@ section {
 }
 
 .team .member .pic {
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .team .member .member-info {
@@ -1082,15 +1098,17 @@ section {
 }
 
 .contact .email-form button[type="submit"] {
-  background: #67b0d1;
+  background: #FFD700;
+  font-weight: bold;
   border: 0;
   padding: 10px 24px;
-  color: #fff;
+  color: #000000;
   transition: 0.4s;
 }
 
 .contact .email-form button[type="submit"]:hover {
-  background: #8ec4dd;
+  background: darkgray;
+  color: #FFFFFF;
 }
 
 @-webkit-keyframes animate-loading {
