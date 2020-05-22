@@ -35,6 +35,9 @@
                         {% if user.is_authenticated %}
                         <li><a href="{% url 'Intranet:voting' %}">Stemmen</a></li>
                         <li><a href="{% url 'Intranet:edit_profile' %}">Profiel</a></li>
+                        {% if user|has_group:"ICT" %}
+                        <a class="dropdown-item" href="/admin">Admin</a>
+                        {% endif %}
                         <li><a href="{% url 'Intranet:logout_user' %}">Uitloggen</a></li>
                         {% endif %}
                     </ul>
