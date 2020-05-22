@@ -10,11 +10,11 @@
 --------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
-  color: #444444;
+  color: #000000;
 }
 
 a {
-  color: #67b0d1;
+  color: gray;
 }
 
 a:hover {
@@ -24,6 +24,7 @@ a:hover {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
+  color: #000000;
 }
 
 /*--------------------------------------------------------------
@@ -37,8 +38,8 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50px;
   right: 15px;
   bottom: 15px;
-  background: #67b0d1;
-  color: #fff;
+  background: gray;
+  color: #FFFFFF;
   transition: display 0.5s ease-in-out;
   z-index: 99999;
 }
@@ -51,8 +52,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .back-to-top:hover {
-  color: #fff;
-  background: #86c0da;
+  color: #000000;
+  background: lightgrey;
   transition: background 0.2s ease-in-out;
 }
 
@@ -68,7 +69,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header.header-scrolled {
-  background: rgba(103, 176, 209, 0.8);
+  background: rgba(0, 0, 0, 0.8);
   height: 60px;
   padding: 10px 0;
 }
@@ -92,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
 #header .logo img {
   padding: 0;
   margin: 0;
-  max-height: 40px;
+  max-height: 50px;
 }
 
 @media (max-width: 768px) {
@@ -117,7 +118,7 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
   float: left;
   margin-top: -10px;
-  background: rgba(255, 255, 255, 0.2);
+  /*background: rgba(0, 0, 0, 0.2);*/
 }
 
 .nav-menu a {
@@ -144,10 +145,21 @@ h1, h2, h3, h4, h5, h6 {
 .header-scrolled .nav-menu a {
   color: #fff;
 }
+.header-scrolled .nav-menu a:after {
+  color: #FFD700;
+}
 
 .header-scrolled .nav-menu a:hover, .header-scrolled .nav-menu .active > a, .header-scrolled .nav-menu li:hover > a {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.5);
 }
+
+.header-scrolled .nav-menu .drop-down ul{
+  background: rgba(0, 0, 0, 0.8);
+  }
+
+.header-scrolled .nav-menu .drop-down ul a{
+  color: #FFFFFF;
+  }
 
 .nav-menu .drop-down ul {
   display: block;
@@ -158,7 +170,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0;
   visibility: hidden;
   padding: 10px 0;
-  background: #fff;
+  background: lightgray; /*rgba(0, 0, 0, 0.2)*/
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: ease all 0.3s;
 }
@@ -179,17 +191,18 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
   font-weight: 500;
   text-transform: none;
-  color: #25607a;
+  color: #2f4d5a;
 }
 
 .nav-menu .drop-down ul a:hover, .nav-menu .drop-down ul .active > a, .nav-menu .drop-down ul li:hover > a {
-  color: #67b0d1;
+  /*color: #67b0d1;*/
 }
 
 .nav-menu .drop-down > a:after {
   content: "\ea99";
   font-family: IcoFont;
   padding-left: 5px;
+
 }
 
 .nav-menu .drop-down .drop-down ul {
@@ -241,9 +254,11 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   text-align: right;
 }
-
-.mobile-nav-toggle i {
-  color: #fff;
+.header-scrolled .icofont-navigation-menu {
+  color: #FFFFFF!important;
+}
+.icofont-navigation-menu{
+  color: #000000;
 }
 
 .mobile-nav {
@@ -340,6 +355,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 100vh;
   background: url("../img/hero-bg.jpg") top center;
+
   background-size: cover;
   position: relative;
 }
@@ -374,6 +390,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   font-weight: 700;
   text-shadow: -1px 0 2px #2f4d5a;
+  max-width: 80%;
 }
 
 #hero .btn-get-started {
@@ -434,7 +451,7 @@ section {
   font-weight: bold;
   position: relative;
   margin-bottom: 30px;
-  color: #2f4d5a;
+  color: #000000;
   z-index: 2;
 }
 
@@ -446,7 +463,7 @@ section {
   transform: translate(-50%, -50%);
   width: 122px;
   height: 66px;
-  background: url(../img/section-title-bg.png) no-repeat;
+  background: url(../img/section-title-bg-gray.png) no-repeat;
   z-index: -1;
 }
 
@@ -907,7 +924,7 @@ section {
 }
 
 .team .member .pic {
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .team .member .member-info {
@@ -981,9 +998,6 @@ section {
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
-.contact {
-  padding-bottom: 80px;
-}
 
 .contact .info-box {
   color: #444444;
@@ -1015,13 +1029,11 @@ section {
   margin-bottom: 0;
 }
 
-.contact .php-email-form {
-  box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
-  padding: 30px;
-  background: #fff;
+.contact .email-form {
+  padding: 0 30px 30px;
 }
 
-.contact .php-email-form .validate {
+.contact .email-form .validate {
   display: none;
   color: red;
   margin: 0 0 15px 0;
@@ -1029,7 +1041,7 @@ section {
   font-size: 13px;
 }
 
-.contact .php-email-form .error-message {
+.contact .email-form .error-message {
   display: none;
   color: #fff;
   background: #ed3c0d;
@@ -1038,7 +1050,7 @@ section {
   font-weight: 600;
 }
 
-.contact .php-email-form .sent-message {
+.contact .email-form .sent-message {
   display: none;
   color: #fff;
   background: #18d26e;
@@ -1047,14 +1059,14 @@ section {
   font-weight: 600;
 }
 
-.contact .php-email-form .loading {
+.contact .email-form .loading {
   display: none;
   background: #fff;
   text-align: center;
   padding: 15px;
 }
 
-.contact .php-email-form .loading:before {
+.contact .email-form .loading:before {
   content: "";
   display: inline-block;
   border-radius: 50%;
@@ -1067,34 +1079,36 @@ section {
   animation: animate-loading 1s linear infinite;
 }
 
-.contact .php-email-form input, .contact .php-email-form textarea {
+.contact .email-form input, .contact .email-form textarea {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
 }
 
-.contact .php-email-form input::focus, .contact .php-email-form textarea::focus {
-  background-color: #67b0d1;
+.contact .email-form input::focus, .contact .email-form textarea::focus {
+  /*background-color: #67b0d1;*/
 }
 
-.contact .php-email-form input {
+.contact .email-form input {
   padding: 20px 15px;
 }
 
-.contact .php-email-form textarea {
+.contact .email-form textarea {
   padding: 12px 15px;
 }
 
-.contact .php-email-form button[type="submit"] {
-  background: #67b0d1;
+.contact .email-form button[type="submit"] {
+  background: #FFD700;
+  font-weight: bold;
   border: 0;
   padding: 10px 24px;
-  color: #fff;
+  color: #000000;
   transition: 0.4s;
 }
 
-.contact .php-email-form button[type="submit"]:hover {
-  background: #8ec4dd;
+.contact .email-form button[type="submit"]:hover {
+  background: darkgray;
+  color: #FFFFFF;
 }
 
 @-webkit-keyframes animate-loading {
@@ -1119,7 +1133,7 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #263f49;
+  background: #000000;
   padding: 0 0 30px 0;
   color: #fff;
   font-size: 14px;
@@ -1133,8 +1147,8 @@ section {
   margin-top: -90px;
   margin-bottom: 15px;
   background: white;
-  color: #2f4d5a;
-  border-top: 4px solid #67b0d1;
+  color: #000000;
+  border-top: 4px solid #FFD700;
   text-align: center;
   padding: 30px 20px;
 }
@@ -1157,7 +1171,7 @@ section {
 #footer .footer-top .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #2f4d5a;
+  background: #000000;
   color: #fff;
   line-height: 1;
   padding: 8px 0;
@@ -1170,8 +1184,8 @@ section {
 }
 
 #footer .footer-top .social-links a:hover {
-  background: #67b0d1;
-  color: #fff;
+  background: lightgray;
+  color: #000000;
   text-decoration: none;
 }
 
@@ -1195,7 +1209,7 @@ section {
 
 #footer .footer-top .footer-links ul i {
   padding-right: 2px;
-  color: #b5d9e9;
+  color: #FFD700;
   font-size: 18px;
   line-height: 1;
 }
@@ -1222,8 +1236,8 @@ section {
 }
 
 #footer .footer-top .footer-newsletter form {
-  margin-top: 30px;
-  background: #fff;
+  margin-top: 10px;
+  /*background: #fff;*/
   padding: 6px 10px;
   position: relative;
   border-radius: 4;
@@ -1232,11 +1246,12 @@ section {
 #footer .footer-top .footer-newsletter form input[type="email"] {
   border: 0;
   padding: 4px;
-  width: calc(100% - 110px);
+  /*width: calc(100% - 110px);*/
 }
 
 #footer .footer-top .footer-newsletter form input[type="submit"] {
   position: absolute;
+  font-weight: bold;
   top: 0;
   right: 0;
   bottom: 0;
@@ -1244,18 +1259,18 @@ section {
   background: none;
   font-size: 16px;
   padding: 0 20px;
-  background: #67b0d1;
-  color: #fff;
+  background: #FFD700;
+  color: #000000;
   transition: 0.3s;
   border-radius: 4;
 }
 
 #footer .footer-top .footer-newsletter form input[type="submit"]:hover {
-  background: #409cc5;
+  background: lightgrey;
 }
 
 #footer .copyright {
-  border-top: 1px solid #385b6b;
+  border-top: 1px solid darkgray;
   text-align: center;
   padding-top: 30px;
 }

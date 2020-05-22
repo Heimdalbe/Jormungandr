@@ -3,73 +3,100 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Heimdal {% block title %}{% endblock %}</title>
-
     <!-- Favicons -->
     <link href="{% static 'img/favicon.png' %}" rel="icon">
 
     {% include 'Jormungandr/stylesheets.html' %}
 </head>
-    <body>
-        {% include 'Jormungandr/navigation.html'  %}
-        {% block banner %}{% endblock %}
-        <!-- Main Wrapper -->
-        <main id="main">
-            {% block body %}{% endblock %}
-        </main>
-        <!-- ======= Footer ======= -->
-        <footer id="footer">
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="footer-info" data-aos="fade-up" data-aos-delay="50">
-                                <h3>Heimdal</h3>
-                                <p class="pb-3"><em>Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een groep studenten, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in Geeky Stuff, samen wilt brengen.</em></p>
-                                <p>
-                                Valentin Vaerwijckweg 1 <br>
-                                9000 Gent<br><br>
-                                <strong>Website:</strong> <a href="{% url 'index' %}">heimdal.be</a><br>
-                                <strong>Email:</strong><a href="mailto:gate@heimdal.be">gate@heimdal.be</a><br>
-                                </p>
-                                <div class="social-links mt-3">
-                                    <a href="https://www.facebook.com/heimdal.be" class="facebook"><i class="bx bxl-facebook"></i></a>
-                                    <a href="https://www.instagram.com/heimdal.be/?hl=en" class="instagram"><i class="bx bxl-instagram"></i></a>
-                                    <a href="https://www.linkedin.com/company/heimdal-be/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                                    <a href="https://www.twitch.tv/heimdalvzw" class="twitch"><i class="bx bxl-twitch"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-2 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="150">
-                            <h4>Handige Links</h4>
-                            <ul>
-                                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'index' %}">Home</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'cms' 'overons' %}">Over ons</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                                <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6 footer-newsletter" data-aos="fade-up" data-aos-delay="350">
-                            <h4>Nieuwsbrief</h4>
-                            <p>Vul hier je emailadres in voor je in te schrijven voor onze nieuwsbrief</p>
-                            <form action="" method="post">
-                                <input type="email" name="email"><input type="submit" value="Subscribe">
-                            </form>
+<body>
+{% include 'Jormungandr/navigation.html' %}
+{% block banner %}{% endblock %}
+<!-- Main Wrapper -->
+<main id="main">
+    {% block body %}{% endblock %}
+</main>
+<!-- ======= Footer ======= -->
+<footer id="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-info" data-aos="fade-up" data-aos-delay="50">
+                        <h3>Heimdal</h3>
+                        <p class="pb-3"><em>Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een
+                            groep studenten, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in
+                            Geeky Stuff, samen wilt brengen.</em></p>
+                        <p>
+                            Valentin Vaerwijckweg 1 <br>
+                            9000 Gent<br><br>
+                            <strong>Website:</strong> <a href="{% url 'index' %}">heimdal.be</a><br>
+                            <strong>Email:</strong><a href="mailto:gate@heimdal.be">gate@heimdal.be</a><br>
+                        </p>
+                        <div class="social-links mt-3">
+                            <a href="https://www.facebook.com/heimdal.be" class="facebook"><i
+                                    class="bx bxl-facebook"></i></a>
+                            <a href="https://www.instagram.com/heimdal.be/?hl=en" class="instagram"><i
+                                    class="bx bxl-instagram"></i></a>
+                            <a href="https://www.linkedin.com/company/heimdal-be/" class="linkedin"><i
+                                    class="bx bxl-linkedin"></i></a>
+                            <a href="https://www.twitch.tv/heimdalvzw" class="twitch"><i class="bx bxl-twitch"></i></a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="container">
-                <div class="copyright">
-                    &copy;  Copyright {% now 'Y' %} <strong><span>Heimdal.be</span></strong>. All Rights Reserved
+
+                <div class="col-lg-2 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="150">
+                    <h4>Handige Links</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{% url 'index' %}">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{% url 'cms' 'overons' %}">Over ons</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 contact" data-aos="fade-up" data-aos-delay="350">
+                    <h4>Contact</h4>
+                    <form action="" method="post" class="email-form">
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
+                                       data-rule="minlen:4" data-msg="Please enter at least 4 chars"/>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <input type="email" class="form-control" name="email" id="email"
+                                       placeholder="Your Email" data-rule="email"
+                                       data-msg="Please enter a valid email"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+                                   data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject"/>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" rows="5" data-rule="required"
+                                      data-msg="Please write something for us" placeholder="Message"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit">Send Message</button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
-        </footer><!-- End Footer -->
+        </div>
+    </div>
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright {% now 'Y' %} <strong><span class="footer-heimdal-name">Heimdal.be</span></strong>. All
+            Rights Reserved
+        </div>
+    </div>
+</footer><!-- End Footer -->
 
-        <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
-        {% include 'Jormungandr/scripts.html' %}
-    </body>
+{% include 'Jormungandr/scripts.html' %}
+</body>
 </html>

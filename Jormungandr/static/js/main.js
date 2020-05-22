@@ -19,6 +19,7 @@
           scrollto -= $('#header').outerHeight()
           if (!$('#header').hasClass('header-scrolled')) {
             scrollto += scrolled;
+
           }
         }
         if ($(this).attr("href") == '#header') {
@@ -74,11 +75,19 @@
   }
 
   // Toggle .header-scrolled class to #header when page is scrolled
+
   $(window).scroll(function() {
     if ($(this).scrollTop() > 100) {
       $('#header').addClass('header-scrolled');
+      $('.drop-down').addClass('header-scrolled');
+      $('.mobile-nav-toggle').addClass('header-scrolled');
+      $(".banner-logo").attr("src", "../static/img/Heimdal Banner white.png");
+
     } else {
       $('#header').removeClass('header-scrolled');
+      $('.drop-down').removeClass('header-scrolled');
+      $('.mobile-nav-toggle').removeClass('header-scrolled');
+      $(".banner-logo").attr("src", "../static/img/Heimdal Banner black.png");
     }
   });
   if ($(window).scrollTop() > 100) {
