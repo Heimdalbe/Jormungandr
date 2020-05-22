@@ -108,8 +108,24 @@ def access_denied(request):
 @login_required
 @user_passes_test(lambda u: u.profile.policy_approved == True, login_url='/Intranet/access_denied')
 def voting(request):
-    elections = Election.objects.filter(visible=True).order_by('order')
-    return render(request, 'Intranet/voting.html', {'elections': elections})
+    context = {'elections': Election.objects.filter(visible=True).order_by('order')}
+    if 'status' in request.session:
+        try:
+            if request.session['status'] == 'ok':
+                context['message'] = "Uw stem werd goed geregistreerd."
+                del request.session['status']
+            if request.session['status'] == 'not_yet':
+                context['message'] = "U mag hier nog niet stemmen."
+                del request.session['status']
+            if request.session['status'] == 'not_yet_detail':
+                context['erMessage'] = "U kan hier (nog) niet stemmen."
+                del request.session['status']
+            if request.session['status'] == 'not_yet_result':
+                context['erMessage'] = "De resultaten zijn nog niet open gezet."
+                del request.session['status']
+        except KeyError:
+            pass
+    return render(request, 'Intranet/voting.html', context)
 
 
 @login_required
@@ -119,12 +135,8 @@ def detail(request, pk):
     if round.actief:
         return render(request, 'Intranet/vote.html', {'round': round, 'users': users})
     else:
-        message = "U kan hier (nog) niet stemmen."
-        round = get_object_or_404(Round, pk=pk)
-        elections = Election.objects.filter(visible=True).order_by('order')
-        return render(request, 'Intranet/voting.html', {
-            'round': round, 'users': users, 'erMessage': message, 'elections': elections
-        })
+        request.session['status'] = 'not_yet_detail'
+        return redirect('/intranet/voting')
 
 
 @login_required
@@ -142,9 +154,8 @@ def vote(request, pk):
         else:
             res = selected_choice.vote(request.user)
             if 'ok' in res:
-                elections = Election.objects.filter(visible=True)
-                message = "Uw stem werd goed geregistreerd."
-                return render(request, 'Intranet/voting.html', {'elections': elections, 'message': message})
+                request.session['status'] = 'ok'
+                return redirect('/intranet/voting')
             if 'profile_incomplete' in res:
                 return render(request, 'Intranet/vote.html', {
                     'round': round,
@@ -163,9 +174,8 @@ def vote(request, pk):
                 'error_message': "Je al gestemd in deze ronde."
             })
     else:
-        message = "U mag hier nog niet stemmen."
-        elections = Election.objects.filter(visible=True)
-        return render(request, 'Intranet/voting.html', {'elections': elections, 'erMessage': message})
+        request.session['status'] = 'not_yet'
+        return redirect('/intranet/voting')
 
 
 @login_required
@@ -175,7 +185,5 @@ def results(request, pk):
     if request.user.groups.filter(name='Kiescomite').count() != 0 or round.resultatenactief:
         return render(request, 'Intranet/results.html', {'round': round, 'roundVotes': roundVotes})
     else:
-        message = "De resultaten zijn nog niet open gezet."
-        elections = Election.objects.filter(visible=True)
-        return render(request, 'Intranet/voting.html', {'elections': elections, 'erMessage': message})
-
+        request.session['status'] = 'not_yet_result'
+        return redirect('/intranet/voting')
