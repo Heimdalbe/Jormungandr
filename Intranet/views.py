@@ -92,7 +92,7 @@ def edit_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            return redirect('/Intranet/edit_profile/')
+            return redirect('/intranet/edit_profile/')
         else:
             return render(request, 'Intranet/edit_password.html', {"form": form})
 
@@ -106,7 +106,7 @@ def access_denied(request):
 
 
 @login_required
-@user_passes_test(lambda u: u.profile.policy_approved == True, login_url='/Intranet/access_denied')
+@user_passes_test(lambda u: u.profile.policy_approved == True, login_url='/intranet/access_denied')
 def voting(request):
     elections = Election.objects.filter(visible=True).order_by('order')
     return render(request, 'Intranet/voting.html', {'elections': elections})
