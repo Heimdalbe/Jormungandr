@@ -103,7 +103,7 @@ class Choice(models.Model):
             return 'profile_incomplete'
         if user.profile.election_active:
             try:
-                self.choice_votes.create(user=user, round=self.round, choice=self, votes=user.profile.votes)
+                UserVotes.create(user=user, round=self.round, votes=user.profile.votes)
                 self.votes += user.profile.votes
                 self.save()
             except IntegrityError:
@@ -116,7 +116,6 @@ class Choice(models.Model):
 class UserVotes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_votes")
     round = models.ForeignKey(Round, on_delete=models.CASCADE, related_name="round_votes")
-    choice = models.ForeignKey(Choice, on_delete=models.CASCADE, related_name="choice_votes")
     votes = models.IntegerField(default=0)
 
     def __str__(self):
