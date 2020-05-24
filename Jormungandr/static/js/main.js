@@ -81,13 +81,13 @@
       $('#header').addClass('header-scrolled');
       $('.drop-down').addClass('header-scrolled');
       $('.mobile-nav-toggle').addClass('header-scrolled');
-      $(".banner-logo").attr("src", "../static/img/Heimdal Banner white.png");
+      $(".banner-logo").attr("src", "../../static/img/Heimdal Banner white.png");
 
     } else {
       $('#header').removeClass('header-scrolled');
       $('.drop-down').removeClass('header-scrolled');
       $('.mobile-nav-toggle').removeClass('header-scrolled');
-      $(".banner-logo").attr("src", "../static/img/Heimdal Banner black.png");
+      $(".banner-logo").attr("src", "../../static/img/Heimdal Banner black.png");
     }
   });
   if ($(window).scrollTop() > 100) {

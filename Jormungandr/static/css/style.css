@@ -18,7 +18,7 @@ a {
 }
 
 a:hover {
-  color: #8ec4dd;
+  color: #FFD700;
   text-decoration: none;
 }
 
@@ -293,7 +293,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mobile-nav a:hover, .mobile-nav .active > a, .mobile-nav li:hover > a {
-  color: #67b0d1;
+  color: #FFD700;
   text-decoration: none;
 }
 
@@ -593,7 +593,7 @@ section {
 }
 
 .services .icon-box:hover::before {
-  background: #67b0d1;
+  background: #FFD700;
   top: 0;
   border-radius: 0px;
 }
@@ -981,7 +981,7 @@ section {
 }
 
 .team .member .social a:hover {
-  color: #67b0d1;
+  color: #FFD700;
 }
 
 .team .member .social i {
@@ -1232,7 +1232,7 @@ section {
 }
 
 #footer .footer-top .footer-links ul a:hover {
-  color: #a2cfe3;
+  color: #FFD700;
 }
 
 #footer .footer-top .footer-newsletter form {
