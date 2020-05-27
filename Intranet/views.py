@@ -45,7 +45,7 @@ def register(request):
             login(request, user)
             return redirect('Intranet:edit_profile')
         else:
-            print (form.errors)
+            print(form.errors)
     else:
         form = UserCreationForm()
     return render(request, 'Intranet/register.html', {'form': form})
