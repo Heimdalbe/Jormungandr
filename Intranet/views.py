@@ -171,7 +171,7 @@ def vote(request, pk):
             return render(request, 'Intranet/vote.html', {
                 'round': round,
                 'users': Profile.objects.filter(election_active=True),
-                'error_message': "Je al gestemd in deze ronde."
+                'error_message': "Je hebt al gestemd in deze ronde."
             })
     else:
         request.session['status'] = 'not_yet'
