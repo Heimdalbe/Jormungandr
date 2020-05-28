@@ -103,7 +103,7 @@ class Choice(models.Model):
             return 'profile_incomplete'
         if user.profile.election_active:
             try:
-                UserVotes.create(user=user, round=self.round, votes=user.profile.votes)
+                UserVotes.objects.create(user=user, round=self.round, votes=user.profile.votes)
                 self.votes += user.profile.votes
                 self.save()
             except IntegrityError:
