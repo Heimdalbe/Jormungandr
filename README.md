@@ -45,5 +45,6 @@ which will make a new sqlite instance, dont use this in production
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
+python manage.py createsuperuser
 
 ```
