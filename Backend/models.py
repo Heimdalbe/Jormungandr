@@ -123,3 +123,26 @@ class UserVotes(models.Model):
 
     class Meta:
         unique_together = ('user', 'round')
+
+
+class PraesidiumFunction(models.Model):
+    name = models.CharField(max_length=50)
+    order = models.IntegerField()
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.name
+
+
+class Praesidium(models.Model):
+    name = models.CharField(max_length=50)
+    function = models.ForeignKey(PraesidiumFunction, on_delete=models.PROTECT)
+    jaar = models.CharField(max_length=20)
+    photo = models.URLField(blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+
+    def __str__(self):
+        return self.name + ": " + self.function.name
+
+
+

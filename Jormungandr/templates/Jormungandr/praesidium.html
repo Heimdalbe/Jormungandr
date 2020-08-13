@@ -1,0 +1,21 @@
+{% extends 'Jormungandr/base.html' %}
+{% load user_tags %}
+{% load static %}
+{% block title %} | Praesidium {% endblock %}
+{% block body %}
+<!-- ======= Services Section ======= -->
+<div class="body-padding">
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+                {% for lid in praesidium %}
+
+                {{ lid.function.order }}
+
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

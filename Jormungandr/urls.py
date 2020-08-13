@@ -18,14 +18,14 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include
 
-from Jormungandr.views import index, cms
+from Jormungandr.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^markdownx/', include('markdownx.urls')),
     url(r'^intranet/', include('Intranet.urls')),
     url(r'^$', index, name="index"),
-
+    url(r'^praesidium/', praesidium, name="praesidium"),
     url(r'^(?P<page>.*)/$', cms, name='cms'),
 
 ]
