@@ -5,14 +5,38 @@
 {% block body %}
 <!-- ======= Services Section ======= -->
 <div class="body-padding">
-    <section id="services" class="services">
+    <section id="team" class="team">
         <div class="container">
             <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-                {% for lid in praesidium %}
 
-                {{ lid.function.order }}
+                <div class="row">
+                    <form action="GET">
 
-                {% endfor %}
+                    </form>
+                </div>
+
+                <div class="row">
+                    {% for lid in praesidium %}
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="member" data-aos="fade-up">
+                            <div class="pic"><img src="{% static 'img/team/homer.png' %}" class="img-fluid" alt="">
+                            </div>
+                            <div class="member-info">
+                                <h4>{{ lid.name }}</h4>
+                                <span>{{ lid.function.name }}</span>
+                                <div class="social" style="font-style: italic">
+                                    {% if lid.quote %}
+                                    {{ lid.quote }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </section>

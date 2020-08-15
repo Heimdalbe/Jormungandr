@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
-from Backend.models import CMS, Praesidium
+from Backend.models import CMS, PraesidiumMember
 
 
 def index(request):
@@ -14,7 +14,7 @@ def cms(request, page):
 
 
 def praesidium(request):
-    praesidium = Praesidium.objects.all()
+    praesidium = PraesidiumMember.objects.all()
     return render(request, 'Jormungandr/praesidium.html', {'praesidium': praesidium})
 
 

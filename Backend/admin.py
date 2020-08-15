@@ -2,14 +2,14 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from .models import Choice, CMS, Election, Profile, UserVotes, Round, Praesidium, PraesidiumFunction
+from .models import Choice, CMS, Election, Profile, UserVotes, Round, PraesidiumMember, PraesidiumFunction
 
 admin.site.register(Choice)
 admin.site.register(CMS)
 admin.site.register(Election)
 admin.site.register(Round)
 admin.site.register(UserVotes)
-admin.site.register(Praesidium)
+admin.site.register(PraesidiumMember)
 admin.site.register(PraesidiumFunction)
 
 
