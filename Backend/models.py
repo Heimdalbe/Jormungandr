@@ -125,6 +125,14 @@ class UserVotes(models.Model):
         unique_together = ('user', 'round')
 
 
+class PraesidiumYear(models.Model):
+    start = models.IntegerField()
+    end = models.IntegerField()
+
+    def __str__(self):
+        return str(self.start) + " - " + str(self.end)
+
+
 class PraesidiumFunction(models.Model):
     name = models.CharField(max_length=50)
     order = models.IntegerField()
@@ -137,7 +145,7 @@ class PraesidiumFunction(models.Model):
 class PraesidiumMember(models.Model):
     name = models.CharField(max_length=50)
     function = models.ForeignKey(PraesidiumFunction, on_delete=models.PROTECT)
-    year = models.CharField(max_length=20)
+    year = models.ForeignKey(PraesidiumYear, on_delete=models.PROTECT, blank=True, null=True)
     photo = models.URLField(blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     quote = models.CharField(max_length=200, blank=True, null=True)

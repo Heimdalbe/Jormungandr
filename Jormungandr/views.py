@@ -14,6 +14,8 @@ def cms(request, page):
 
 
 def praesidium(request):
+    # Add if else for checking for GET and POST
+    # Way to select which praesidiumyear to view
     praesidium = PraesidiumMember.objects.all()
     return render(request, 'Jormungandr/praesidium.html', {'praesidium': praesidium})
 
