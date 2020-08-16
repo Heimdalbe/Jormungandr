@@ -10,10 +10,15 @@
             <div class="section-title" data-aos="fade-in" data-aos-delay="100">
 
                 <div class="row">
-                    <form action="GET">
-                        <select onchange="submit()" name="" id="">
-                            <option value="">Test</option>
-                            <option value="">Test</option>
+                    <form action="">
+                        <select onchange="submit()" name="year" id="year" class="offset-1 col-2">
+
+                            {% for year in years %}
+                            <option value="{{ year.id }}" {% if year.id == selectedyear %}selected="selected" {% endif %}>
+                                {{ year }}
+                            </option>
+                            {% endfor %}
+
                         </select>
                     </form>
                 </div>
