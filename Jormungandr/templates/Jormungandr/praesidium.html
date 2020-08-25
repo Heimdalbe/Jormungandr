@@ -9,9 +9,10 @@
         <div class="container">
             <div class="section-title" data-aos="fade-in" data-aos-delay="100">
 
-                <div class="row">
-                    <form action="">
-                        <select onchange="submit()" name="year" id="year" class="offset-1 col-2">
+                <div class="row" style="margin-bottom: 50px">
+                    <div class="col">
+                        <form action="">
+                        <select onchange="submit()" name="year" id="year" >
 
                             {% for year in years %}
                             <option value="{{ year.id }}" {% if year.id == selectedyear %}selected="selected" {% endif %}>
@@ -21,22 +22,33 @@
 
                         </select>
                     </form>
+                    </div>
                 </div>
 
-                <div class="row">
+                <div class="row" id="extendedinfo hide" >
+
+
+
+                </div>
+
+
+                <div class="row" >
                     {% for lid in praesidium %}
 
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6" style="margin-bottom: 75px">
+
+                        <!--Base info-->
                         <div class="member" data-aos="fade-up">
                             <div class="pic"><img src="{% static 'img/team/homer.png' %}" class="img-fluid" alt="">
                             </div>
                             <div class="member-info">
                                 <h4>{{ lid.name }}</h4>
                                 <span>{{ lid.function.name }}</span>
-                                <div class="social" style="font-style: italic">
+                                <div class="social" style="font-style: italic;">
                                     {% if lid.quote %}
                                     {{ lid.quote }}
                                     {% endif %}
+
                                 </div>
                             </div>
                         </div>
@@ -51,3 +63,35 @@
 </div>
 
 {% endblock %}
+
+
+
+<!--<div class="col-lg-4 col-md-6">-->
+            <!--<div class="member" data-aos="fade-up">-->
+              <!--<div class="pic"><img src="{% static 'img/team/team-1.jpg' %}" class="img-fluid" alt=""></div>-->
+              <!--<div class="member-info">-->
+                <!--<h4>Walter White</h4>-->
+                <!--<span>Chief Executive Officer</span>-->
+                <!--<div class="social">-->
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+
+
+<style>
+
+.debug{
+    border: 1px solid green;
+}
+
+.extendedcontainer{
+    margin-top: 50px;
+    height: 200px;
+}
+
+</style>

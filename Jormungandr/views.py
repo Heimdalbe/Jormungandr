@@ -19,7 +19,7 @@ def praesidium(request):
         chosenyear = request.GET.get("year")
         if chosenyear and chosenyear != "0":
             year = PraesidiumYear.objects.filter(id=chosenyear).get()
-    members = PraesidiumMember.objects.filter(year=year)
+    members = sorted(PraesidiumMember.objects.filter(year=year), key=lambda s: s.function.order)
 
     return render(request, 'Jormungandr/praesidium.html',
                   {'praesidium': members, "years": years, "selectedyear": year.id})

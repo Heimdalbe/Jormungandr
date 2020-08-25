@@ -152,3 +152,12 @@ class PraesidiumMember(models.Model):
 
     def __str__(self):
         return self.name + ": " + self.function.name
+
+
+class PraesidiumInfoLine(models.Model):
+    title = models.CharField(max_length=60)
+    text = models.CharField(max_length=300)
+    member = models.ForeignKey(to=PraesidiumMember, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title + ": " + self.text

@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from .models import Choice, CMS, Election, Profile, UserVotes, Round, PraesidiumMember, PraesidiumFunction, PraesidiumYear
+from .models import Choice, CMS, Election, Profile, UserVotes, Round, \
+    PraesidiumMember, PraesidiumFunction, PraesidiumYear, PraesidiumInfoLine
 
 admin.site.register(Choice)
 admin.site.register(CMS)
@@ -12,6 +13,7 @@ admin.site.register(UserVotes)
 admin.site.register(PraesidiumMember)
 admin.site.register(PraesidiumFunction)
 admin.site.register(PraesidiumYear)
+admin.site.register(PraesidiumInfoLine)
 
 
 class ProfileInline(admin.StackedInline):
