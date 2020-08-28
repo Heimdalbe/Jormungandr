@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
+from typing import List
+import json
 
-from Backend.models import CMS, PraesidiumMember, PraesidiumYear
+from Backend.models import CMS, PraesidiumMember, PraesidiumYear, PraesidiumInfoLine
 
 
 def index(request):
@@ -20,9 +22,13 @@ def praesidium(request):
         if chosenyear and chosenyear != "0":
             year = PraesidiumYear.objects.filter(id=chosenyear).get()
     members = sorted(PraesidiumMember.objects.filter(year=year), key=lambda s: s.function.order)
+    quotes = sorted(PraesidiumInfoLine.objects.filter(member__year=year), key=lambda s: s.member.function.order)
+    temp = list_to_dict(quotes)
+    quotesjson = json.dumps(temp)
 
     return render(request, 'Jormungandr/praesidium.html',
-                  {'praesidium': members, "years": years, "selectedyear": year.id})
+                  {'praesidium': members, "years": years, "selectedyear": year.id, "quotes": quotesjson})
+
 
 # if request.method == 'GET':         user = request.GET.get("user")
 # month = request.GET.get("month")
@@ -37,3 +43,16 @@ def praesidium(request):
 # direct += "?user=" + request.GET.get("user")
 # context['url_user'] = int(user) elif month: queryset_list = Shift.objects.filter(start_timemonth=month.split("|")[0],
 #                                                                                  start_timeyear=month.split("|")
+
+
+def list_to_dict(lines: List[PraesidiumInfoLine]):
+    dic = {}
+    for item in lines:
+        temp = item.member.id
+        item = item.to_json_serializable()
+        if temp in dic:
+            dic[temp].append(item)
+        else:
+            dic[temp] = [item]
+    return dic
+    # return {item.member.id: item for item in lines}

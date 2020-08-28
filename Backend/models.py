@@ -161,3 +161,6 @@ class PraesidiumInfoLine(models.Model):
 
     def __str__(self):
         return self.title + ": " + self.text
+
+    def to_json_serializable(self):
+        return {"title": self.title, "text": self.text, "member": self.member.id}
