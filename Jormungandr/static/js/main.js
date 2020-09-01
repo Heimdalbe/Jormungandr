@@ -7,26 +7,27 @@
 !(function($) {
   "use strict";
 
-let modal
-let modalOpenable=false
+    function setData(param){
+        data=param
+    }
 
-$(document).ready(function() {
 
 
-    console.log("derp")
-    let temp = $("#modal")
-    modalOpenable = !!temp.length
-    if(modalOpenable)
-        modal=$("#modal")[0]
-    modal.modal()
-})
+    let data
 
-$(".extendable").click(() => {
-let clicked=$(this)[0]
-let member = clicked.data("member")
-console.log(member)
+    let modal
+    let modalOpenable=false
 
-})
+//    $(document).ready(function() {
+//        console.log("derp")
+//        let temp = $("#modal")
+//        modalOpenable = !!temp.length
+//        if(modalOpenable)
+//        modal=$("#modal")[0]
+//        console.log(data)
+//})
+
+
 
   // Smooth scroll for the navigation menu and links with .scrollto classes
   $(document).on('click', '.nav-menu a, .mobile-nav a, .scrollto', function(e) {

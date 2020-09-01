@@ -12,35 +12,34 @@
                 <div class="row" style="margin-bottom: 50px">
                     <div class="col">
                         <form action="">
-                        <select onchange="submit()" name="year" id="year" >
+                            <select onchange="submit()" name="year" id="year">
 
-                            {% for year in years %}
-                            <option value="{{ year.id }}" {% if year.id == selectedyear %}selected="selected" {% endif %}>
-                                {{ year }}
-                            </option>
-                            {% endfor %}
+                                {% for year in years %}
+                                <option value="{{ year.id }}" {% if year.id == selectedyear %}selected="selected"
+                                        {% endif %}>
+                                    {{ year }}
+                                </option>
+                                {% endfor %}
 
-                        </select>
-                    </form>
+                            </select>
+                        </form>
                     </div>
                 </div>
 
-                <div class="row" id="extendedinfo hide" >
+                <div class="row" id="extendedinfo hide">
 
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal">Open Modal</button>
 
                 </div>
 
 
-                <div class="row" >
+                <div class="row">
                     {% for lid in praesidium %}
 
 
-
-                    <div class="col-lg-4 col-md-6 extendable" data-member="{{ lid.id }}" style="margin-bottom: 75px">
+                    <div class="col-lg-4 col-md-6 " style="margin-bottom: 75px">
 
                         <!--Base info-->
-                        <div class="member" data-aos="fade-up">
+                        <div class="member extendable" data-aos="fade-up" data-member="{{ lid.id }}">
                             <div class="pic"><img src="{% static 'img/team/homer.png' %}" class="img-fluid" alt="">
                             </div>
                             <div class="member-info">
@@ -61,49 +60,67 @@
                 </div>
             </div>
             <!-- Modal -->
-  <div class="modal fade" id="modal" role="dialog">
-    <div class="modal-dialog">
+            <div class="modal fade" id="modal" role="dialog">
+                <div class="modal-dialog">
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
+                    <!-- Modal content-->
+                    <div class="modal-content">
 
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
+                        <div class="modal-body">
+                            <p>Some text in the modal.</p>
+                        </div>
 
-    </div>
-  </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </section>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    let data
+    let modal
+    let modalOpenable
+
+    $(document).ready(function() {
+        data = JSON.parse("{{quotes|escapejs}}")
+        let temp = $("#modal")
+        modalOpenable = !!temp.length
+        if(modalOpenable)
+        modal=$("#modal")[0]
+    })
+
+    $("div.extendable").click(function() {
+        let clicked=$(this)[0]
+        let member = $(clicked).attr("data-member")
+        console.log(member)
+    $(modal).modal()
+    })
+</script>
+
 {% endblock %}
 
 
-
 <!--<div class="col-lg-4 col-md-6">-->
-            <!--<div class="member" data-aos="fade-up">-->
-              <!--<div class="pic"><img src="{% static 'img/team/team-1.jpg' %}" class="img-fluid" alt=""></div>-->
-              <!--<div class="member-info">-->
-                <!--<h4>Walter White</h4>-->
-                <!--<span>Chief Executive Officer</span>-->
-                <!--<div class="social">-->
-                  <a href=""><i class="icofont-twitter"></i></a>
-                  <a href=""><i class="icofont-facebook"></i></a>
-                  <a href=""><i class="icofont-instagram"></i></a>
-                  <a href=""><i class="icofont-linkedin"></i></a>
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
+<!--<div class="member" data-aos="fade-up">-->
+<!--<div class="pic"><img src="{% static 'img/team/team-1.jpg' %}" class="img-fluid" alt=""></div>-->
+<!--<div class="member-info">-->
+<!--<h4>Walter White</h4>-->
+<!--<span>Chief Executive Officer</span>-->
+<!--<div class="social">-->
+<a href=""><i class="icofont-twitter"></i></a>
+<a href=""><i class="icofont-facebook"></i></a>
+<a href=""><i class="icofont-instagram"></i></a>
+<a href=""><i class="icofont-linkedin"></i></a>
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
-<script src="../../static/js/praesidium.js" />
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+
