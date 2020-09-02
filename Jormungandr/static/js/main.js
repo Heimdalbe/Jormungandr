@@ -7,25 +7,38 @@
 !(function($) {
   "use strict";
 
-    function setData(param){
-        data=param
-    }
-
-
-
-    let data
-
-    let modal
-    let modalOpenable=false
-
+//let data
+//    let modal
+//    let modalOpenable
+//
 //    $(document).ready(function() {
-//        console.log("derp")
+//        data = JSON.parse("{{quotes|escapejs}}")
 //        let temp = $("#modal")
 //        modalOpenable = !!temp.length
 //        if(modalOpenable)
 //        modal=$("#modal")[0]
-//        console.log(data)
-//})
+//    })
+//
+//    $("div.extendable").click(function() {
+//        let clicked=$(this)[0]
+//        let id = $(clicked).attr("data-member")
+//        let dataMember=data[id]
+//
+//
+//        let parent = $('<div>', {
+//        id: "modal-container",
+//        "class": "row",
+//        })
+//
+//        dataMember.forEach(s=> {
+//            let nextQuote = $("<div>", {"class": "col"})
+//            let child = $(`<p><strong>${s.title}: </strong>${s.text}</p>`)
+//            child.appendTo(nextQuote)
+//            nextQuote.appendTo(parent)
+//        })
+//
+//        $(modal).modal()
+//    })
 
 
 

@@ -997,6 +997,20 @@ section {
   }
 }
 
+.modal-body{
+padding: 40px;
+}
+
+#modal{
+margin-top: 100px;
+min-width: 300px;
+}
+
+.modal-title{
+margin: auto;
+margin-bottom: 20px;
+}
+
 
 
 

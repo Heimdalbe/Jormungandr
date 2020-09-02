@@ -66,8 +66,8 @@
                     <!-- Modal content-->
                     <div class="modal-content">
 
-                        <div class="modal-body">
-                            <p>Some text in the modal.</p>
+                        <div class="modal-body" id="modal-body">
+
                         </div>
 
                     </div>
@@ -96,10 +96,32 @@
 
     $("div.extendable").click(function() {
         let clicked=$(this)[0]
-        let member = $(clicked).attr("data-member")
-        console.log(member)
-    $(modal).modal()
+        let id = $(clicked).attr("data-member")
+        let dataMember=data[id]
+
+        if(!!!dataMember)
+            return;
+
+        let parent = $('<div>', {
+        id: "modal-container",
+        "class": "row",
+        })
+
+        $(`<h2>${dataMember[0].membername}</h2>`).addClass("modal-title").appendTo(parent)
+
+        dataMember.forEach(s=> {
+            let nextQuote = $("<div>")
+            let child = $(`<p><strong>${s.title}: </strong>${s.text}</p>`)
+            $(child).appendTo(nextQuote)
+            $(nextQuote).appendTo(parent)
+        })
+
+
+        $("#modal-body").empty().append(parent)
+
+        $(modal).modal()
     })
+
 </script>
 
 {% endblock %}
