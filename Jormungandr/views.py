@@ -2,11 +2,20 @@ from django.shortcuts import render, get_object_or_404
 from typing import List
 import json
 
+from django.views import View
+
 from Backend.models import CMS, PraesidiumMember, PraesidiumYear, PraesidiumInfoLine
 
 
 def index(request):
     return render(request, 'Jormungandr/index.html', {})
+
+
+# class IndexView(View):
+#     template_name = "Jormungandr/index.html"
+#
+#     def get(self, request):
+#         return render(request, self.template_name, {})
 
 
 def cms(request, page):
@@ -30,19 +39,7 @@ def praesidium(request):
                   {'praesidium': members, "years": years, "selectedyear": year.id, "quotes": quotesjson})
 
 
-# if request.method == 'GET':         user = request.GET.get("user")
-# month = request.GET.get("month")
-# if user:             if
-# month: queryset_list = Shift.objects.filter(user_id=user, start_timemonth=month.split("|")[0],
-#                                             start_timeyear=month.split("|")[1]).order_by('-start_time')
-# direct += "?user=" + request.GET.get("user")
-# direct += "%26month=" + request.GET.get("month")
-# context['url_user'] = int(user)
-# context['url_month'] = month             else:                 queryset_list = Shift.objects.filter(
-#     user_id=user).order_by('-start_time')
-# direct += "?user=" + request.GET.get("user")
-# context['url_user'] = int(user) elif month: queryset_list = Shift.objects.filter(start_timemonth=month.split("|")[0],
-#                                                                                  start_timeyear=month.split("|")
+
 
 
 def list_to_dict(lines: List[PraesidiumInfoLine]):

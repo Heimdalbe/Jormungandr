@@ -20,3 +20,6 @@ class EditProfileForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(EditProfileForm, self).__init__(*args, **kwargs)
         self.fields['geslacht'].widget.attrs = {'class': 'form-control'}
+
+
+# class ContactForm
