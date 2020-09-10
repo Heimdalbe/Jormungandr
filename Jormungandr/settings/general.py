@@ -113,3 +113,10 @@ MEDIA_URL = '/files/'
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
 
 LOGIN_URL = '/intranet/login_user'
+
+EMAIL_HOST = "localhost"
+EMAIL_PORT = "1025"
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_TLS = False
+#EMAIL_USE_SSL = False

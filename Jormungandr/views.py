@@ -1,10 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from typing import List
 import json
 
 from django.views import View
-from django.views.generic import FormView
-
+from django.core.mail import send_mail
 from Backend.forms import ContactForm
 from Backend.models import CMS, PraesidiumMember, PraesidiumYear, PraesidiumInfoLine
 
@@ -41,8 +40,26 @@ def praesidium(request):
                   {'praesidium': members, "years": years, "selectedyear": year.id, "quotes": quotesjson})
 
 
-# class ContactForm(FormView):
-#     form_class = ContactForm
+class SendMail(View):
+    def post(self, request):
+        form = ContactForm(request.POST)
+
+        previous = request.GET["next"]
+
+        if not form.is_valid():
+            return redirect(previous)
+
+        self.format_send_mail(form.cleaned_data)
+        return redirect(previous)
+
+    def format_send_mail(self, form):
+        send_mail(
+            form.get("subject"),
+            form.get("message"),
+            form.get("email"),
+            [form.get("email")],
+            fail_silently=False
+        )
 
 
 def list_to_dict(lines: List[PraesidiumInfoLine]):

@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^$', index, name="index"),
     url(r'^praesidium/', praesidium, name="praesidium"),
     url(r'^(?P<page>.*)/$', cms, name='cms'),
+    url(r'^sendmail', SendMail.as_view(), name="sendmail")
 
 ]

@@ -2,52 +2,54 @@
 {% load user_tags %}
 
 <div class="col-lg-6 contact" data-aos="fade-up" data-aos-delay="350">
-                    <h4>Contact</h4>
-                    <form action="" method="post" class="email-form">
-                        <!--<div class="form-row">-->
-                        <!--<div class="col-md-6 form-group">-->
-                        <!--<input type="text" name="name" class="form-control" id="name" placeholder="Your Name"-->
-                        <!--data-rule="minlen:4" data-msg="Please enter at least 4 chars"/>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-6 form-group">-->
-                        <!--<input type="email" class="form-control" name="email" id="email"-->
-                        <!--placeholder="Your Email" data-rule="email"-->
-                        <!--data-msg="Please enter a valid email"/>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"-->
-                        <!--data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject"/>-->
-                        <!--</div>-->
-                        <!--<div class="form-group">-->
-                        <!--<textarea class="form-control" name="message" rows="5" data-rule="required"-->
-                        <!--data-msg="Please write something for us" placeholder="Message"></textarea>-->
-                        <!--</div>-->
-                        <!--<div class="text-center">-->
-                        <!--<button type="submit">Send Message</button>-->
-                        <!--</div>-->
+    <h4>Contact</h4>
+    <form action="{% url 'sendmail' %}?next={{ request.path|urlencode }}" method="POST" class="email-form">
+        {% csrf_token %}
 
-                        <div class="row">
+        <div class="row">
 
-                            <div class="col-md-6 form-group">
-                                {{ contact.name }}
-                            </div>
-                            <div class="col-md-6 form-group">
-                                {{ contact.email }}
-                            </div>
-                            <div class="col-12 form-group">
-                               {{ contact.subject }}
-                            </div>
-                            <div class="col-12 form-group">
-                                {{ contact.message }}
-                            </div>
+            <div class="col-md-6 form-group">
+                {{ contact.name }}
+            </div>
+            <div class="col-md-6 form-group">
+                {{ contact.email }}
+            </div>
+            <div class="col-12 form-group">
+                {{ contact.subject }}
+            </div>
+            <div class="col-12 form-group">
+                {{ contact.message }}
+            </div>
 
-                            <div class="center">
-                                <button type="submit">Send Message</button>
-                            </div>
+            <div class="center">
+                <button type="submit">Send Message</button>
+            </div>
 
-                        </div>
+        </div>
 
-                    </form>
+    </form>
 
-                </div>
+</div>
+
+<!--<div class="form-row">-->
+<!--<div class="col-md-6 form-group">-->
+<!--<input type="text" name="name" class="form-control" id="name" placeholder="Your Name"-->
+<!--data-rule="minlen:4" data-msg="Please enter at least 4 chars"/>-->
+<!--</div>-->
+<!--<div class="col-md-6 form-group">-->
+<!--<input type="email" class="form-control" name="email" id="email"-->
+<!--placeholder="Your Email" data-rule="email"-->
+<!--data-msg="Please enter a valid email"/>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="form-group">-->
+<!--<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"-->
+<!--data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject"/>-->
+<!--</div>-->
+<!--<div class="form-group">-->
+<!--<textarea class="form-control" name="message" rows="5" data-rule="required"-->
+<!--data-msg="Please write something for us" placeholder="Message"></textarea>-->
+<!--</div>-->
+<!--<div class="text-center">-->
+<!--<button type="submit">Send Message</button>-->
+<!--</div>-->
