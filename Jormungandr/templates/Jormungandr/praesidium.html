@@ -15,7 +15,8 @@
                             <select onchange="submit()" name="year" id="year">
 
                                 {% for year in years %}
-                                <option value="{{ year.id }}" {% if year.id == selectedyear %}selected="selected"
+                                <option value="{{ year.id }}"
+                                        {% if year.id == selectedyear %}selected="selected"
                                         {% endif %}>
                                     {{ year }}
                                 </option>

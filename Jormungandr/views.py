@@ -53,11 +53,14 @@ class SendMail(View):
         return redirect(previous)
 
     def format_send_mail(self, form):
+        subject = "Mail sent by: {}".format(form.get("name"))
+        message = "Subject: {}\n\n{}\n\n{}\n\nYou can respond to: {}"\
+            .format(form.get("subject"), form.get("message"), "="*20, form.get("email"))
         send_mail(
-            form.get("subject"),
-            form.get("message"),
-            form.get("email"),
-            [form.get("email")],
+            subject,
+            message,
+            "",
+            ["test@heimdal.be"],
             fail_silently=False
         )
 
