@@ -3,7 +3,9 @@ from typing import List
 import json
 
 from django.views import View
+from django.views.generic import FormView
 
+from Backend.forms import ContactForm
 from Backend.models import CMS, PraesidiumMember, PraesidiumYear, PraesidiumInfoLine
 
 
@@ -39,7 +41,8 @@ def praesidium(request):
                   {'praesidium': members, "years": years, "selectedyear": year.id, "quotes": quotesjson})
 
 
-
+# class ContactForm(FormView):
+#     form_class = ContactForm
 
 
 def list_to_dict(lines: List[PraesidiumInfoLine]):
