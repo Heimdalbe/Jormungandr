@@ -16,5 +16,9 @@ div.noBullet ul {
 }
 
 .center{
-margin: auto;
+    margin: auto;
+}
+
+img.inverted{
+    filter: invert(1);
 }

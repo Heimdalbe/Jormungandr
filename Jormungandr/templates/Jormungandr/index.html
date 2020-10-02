@@ -5,66 +5,126 @@
 <section id="hero">
     <div class="hero-container" data-aos="fade-up">
         <h1>Heimdal.be</h1>
-        <h2>Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een groep studenten. Studenten die graag andere mensen, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in Geeky Stuff, samen wilt brengen.</h2>
+        <h2>Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een groep studenten. Studenten die
+            graag andere mensen, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in Geeky Stuff,
+            samen wilt brengen.</h2>
         <a href="#team" class="btn-get-started scrollto"><i class="bx bx-chevrons-down"></i></a>
     </div>
 </section>
 {% endblock %}
 {% block body %}
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team">
-      <div class="container">
+<!-- ======= Team Section ======= -->
+<section id="team" class="team">
+    <div class="container">
 
         <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-          <h2>Kiescomité</h2>
-          <p>Deze verkiezingen worden u gebracht door het kiescomité, dat bestaat uit volgende topmensen.<br> Thomas heeft ons verlaten en daarom vonden we topvervanging in onze andere prosenior, Hans.</p>
+            <h2>Heimdal - By Students</h2>
+            <p>Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een groep studenten. Studenten die
+                graag andere mensen, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in Geeky Stuff,
+                samen wilt brengen.</p>
         </div>
 
-        <div class="row">
 
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="fade-up">
-              <div class="pic"><img src="{% static 'img/team/Ritchie.png' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Ritchie Van Mele</h4>
-                <span>Voorzitter</span>
-                <div class="social" style="font-style: italic">
-                  "Heimdal is geen drankvereniging"
+    </div>
+</section><!-- End Team Section -->
+
+<section class="" id="from">
+    <div class="container">
+
+        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+            <h2>Onze studenten zijn afkomstig van</h2>
+
+
+            <!--TODO Add new logos-->
+
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-12">
+                    <a href="https://www.hogent.be/" target="_blank">
+                        <img
+                                width="300" height="75"
+                                src="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent-300x75.png"
+                                class="inverted" alt="Hogeschool Gent"
+                                srcset="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent-300x75.png 300w, https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent.png 600w"
+                                sizes="(max-width: 300px) 100vw, 300px">
+                    </a>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="fade-up" data-aos-delay="150">
-              <div class="pic"><img src="{% static 'img/team/Stef.png' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Stef Bondroit</h4>
-
-                <span>Ondervoorzitter - ICT</span>
-                <div class="social" style="font-style: italic">
-                  "u moeder ja!"
+                <div class="col-md-4 col-sm-6 col-12">
+                    <a href="https://schoolofartsgent.be/en/" target="_blank">
+                        <img width="211" height="150"
+                             src="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/kask-1.png"
+                             class=inverted"
+                             alt="School Of Arts Gent">
+                    </a>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="fade-up" data-aos-delay="300">
-              <div class="pic"><img src="{% static 'img/team/Hans.png' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Hans De Boeck</h4>
-                <span>Secretaris</span>
-                <div class="social" style="font-style: italic">
-                  "Hanspunt.be for free €€€"
+                <div class="col-md-4 col-sm-6 col-12">
+                    <a href="https://www.ugent.be/" target="_blank">
+                        <img width="193" height="150"
+                             src="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/universiteit-1.png"
+                             class="inverted"
+                             alt="Universiteit Gent">
+                    </a>
                 </div>
-              </div>
+                <div class="col-md-4 col-sm-6 col-12">
+                    <a href="https://www.arteveldehogeschool.be/" target="_blank">
+                        <img width="300" height="141"
+                             src="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/artevelde-1-300x141.png"
+                             class="inverted"
+                             alt="Artevelde Hogeschool"
+                             srcset="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/artevelde-1-300x141.png 300w, https://heimdal.xcdn.eu/wp-content/uploads/2018/04/artevelde-1.png 320w"
+                             sizes="(max-width: 300px) 100vw, 300px">
+                    </a>
+                </div>
             </div>
-          </div>
 
         </div>
 
-      </div>
-    </section><!-- End Team Section -->
+
+    </div>
+</section>
 
 {% endblock %}
+
+
+<!--<div class="row">-->
+
+<!--<div class="col-lg-4 col-md-6">-->
+<!--<div class="member" data-aos="fade-up">-->
+<!--<div class="pic"><img src="{% static 'img/team/Ritchie.png' %}" class="img-fluid" alt=""></div>-->
+<!--<div class="member-info">-->
+<!--<h4>Ritchie Van Mele</h4>-->
+<!--<span>Voorzitter</span>-->
+<!--<div class="social" style="font-style: italic">-->
+<!--"Heimdal is geen drankvereniging"-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="col-lg-4 col-md-6">-->
+<!--<div class="member" data-aos="fade-up" data-aos-delay="150">-->
+<!--<div class="pic"><img src="{% static 'img/team/Stef.png' %}" class="img-fluid" alt=""></div>-->
+<!--<div class="member-info">-->
+<!--<h4>Stef Bondroit</h4>-->
+
+<!--<span>Ondervoorzitter - ICT</span>-->
+<!--<div class="social" style="font-style: italic">-->
+<!--"u moeder ja!"-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="col-lg-4 col-md-6">-->
+<!--<div class="member" data-aos="fade-up" data-aos-delay="300">-->
+<!--<div class="pic"><img src="{% static 'img/team/Hans.png' %}" class="img-fluid" alt=""></div>-->
+<!--<div class="member-info">-->
+<!--<h4>Hans De Boeck</h4>-->
+<!--<span>Secretaris</span>-->
+<!--<div class="social" style="font-style: italic">-->
+<!--"Hanspunt.be for free €€€"-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--</div>-->
