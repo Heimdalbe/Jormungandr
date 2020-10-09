@@ -456,6 +456,14 @@ section {
   z-index: 2;
 }
 
+.section-title h2.black-title{
+color:white;
+}
+
+.section-title p.enlarged-text{
+    text-size: 50px;
+}
+
 .section-title h2::after {
   content: "";
   position: absolute;
@@ -464,7 +472,7 @@ section {
   transform: translate(-50%, -50%);
   width: 122px;
   height: 66px;
-  background: url(../img/section-title-bg-gray.png) no-repeat;
+  /*background: url(../img/section-title-bg-gray.png) no-repeat;*/
   z-index: -1;
 }
 

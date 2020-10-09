@@ -22,3 +22,15 @@ div.noBullet ul {
 img.inverted{
     filter: invert(1);
 }
+
+img.sponsor{
+max-width: 300px
+}
+
+.black{
+background-color: black;
+}
+
+.black-title{
+color: white;
+}
