@@ -164,3 +164,12 @@ class PraesidiumInfoLine(models.Model):
 
     def to_json_serializable(self):
         return {"title": self.title, "text": self.text, "member": self.member.id, "membername": self.member.name}
+
+
+class Sponsor(models.Model):
+    name = models.CharField(max_length=100)
+    website = models.URLField()
+    image = models.ImageField(upload_to="Jormungandr/static/img/sponsors")
+
+    def __str__(self):
+        return self.name + " - " + self.website

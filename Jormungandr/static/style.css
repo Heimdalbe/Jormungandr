@@ -33,4 +33,11 @@ background-color: black;
 
 .black-title{
 color: white;
+
+}
+
+hr.linebreak{
+    color: darkgray;
+    width: 50%;
+    margin: 0;
 }
