@@ -167,9 +167,10 @@ class PraesidiumInfoLine(models.Model):
 
 
 class Sponsor(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     website = models.URLField()
-    image = models.ImageField(upload_to="Jormungandr/static/img/sponsors")
+    imageurl = models.CharField(max_length=150, unique=True)
+    invertedcolor = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name + " - " + self.website

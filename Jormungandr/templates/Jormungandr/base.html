@@ -17,57 +17,43 @@
 <main id="main">
 
 
-
     {% block body %}{% endblock %}
 
     <!--TODO Refactor to proper table-->
 
     <section class="black" id="sponsors">
-    <div class="container">
-        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-            <h2 class="black-title">Onze sponsors</h2>
-
+        <div class="container">
             <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+                <h2 class="black-title">Onze sponsors</h2>
 
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 col-12">
-                        <a href="https://www.facebook.com/cafecomicsans/" target="_blank">
-                            <img
+                <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+                    <div class="row h-100">
 
-                                    src="{% static 'img/sponsors/ComicSansTransparant.png' %}"
-                                    class="sponsor" alt="Comic Sans Gent">
-                        </a>
-                        <!--width="300" height="75"-->
-                        <!--sizes="(max-width: 300px) 100vw, 300px"-->
-                        <!--srcset="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent-300x75.png 300w, https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent.png 600w"-->
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-12">
-                        <a href="https://hanspunt.be/" target="_blank">
-                            <img
-                                    src="{% static 'img/sponsors/HansPunt.png' %}"
-                                    class="sponsor inverted" alt="HansPunt">
-                        </a>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-12">
-                        <a href="https://www.thezone.be/" target="_blank">
-                            <img
-                                    src="{% static 'img/sponsors/TheZone.png' %}"
-                                    class="sponsor" alt="The Zone">
-                        </a>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-12">
-                        <a href="https://www.hogent.be/" target="_blank">
-                            <img
-                                    src="{% static 'img/institutes/HoGent_Logo_black.png' %}"
-                                    class="sponsor inverted" alt="Hogeschool Gent">
-                        </a>
+                        {% for sponsor in sponsors %}
+
+                        <div class="col-md-4 col-sm-6 col-12 my-auto">
+
+                            <a href="{{ sponsor.website }}" target="_blank">
+                                <img
+                                        src="{% static sponsor.imageurl %}"
+                                        class="sponsor {% if sponsor.invertedcolor %} inverted {% endif %}"
+                                        alt="{{ sponsor.name }}">
+                            </a>
+                        </div>
+
+                        <!--&lt;!&ndash;width="300" height="75"&ndash;&gt;-->
+                        <!--&lt;!&ndash;sizes="(max-width: 300px) 100vw, 300px"&ndash;&gt;-->
+                        <!--&lt;!&ndash;srcset="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent-300x75.png 300w, https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent.png 600w"&ndash;&gt;-->
+
+
+                        {% endfor %}
+
+
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 </main>
 
@@ -131,3 +117,36 @@
 {% include 'Jormungandr/scripts.html' %}
 </body>
 </html>
+
+<!--<div class="col-md-4 col-sm-6 col-12">-->
+<!--<a href="https://www.facebook.com/cafecomicsans/" target="_blank">-->
+<!--<img-->
+
+<!--src="{% static 'img/sponsors/ComicSansTransparant.png' %}"-->
+<!--class="sponsor" alt="Comic Sans Gent">-->
+<!--</a>-->
+<!--&lt;!&ndash;width="300" height="75"&ndash;&gt;-->
+<!--&lt;!&ndash;sizes="(max-width: 300px) 100vw, 300px"&ndash;&gt;-->
+<!--&lt;!&ndash;srcset="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent-300x75.png 300w, https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent.png 600w"&ndash;&gt;-->
+<!--</div>-->
+<!--<div class="col-md-4 col-sm-6 col-12">-->
+<!--<a href="https://hanspunt.be/" target="_blank">-->
+<!--<img-->
+<!--src="{% static 'img/sponsors/HansPunt.png' %}"-->
+<!--class="sponsor inverted" alt="HansPunt">-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="col-md-4 col-sm-6 col-12">-->
+<!--<a href="https://www.thezone.be/" target="_blank">-->
+<!--<img-->
+<!--src="{% static 'img/sponsors/TheZone.png' %}"-->
+<!--class="sponsor" alt="The Zone">-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="col-md-4 col-sm-6 col-12">-->
+<!--<a href="https://www.hogent.be/" target="_blank">-->
+<!--<img-->
+<!--src="{% static 'img/institutes/HoGent_Logo_black.png' %}"-->
+<!--class="sponsor inverted" alt="Hogeschool Gent">-->
+<!--</a>-->
+<!--</div>-->
