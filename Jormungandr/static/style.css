@@ -41,3 +41,11 @@ hr.linebreak{
     width: 50%;
     margin: 0;
 }
+
+.carouselItem{
+max-width: 600px;
+}
+
+.carousel-item>img{
+    margin: auto;
+}

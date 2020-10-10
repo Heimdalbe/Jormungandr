@@ -3,7 +3,8 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
 from .models import Choice, CMS, Election, Profile, UserVotes, Round, \
-    PraesidiumMember, PraesidiumFunction, PraesidiumYear, PraesidiumInfoLine, Sponsor
+    PraesidiumMember, PraesidiumFunction, PraesidiumYear, PraesidiumInfoLine, Sponsor, \
+    CarouselPicture
 
 admin.site.register(Choice)
 admin.site.register(CMS)
@@ -15,6 +16,7 @@ admin.site.register(PraesidiumFunction)
 admin.site.register(PraesidiumYear)
 admin.site.register(PraesidiumInfoLine)
 admin.site.register(Sponsor)
+admin.site.register(CarouselPicture)
 
 
 class ProfileInline(admin.StackedInline):
@@ -25,7 +27,7 @@ class ProfileInline(admin.StackedInline):
 
 
 class CustomUserAdmin(UserAdmin):
-    inlines = (ProfileInline, )
+    inlines = (ProfileInline,)
 
     def get_inline_instances(self, request, obj=None):
         if not obj:

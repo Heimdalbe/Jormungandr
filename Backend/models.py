@@ -174,3 +174,12 @@ class Sponsor(models.Model):
 
     def __str__(self):
         return self.name + " - " + self.website
+
+
+class CarouselPicture(models.Model):
+    link = models.CharField(max_length=150, unique=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    description = models.CharField(max_length=300, blank=True, null=True)
+
+    def __str__(self):
+        return self.name

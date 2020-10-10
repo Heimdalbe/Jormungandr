@@ -5,11 +5,11 @@ import json
 from django.views import View
 from django.core.mail import send_mail
 from Backend.forms import ContactForm
-from Backend.models import CMS, PraesidiumMember, PraesidiumYear, PraesidiumInfoLine
+from Backend.models import CMS, PraesidiumMember, PraesidiumYear, PraesidiumInfoLine, CarouselPicture
 
 
 def index(request):
-    return render(request, 'Jormungandr/index.html', {})
+    return render(request, 'Jormungandr/index.html', {"carousel": CarouselPicture.objects.all()})
 
 
 # class IndexView(View):
@@ -54,8 +54,8 @@ class SendMail(View):
 
     def format_send_mail(self, form):
         subject = "Mail sent by: {}".format(form.get("name"))
-        message = "Subject: {}\n\n{}\n\n{}\n\nYou can respond to: {}"\
-            .format(form.get("subject"), form.get("message"), "="*20, form.get("email"))
+        message = "Subject: {}\n\n{}\n\n{}\n\nYou can respond to: {}" \
+            .format(form.get("subject"), form.get("message"), "=" * 20, form.get("email"))
         send_mail(
             subject,
             message,
