@@ -4,6 +4,7 @@
 {% block banner %}
 <section id="hero">
     <div class="hero-container" data-aos="fade-up">
+        <p style="color: white;">[This site and its content are still under construction.]</p>
         <h1>Heimdal.be - By Students</h1>
         <h2>Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een groep studenten. Studenten die
             graag andere mensen, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in Geeky Stuff,
@@ -40,21 +41,13 @@
                 <div class="carousel-inner">
                     {% for item in carousel %}
                     <div class="carousel-item {% if forloop.counter0 is 0%} active {% endif %}">
-                        <img class="d-block w-100 carouselItem" src="{% static item.link %}"
+                        <img class="d-block w-100 carouselItem" src="{{item.link}}"
                              alt="{{item.name}}">
                     </div>
 
                     {% endfor %}
                 </div>
 
-                <!--<a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">-->
-                    <!--<span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-                    <!--<span class="sr-only">Previous</span>-->
-                <!--</a>-->
-                <!--<a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">-->
-                    <!--<span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-                    <!--<span class="sr-only">Next</span>-->
-                <!--</a>-->
             </div>
 
             <!--End Carousel-->
@@ -116,49 +109,3 @@
 
 <!--</div>-->
 
-
-<!--OUDE PORTRAITS-->
-
-<!--<div class="row">-->
-
-<!--<div class="col-lg-4 col-md-6">-->
-<!--<div class="member" data-aos="fade-up">-->
-<!--<div class="pic"><img src="{% static 'img/team/Ritchie.png' %}" class="img-fluid" alt=""></div>-->
-<!--<div class="member-info">-->
-<!--<h4>Ritchie Van Mele</h4>-->
-<!--<span>Voorzitter</span>-->
-<!--<div class="social" style="font-style: italic">-->
-<!--"Heimdal is geen drankvereniging"-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="col-lg-4 col-md-6">-->
-<!--<div class="member" data-aos="fade-up" data-aos-delay="150">-->
-<!--<div class="pic"><img src="{% static 'img/team/Stef.png' %}" class="img-fluid" alt=""></div>-->
-<!--<div class="member-info">-->
-<!--<h4>Stef Bondroit</h4>-->
-
-<!--<span>Ondervoorzitter - ICT</span>-->
-<!--<div class="social" style="font-style: italic">-->
-<!--"u moeder ja!"-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="col-lg-4 col-md-6">-->
-<!--<div class="member" data-aos="fade-up" data-aos-delay="300">-->
-<!--<div class="pic"><img src="{% static 'img/team/Hans.png' %}" class="img-fluid" alt=""></div>-->
-<!--<div class="member-info">-->
-<!--<h4>Hans De Boeck</h4>-->
-<!--<span>Secretaris</span>-->
-<!--<div class="social" style="font-style: italic">-->
-<!--"Hanspunt.be for free €€€"-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--</div>-->

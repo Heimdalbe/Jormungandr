@@ -43,9 +43,26 @@ hr.linebreak{
 }
 
 .carouselItem{
-max-width: 600px;
+max-width: 100%;
+}
+/*
+.carousel{
+max-height: 75vh;
+max-width: auto;
+}*/
+
+.carousel>*{
+min-width: none;
 }
 
 .carousel-item>img{
     margin: auto;
+    object-fit: contain;
 }
+/*
+.carousel .item {
+  min-width: 100%;
+  background-color: #fff;
+}
+*/
+
