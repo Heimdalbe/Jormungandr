@@ -67,7 +67,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'Jormungandr.context_processors.contact_form',
-                'Jormungandr.context_processors.sponsors'
+                'Jormungandr.context_processors.sponsors',
+                'Jormungandr.context_processors.cms'
             ],
         },
     },

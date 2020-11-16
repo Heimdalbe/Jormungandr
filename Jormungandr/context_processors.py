@@ -1,5 +1,7 @@
 from Backend.forms import ContactForm
-from Backend.models import Sponsor
+from Backend.models import Sponsor, CMSType, CMS
+from typing import List
+import json
 
 
 def contact_form(request):
@@ -8,3 +10,20 @@ def contact_form(request):
 
 def sponsors(request):
     return {'sponsors': Sponsor.objects.all()}
+
+
+def cms(request):
+    return {'cms': list_to_dict(sorted(CMS.objects.all(), key=lambda s: s.displayorder))}
+
+
+def list_to_dict(pages: List[CMS]):
+    dic = {}
+    for item in pages:
+        temp = item.type
+        # item = item.to_json_serializable()
+        if temp in dic:
+            dic[temp].append(item)
+        else:
+            dic[temp] = [item]
+    print(dic.items())
+    return dic

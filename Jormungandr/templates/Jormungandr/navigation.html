@@ -7,7 +7,8 @@
         <div class="logo mr-auto">
             <!-- <h1 class="text-light"><a href="{% url 'index' %}" id="logo"><span>Heimdal</span></a></h1>-->
             <!-- Uncomment below if you prefer to use an image logo -->
-            <a href="{% url 'index' %}"><img src="{% static 'img/Heimdal Banner black.png' %}" alt="Heimdal Banner" class="banner-logo img-fluid"></a>
+            <a href="{% url 'index' %}"><img src="{% static 'img/Heimdal Banner black.png' %}" alt="Heimdal Banner"
+                                             class="banner-logo img-fluid"></a>
         </div>
 
         <nav class="nav-menu d-none d-lg-block">
@@ -19,6 +20,22 @@
 
                 <!--TODO Loop per type en loop per pagina per type-->
 
+                {% for type, items in cms.items %}
+
+                {% if items|length == 1 %}
+                <li><a href="{% url 'cms' items.0.name %}">{{items.0.title}}</a></li>
+                {% else %}
+                <li class="drop-down"><a href="">{{ type.display }}</a>
+                    <ul>
+
+                        {% for item in items %}
+                        <li><a href="{% url 'cms' item.name %}">{{item.title}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endif %}
+
+                {% endfor %}
 
                 <!--- Voorbeelden van de rest van NAV
                 <li><a href="{% url 'cms' 'andreas' %}">Andreas</a></li>
@@ -38,7 +55,7 @@
                     </ul>
                 </li>
                 --->
-                <li class="drop-down"> <a href="#">Leden</a>
+                <li class="drop-down"><a href="#">Leden</a>
                     <ul>
                         <li><a href="{% url 'Intranet:index' %}">Intranet</a></li>
                         {% if user.is_authenticated %}

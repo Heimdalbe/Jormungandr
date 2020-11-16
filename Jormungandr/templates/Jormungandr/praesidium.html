@@ -13,7 +13,7 @@
                     <div class="col">
                         <form action="">
                             <select onchange="submit()" name="year" id="year">
-
+<!-- TODO Bootstrap dropdown fixen-->
                                 {% for year in years %}
                                 <option value="{{ year.id }}"
                                         {% if year.id == selectedyear %}selected="selected"

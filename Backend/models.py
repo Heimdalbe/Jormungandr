@@ -8,6 +8,7 @@ from multiselectfield import MultiSelectField
 class CMSType(models.Model):
     name = models.CharField(max_length=128)
     display = models.CharField(max_length=128)
+    displayorder = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.display
@@ -18,9 +19,14 @@ class CMS(models.Model):
     title = models.CharField(max_length=128)
     description = MarkdownxField(default=None)
     type = models.ForeignKey(CMSType, on_delete=models.CASCADE, null=True, blank=True)
+    displayorder = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.name
+
+    def to_json_serializable(self):
+        return {"name": self.name, "title": self.title, "description": self.description, "type": self.type, "order":
+                self.displayorder}
 
 
 class Profile(models.Model):
