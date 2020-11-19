@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from .models import Choice, CMS, CMSType, Election, Profile, UserVotes, Round, \
     PraesidiumMember, PraesidiumFunction, PraesidiumYear, PraesidiumInfoLine, Sponsor, \
-    CarouselPicture
+    CarouselPicture, Event
 
 admin.site.register(Choice)
 admin.site.register(CMS)
@@ -18,6 +18,7 @@ admin.site.register(PraesidiumYear)
 admin.site.register(PraesidiumInfoLine)
 admin.site.register(Sponsor)
 admin.site.register(CarouselPicture)
+admin.site.register(Event)
 
 
 class ProfileInline(admin.StackedInline):
