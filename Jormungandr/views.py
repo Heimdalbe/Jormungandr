@@ -5,10 +5,11 @@ import json
 from django.views import View
 from django.core.mail import send_mail
 from Backend.forms import ContactForm
-from Backend.models import CMS, PraesidiumMember, PraesidiumYear, PraesidiumInfoLine, CarouselPicture
+from Backend.models import CMS, PraesidiumMember, PraesidiumYear, PraesidiumInfoLine, CarouselPicture, Event
 
 
 def index(request):
+    print(list_to_dict(Event.objects.all()))
     return render(request, 'Jormungandr/index.html', {"carousel": CarouselPicture.objects.all()})
 
 
@@ -76,3 +77,14 @@ def list_to_dict(lines: List[PraesidiumInfoLine]):
             dic[temp] = [item]
     return dic
     # return {item.member.id: item for item in lines}
+
+
+def list_to_dict(lines: List[Event]):
+    dic = {}
+    for item in lines:
+        temp = item.date.strftime('%B')
+        if temp in dic:
+            dic[temp].append(item)
+        else:
+            dic[temp] = [item]
+    return dic

@@ -208,3 +208,8 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+    def to_month(self):
+        return self.date.strftime('%B')
+
+
