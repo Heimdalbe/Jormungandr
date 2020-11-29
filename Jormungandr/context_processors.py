@@ -11,8 +11,6 @@ def sponsors(request):
     return {'sponsors': Sponsor.objects.all()}
 
 
-
-
 def list_to_dict(pages: List[CMS]):
     dic = {}
     for item in pages:
