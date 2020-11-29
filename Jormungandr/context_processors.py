@@ -11,8 +11,6 @@ def sponsors(request):
     return {'sponsors': Sponsor.objects.all()}
 
 
-def cms(request):
-    return {'cms': list_to_dict(sorted(CMS.objects.all(), key=lambda s: s.displayorder))}
 
 
 def list_to_dict(pages: List[CMS]):
