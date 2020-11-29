@@ -1,10 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User
 
-from .models import Choice, CMS, CMSType, Election, Profile, UserVotes, Round, \
-    PraesidiumMember, PraesidiumFunction, PraesidiumYear, PraesidiumInfoLine, Sponsor, \
-    CarouselPicture, Event
+from .models import *
 
 admin.site.register(Choice)
 admin.site.register(CMS)
@@ -15,9 +12,11 @@ admin.site.register(UserVotes)
 admin.site.register(PraesidiumMember)
 admin.site.register(PraesidiumFunction)
 admin.site.register(PraesidiumYear)
-admin.site.register(PraesidiumInfoLine)
+admin.site.register(PraesidiumFunctionYearMember)
 admin.site.register(Sponsor)
-admin.site.register(CarouselPicture)
+admin.site.register(PhotoAlbum)
+admin.site.register(Picture)
+admin.site.register(EventGenre)
 admin.site.register(Event)
 
 

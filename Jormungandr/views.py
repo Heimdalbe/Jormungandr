@@ -1,23 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from typing import List
-import json
 
 from django.views import View
 from django.core.mail import send_mail
 from Backend.forms import ContactForm
-from Backend.models import CMS, PraesidiumMember, PraesidiumYear, PraesidiumInfoLine, CarouselPicture, Event
+from Backend.models import *
 
 
 def index(request):
-    print(list_to_dict(Event.objects.all()))
-    return render(request, 'Jormungandr/index.html', {"carousel": CarouselPicture.objects.all()})
-
-
-# class IndexView(View):
-#     template_name = "Jormungandr/index.html"
-#
-#     def get(self, request):
-#         return render(request, self.template_name, {})
+    return render(request, 'Jormungandr/index.html', {"carousel": Picture.objects.filter(is_carousel_pic=True)})
 
 
 def cms(request, page):
@@ -33,12 +23,9 @@ def praesidium(request):
         if chosenyear and chosenyear != "0":
             year = PraesidiumYear.objects.filter(id=chosenyear).get()
     members = sorted(PraesidiumMember.objects.filter(year=year), key=lambda s: s.function.order)
-    quotes = sorted(PraesidiumInfoLine.objects.filter(member__year=year), key=lambda s: s.member.function.order)
-    temp = list_to_dict(quotes)
-    quotesjson = json.dumps(temp)
 
     return render(request, 'Jormungandr/praesidium.html',
-                  {'praesidium': members, "years": years, "selectedyear": year.id, "quotes": quotesjson})
+                  {'praesidium': members, "years": years, "selectedyear": year.id})
 
 
 class SendMail(View):
@@ -65,26 +52,3 @@ class SendMail(View):
             fail_silently=False
         )
 
-
-def list_to_dict(lines: List[PraesidiumInfoLine]):
-    dic = {}
-    for item in lines:
-        temp = item.member.id
-        item = item.to_json_serializable()
-        if temp in dic:
-            dic[temp].append(item)
-        else:
-            dic[temp] = [item]
-    return dic
-    # return {item.member.id: item for item in lines}
-
-
-def list_to_dict(lines: List[Event]):
-    dic = {}
-    for item in lines:
-        temp = item.date.strftime('%B')
-        if temp in dic:
-            dic[temp].append(item)
-        else:
-            dic[temp] = [item]
-    return dic

@@ -141,8 +141,8 @@ class UserVotes(models.Model):
 
 
 class PraesidiumYear(models.Model):
-    start = models.IntegerField()
-    end = models.IntegerField()
+    start = models.DateTimeField()
+    end = models.DateTimeField()
 
     def __str__(self):
         return str(self.start) + " - " + str(self.end)
@@ -150,66 +150,91 @@ class PraesidiumYear(models.Model):
 
 class PraesidiumFunction(models.Model):
     name = models.CharField(max_length=50)
-    order = models.IntegerField()
     email = models.EmailField()
+    order = models.SmallIntegerField()
 
     def __str__(self):
         return self.name
 
 
 class PraesidiumMember(models.Model):
-    name = models.CharField(max_length=50)
-    function = models.ForeignKey(PraesidiumFunction, on_delete=models.PROTECT)
-    year = models.ForeignKey(PraesidiumYear, on_delete=models.PROTECT, blank=True, null=True)
-    photo = models.URLField(blank=True, null=True)
-    phone = models.CharField(max_length=20, blank=True, null=True)
-    quote = models.CharField(max_length=200, blank=True, null=True)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20, null=True)
+    photo = models.URLField(null=True)
+    quote = models.CharField(max_length=200, null=True)
+    description = models.CharField(max_length=200, null=True)
+    trivia = MarkdownxField()
+    facebook_link = models.URLField(null=True)
+    linkedin_link = models.URLField(null=True)
+    twitter_link = models.URLField(null=True)
+    instagram_link = models.URLField(null=True)
 
     def __str__(self):
-        return self.name + ": " + self.function.name
+        return self.first_name + ": " + self.last_name
 
 
-class PraesidiumInfoLine(models.Model):
-    title = models.CharField(max_length=60)
-    text = models.CharField(max_length=300)
-    member = models.ForeignKey(to=PraesidiumMember, on_delete=models.CASCADE)
+class PraesidiumFunctionYearMember(models.Model):
+    praesidium_year = models.ForeignKey(PraesidiumYear, on_delete=models.CASCADE)
+    praesidium_member = models.ForeignKey(PraesidiumMember, on_delete=models.CASCADE)
+    praesidium_function = models.ForeignKey(PraesidiumFunction, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title + ": " + self.text
-
-    def to_json_serializable(self):
-        return {"title": self.title, "text": self.text, "member": self.member.id, "membername": self.member.name}
+        return self.praesidium_year.__str__() + " " + self.praesidium_function.__str__()
 
 
 class Sponsor(models.Model):
     name = models.CharField(max_length=100, unique=True)
     website = models.URLField()
-    imageurl = models.CharField(max_length=150, unique=True)
-    invertedcolor = models.BooleanField(default=False)
+    logo = models.ImageField(upload_to='sponsor', null=True)
+    inverted_color = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name + " - " + self.website
+        return self.name
 
 
-class CarouselPicture(models.Model):
+class PhotoAlbum(models.Model):
+    name = models.CharField(max_length=100)
+    created_at = models.DateTimeField()
+    order = models.SmallIntegerField()
+
+    def __str__(self):
+        return self.name
+
+
+class Picture(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=300, null=True)
     link = models.CharField(max_length=150, unique=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-    description = models.CharField(max_length=300, blank=True, null=True)
+    is_carousel_pic = models.BooleanField(default=False)
+    album = models.ForeignKey(PhotoAlbum, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.album.__str__() + " - " + self.name
+
+
+class EventGenre(models.Model):
+    name = models.CharField(max_length=64, unique=1)
+    description = MarkdownxField(default=None)
+    logo = models.ImageField(upload_to='event_type')
 
     def __str__(self):
         return self.name
 
 
 class Event(models.Model):
-    name = models.CharField(max_length=150)
-    date = models.DateField(unique=True)
-    description = models.CharField(max_length=300, blank=True, null=True)
-    image = models.URLField(null=True, blank=True)
+    name = models.CharField(max_length=128)
+    description = MarkdownxField(default=None, null=1)
+    url = models.CharField(max_length=1024, blank=1, null=1)
+    poster = models.ImageField(upload_to='events')
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    location = models.CharField(max_length=256)
+    genre = models.ForeignKey(EventGenre, on_delete=models.CASCADE)
+    is_open = models.BooleanField(default=1)
 
     def __str__(self):
         return self.name
-
-    def to_month(self):
-        return self.date.strftime('%B')
 
 

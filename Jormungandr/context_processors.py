@@ -1,7 +1,6 @@
 from Backend.forms import ContactForm
-from Backend.models import Sponsor, CMSType, CMS
+from Backend.models import Sponsor, CMS
 from typing import List
-import json
 
 
 def contact_form(request):
