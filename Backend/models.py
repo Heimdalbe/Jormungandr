@@ -26,7 +26,7 @@ class CMS(models.Model):
 
     def to_json_serializable(self):
         return {"name": self.name, "title": self.title, "description": self.description, "type": self.type, "order":
-                self.displayorder}
+            self.displayorder}
 
 
 class Profile(models.Model):
@@ -161,15 +161,15 @@ class PraesidiumMember(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone = models.CharField(max_length=20, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
     photo = models.URLField(null=True)
-    quote = models.CharField(max_length=200, null=True)
-    description = models.CharField(max_length=200, null=True)
+    quote = models.CharField(max_length=200, blank=True, null=True)
+    description = models.CharField(max_length=200, blank=True, null=True)
     trivia = MarkdownxField()
-    facebook_link = models.URLField(null=True)
-    linkedin_link = models.URLField(null=True)
-    twitter_link = models.URLField(null=True)
-    instagram_link = models.URLField(null=True)
+    facebook_link = models.URLField(blank=True, null=True)
+    linkedin_link = models.URLField(blank=True, null=True)
+    twitter_link = models.URLField(blank=True, null=True)
+    instagram_link = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.first_name + ": " + self.last_name
@@ -205,7 +205,7 @@ class PhotoAlbum(models.Model):
 
 class Picture(models.Model):
     name = models.CharField(max_length=100)
-    description = models.CharField(max_length=300, null=True)
+    description = models.CharField(max_length=300, blank=True, null=True)
     link = models.CharField(max_length=150, unique=True)
     is_carousel_pic = models.BooleanField(default=False)
     album = models.ForeignKey(PhotoAlbum, on_delete=models.CASCADE)
@@ -225,8 +225,8 @@ class EventGenre(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=128)
-    description = MarkdownxField(default=None, null=1)
-    url = models.CharField(max_length=1024, blank=1, null=1)
+    description = MarkdownxField(default=None, null=True)
+    url = models.CharField(max_length=1024, blank=True, null=True)
     poster = models.ImageField(upload_to='events')
     start = models.DateTimeField()
     end = models.DateTimeField()
@@ -236,5 +236,3 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
-
-

@@ -3,127 +3,83 @@
 {% load static %}
 {% block title %} | Praesidium {% endblock %}
 {% block body %}
-<!-- ======= Services Section ======= -->
-<div class="body-padding">
-    <section id="team" class="team">
-        <div class="container">
-            <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-
-                <div class="row" style="margin-bottom: 50px">
-                    <div class="col">
-                        <form action="">
-                            <select onchange="submit()" name="year" id="year">
-<!-- TODO Bootstrap dropdown fixen-->
-                                {% for year in years %}
-                                <option value="{{ year.id }}"
-                                        {% if year.id == selectedyear %}selected="selected"
-                                        {% endif %}>
-                                    {{ year }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </form>
+    <!-- ======= Praesidium Section ======= -->
+    <div class="body-padding">
+        <section id="team" class="team">
+            <section class="container">
+                <div class="row">
+                    <div class="col-sm-12 shadow-lg left-border-yellow">
+                        <div class="text-center p-5">
+                            <h2 class="mb-4">Kies een jaar</h2>
+                            <form action="" class="col-sm-12 form align-items-center">
+                                <div class="row justify-content-center">
+                                    <select onchange="submit()" name="year" id="year"
+                                            class="form-control praesidia-select">
+                                        {% for year in years %}
+                                            <option value="{{ year.start|date:'Y' }}"
+                                                    {% if year.start|date:'Y' == selectedyear.start|date:'Y' %}selected="selected"
+                                                    {% endif %}>
+                                                {{ year.start|date:'Y' }} - {{ year.end|date:'Y' }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row" id="extendedinfo hide">
+                {% if praesidium %}
+                    <div class="section-title pt-5" data-aos="fade-in" data-aos-delay="100">
+                        <h2>Praesidium {{ selectedyear.start|date:'Y' }} - {{ selectedyear.end|date:'Y' }}</h2>
+                        <p>
+                            Dit jaar geven onderstaande mensen het beste van zichzelf om alles in goede banen te leiden
+                            binnen Heimdal.
+                        </p>
+                    </div>
 
-
-                </div>
-
-
-                <div class="row">
-                    {% for lid in praesidium %}
-
-
-                    <div class="col-lg-4 col-md-6 " style="margin-bottom: 75px">
-
-                        <!--Base info-->
-                        <div class="member extendable" data-aos="fade-up" data-member="{{ lid.id }}">
-                            <div class="pic"><img src="{{lid.photo}}" class="img-fluid" alt="">
-                            </div>
-                            <div class="member-info">
-                                <h4>{{ lid.name }}</h4>
-                                <span>{{ lid.function.name }}</span>
-                                <div class="social" style="font-style: italic;">
-                                    {% if lid.quote %}
-                                    {{ lid.quote }}
-                                    {% endif %}
-
+                    <div class="row pt-5">
+                        {% for lid in praesidium %}
+                            <div class="col-lg-4 col-md-6 " style="margin-bottom: 75px">
+                                <!--Base info-->
+                                <div class="member extendable" data-aos="fade-up">
+                                    <div class="pic"><img src="{{ lid.praesidium_member.photo }}" class="img-fluid"
+                                                          alt="{{ lid.praesidium_member.first_name }} {{ lid.praesidium_member.last_name }}">
+                                    </div>
+                                    <div class="member-info">
+                                        <h4>{{ lid.praesidium_member.first_name }} {{ lid.praesidium_member.last_name }}</h4>
+                                        <span>{{ lid.praesidium_function.name }}</span>
+                                        <div class="social" style="font-style: italic;">
+                                            {% if lid.praesidium_member.linkedin_link %}
+                                                <a href="{{ lid.praesidium_member.linkedin_link }}" target="_blank"><i
+                                                        class="icofont-linkedin"></i></a>
+                                            {% endif %}
+                                            {% if lid.praesidium_member.facebook_link %}
+                                                <a href="{{ lid.praesidium_member.facebook_link }}" target="_blank"><i
+                                                        class="icofont-facebook"></i></a>
+                                            {% endif %}
+                                            {% if lid.praesidium_member.instagram_link %}
+                                                <a href="{{ lid.praesidium_member.instagram_link }}" target="_blank"><i
+                                                        class="icofont-instagram"></i></a>
+                                            {% endif %}
+                                            {% if lid.praesidium_member.twitter_link %}
+                                                <a href="{{ lid.praesidium_member.twitter_link }}" target="_blank"><i
+                                                        class="icofont-twitter"></i></a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endfor %}
                     </div>
-
-
-                    {% endfor %}
-                </div>
-            </div>
-            <!-- Modal -->
-            <div class="modal fade" id="modal" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-
-                        <div class="modal-body" id="modal-body">
-
-                        </div>
-
+                {% else %}
+                    <div class="section-title pt-5" data-aos="fade-in" data-aos-delay="100">
+                        <h2>Geen praesidiumleden gevonden voor {{ selectedyear.start|date:'Y' }} - {{ selectedyear.end|date:'Y' }}</h2>
                     </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script type="text/javascript">
-
-    let data
-    let modal
-    let modalOpenable
-
-    $(document).ready(function() {
-        data = JSON.parse("{{quotes|escapejs}}")
-        let temp = $("#modal")
-        modalOpenable = !!temp.length
-        if(modalOpenable)
-        modal=$("#modal")[0]
-    })
-
-    $("div.extendable").click(function() {
-        let clicked=$(this)[0]
-        let id = $(clicked).attr("data-member")
-        let dataMember=data[id]
-
-        if(!!!dataMember)
-            return;
-
-        let parent = $('<div>', {
-        id: "modal-container",
-        "class": "row",
-        })
-
-        $(`<h2>${dataMember[0].membername}</h2>`).addClass("modal-title").appendTo(parent)
-
-        dataMember.forEach(s=> {
-            let nextQuote = $("<div>")
-            let child = $(`<p><strong>${s.title}: </strong>${s.text}</p>`)
-            $(child).appendTo(nextQuote)
-            $(nextQuote).appendTo(parent)
-        })
-
-
-        $("#modal-body").empty().append(parent)
-
-        $(modal).modal()
-    })
-
-</script>
-
+                {% endif %}
+            </section>
+        </section>
+    </div>
 {% endblock %}
 
 

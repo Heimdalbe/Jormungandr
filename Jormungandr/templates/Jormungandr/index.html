@@ -2,69 +2,90 @@
 {% load static %}
 {% block title %} | Home{% endblock %}
 {% block banner %}
-<section id="hero">
-    <div class="hero-container" data-aos="fade-up">
-        <h1>Heimdal.be</h1>
-        <h2>Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een groep studenten. Studenten die graag andere mensen, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in Geeky Stuff, samen wilt brengen.</h2>
-        <a href="#team" class="btn-get-started scrollto"><i class="bx bx-chevrons-down"></i></a>
-    </div>
-</section>
+    <section id="hero">
+        <div class="hero-container" data-aos="fade-up">
+            <h1>Heimdal.be</h1>
+            <h2>Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een groep studenten. Studenten
+                die graag andere mensen, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in Geeky
+                Stuff, samen wilt brengen.</h2>
+            <a href="#team" class="btn-get-started scrollto"><i class="bx bx-chevrons-down"></i></a>
+        </div>
+    </section>
 {% endblock %}
 {% block body %}
     <!-- ======= Team Section ======= -->
     <section id="team" class="team">
-      <div class="container">
+        <div class="container">
 
-        <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-          <h2>Kiescomité</h2>
-          <p>Deze verkiezingen worden u gebracht door het kiescomité, dat bestaat uit volgende topmensen.<br> Thomas heeft ons verlaten en daarom vonden we topvervanging in onze andere prosenior, Hans.</p>
+            <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+                <h2>Kiescomité</h2>
+                <p>Deze verkiezingen worden u gebracht door het kiescomité, dat bestaat uit volgende topmensen.<br>
+                    Thomas heeft ons verlaten en daarom vonden we topvervanging in onze andere prosenior, Hans.</p>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="member" data-aos="fade-up">
+                        <div class="pic"><img src="{% static 'img/team/Ritchie.png' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>Ritchie Van Mele</h4>
+                            <span>Voorzitter</span>
+                            <div class="social" style="font-style: italic">
+                                "Heimdal is geen drankvereniging"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="member" data-aos="fade-up" data-aos-delay="150">
+                        <div class="pic"><img src="{% static 'img/team/Stef.png' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>Stef Bondroit</h4>
+
+                            <span>Ondervoorzitter - ICT</span>
+                            <div class="social" style="font-style: italic">
+                                "u moeder ja!"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="member" data-aos="fade-up" data-aos-delay="300">
+                        <div class="pic"><img src="{% static 'img/team/Hans.png' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>Hans De Boeck</h4>
+                            <span>Secretaris</span>
+                            <div class="social" style="font-style: italic">
+                                "Hanspunt.be for free €€€"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="fade-up">
-              <div class="pic"><img src="{% static 'img/team/Ritchie.png' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Ritchie Van Mele</h4>
-                <span>Voorzitter</span>
-                <div class="social" style="font-style: italic">
-                  "Heimdal is geen drankvereniging"
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="fade-up" data-aos-delay="150">
-              <div class="pic"><img src="{% static 'img/team/Stef.png' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Stef Bondroit</h4>
-
-                <span>Ondervoorzitter - ICT</span>
-                <div class="social" style="font-style: italic">
-                  "u moeder ja!"
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="fade-up" data-aos-delay="300">
-              <div class="pic"><img src="{% static 'img/team/Hans.png' %}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Hans De Boeck</h4>
-                <span>Secretaris</span>
-                <div class="social" style="font-style: italic">
-                  "Hanspunt.be for free €€€"
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
     </section><!-- End Team Section -->
 
+    <!-- ======= Picture Section ======= -->
+    <section id="pictures" class="pictures section-bg">
+        <div class="container">
+
+            <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+                <h2>Enkele sfeerbeelden</h2>
+            </div>
+
+            <div class="owl-carousel picture-carousel">
+                {% for picture in pictures %}
+                    <div class="carousel-item active">
+                        <img alt="{{ picture.name }}" title="{{ picture.name }}"
+                             src="{{ picture.link }}" class="d-block w-100">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section><!-- End Testimonials Section -->
 {% endblock %}

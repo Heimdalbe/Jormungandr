@@ -189,6 +189,19 @@
     }
   });
 
+    // Picture carousel (uses the Owl Carousel library)
+  $(".picture-carousel").owlCarousel({
+    autoplay: true,
+    autoHeight: false,
+    dots: true,
+    loop: true,
+    responsive: {
+      0: {
+        items: 1,
+      },
+    }
+  });
+
   // Initi AOS
   function aos_init() {
     AOS.init({

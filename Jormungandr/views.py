@@ -7,7 +7,7 @@ from Backend.models import *
 
 
 def index(request):
-    return render(request, 'Jormungandr/index.html', {"carousel": Picture.objects.filter(is_carousel_pic=True)})
+    return render(request, 'Jormungandr/index.html', {"pictures": Picture.objects.filter(is_carousel_pic=True)})
 
 
 def cms(request, page):
@@ -15,17 +15,54 @@ def cms(request, page):
     return render(request, 'Jormungandr/cms.html', {'page': page})
 
 
-def praesidium(request):
-    years = sorted(PraesidiumYear.objects.all(), key=lambda s: s.start, reverse=True)
-    year = years[0]  # Default year
-    if request.method == "GET":
-        chosenyear = request.GET.get("year")
-        if chosenyear and chosenyear != "0":
-            year = PraesidiumYear.objects.filter(id=chosenyear).get()
-    members = sorted(PraesidiumMember.objects.filter(year=year), key=lambda s: s.function.order)
+def praesidia(request):
+    years = PraesidiumYear.objects.all().order_by('start')
+    selected_year = years.last()
+    members = PraesidiumFunctionYearMember.objects.all()
+
+    if request.method == 'GET':
+        year = request.GET.get("year")
+        if year:
+            selected_year = PraesidiumYear.objects.filter(start__year=year).get()
+            members = members.filter(praesidium_year=selected_year)
+        else:
+            members = members.filter(praesidium_year=selected_year)
 
     return render(request, 'Jormungandr/praesidium.html',
-                  {'praesidium': members, "years": years, "selectedyear": year.id})
+                  {'praesidium': members, "years": years, "selectedyear": selected_year})
+
+
+def events(request):
+    _events = {g: Event.objects.filter(genre=g).order_by('start') for g in EventGenre.objects.all()}
+    return render(request, 'Jormungandr/events.html', {'events': _events})
+
+
+def event(request, pk):
+    _event = get_object_or_404(Event, pk=pk)
+    return render(request, 'Jormungandr/event.html', {'activity': _event})
+
+
+def albums(request):
+    _albums = PhotoAlbum.objects.all().order_by('created_at')
+    return render(request, 'Jormungandr/gallery.html', {'albums': _albums})
+
+
+def gallery(request, pk):
+    _album = get_object_or_404(PhotoAlbum, pk=pk)
+    return render(request, 'Jormungandr/pictures.html', {'album': _album})
+
+
+def praesidium(request, pk):
+    praesidium_lid = get_object_or_404(PraesidiumMember, pk=pk)
+    return render(request, 'Jormungandr/erelid.html', {'praesidium_lid': praesidium_lid})
+
+
+def handler404(request, *args, **argv):
+    return render(request, 'Jormungandr/404.html', status=404)
+
+
+def handler500(request, *args, **argv):
+    return render(request, 'Jormungandr/500.html', status=500)
 
 
 class SendMail(View):
@@ -51,4 +88,3 @@ class SendMail(View):
             ["test@heimdal.be"],
             fail_silently=False
         )
-

@@ -31,19 +31,19 @@
 
                         {% for sponsor in sponsors %}
 
-                        <div class="col-md-4 col-sm-6 col-12 my-auto">
+                            <div class="col-md-4 col-sm-6 col-12 my-auto">
 
-                            <a href="{{ sponsor.website }}" target="_blank">
-                                <img
-                                        src="{{ sponsor.imageurl }}"
-                                        class="sponsor {% if sponsor.invertedcolor %} inverted {% endif %}"
-                                        alt="{{ sponsor.name }}">
-                            </a>
-                        </div>
+                                <a href="{{ sponsor.website }}" target="_blank">
+                                    <img
+                                            src="{% if sponsor.logo %}https://hanspunt.xcdn.eu/wp-content/uploads/2020/01/hanspunt-white.png?x38390{% else %}{{ sponsor.logo.url }}{% endif %}"
+                                            class="sponsor {% if sponsor.invertedcolor %} inverted {% endif %}"
+                                            alt="{{ sponsor.name }}">
+                                </a>
+                            </div>
 
-                        <!--&lt;!&ndash;width="300" height="75"&ndash;&gt;-->
-                        <!--&lt;!&ndash;sizes="(max-width: 300px) 100vw, 300px"&ndash;&gt;-->
-                        <!--&lt;!&ndash;srcset="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent-300x75.png 300w, https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent.png 600w"&ndash;&gt;-->
+                            <!--&lt;!&ndash;width="300" height="75"&ndash;&gt;-->
+                            <!--&lt;!&ndash;sizes="(max-width: 300px) 100vw, 300px"&ndash;&gt;-->
+                            <!--&lt;!&ndash;srcset="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent-300x75.png 300w, https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent.png 600w"&ndash;&gt;-->
 
 
                         {% endfor %}

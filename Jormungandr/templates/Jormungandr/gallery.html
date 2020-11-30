@@ -1,0 +1,36 @@
+{% extends 'Jormungandr/base.html' %}
+{% load static %}
+{% block title %} | Gallerij{% endblock %}
+{% block body %}
+    <div class="body-padding">
+        <div class="container">
+            <div class="section-title pt-5" data-aos="fade-in" data-aos-delay="100">
+                <h2>Gallerij</h2>
+                <p>Hieronder staan de albums van alle foto's van onze vereniging</p>
+            </div>
+            <div class="row">
+                {% for album in albums %}
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="card h-100">
+                            <a href="{% url 'gallery' album.pk %}">
+                            {% if album.picture_set.all %}
+                                {% with album.picture_set.all|first as image %}
+                                    <img src="{{ image.link }}" class="card-img-top" alt="{{ image.name }}">
+                                {% endwith %}
+                            {% else %}
+                                <img src="{% static 'img/Heimdal Banner black.png' %}" class="card-img-top" alt="Heimdal Banner">
+                            {% endif %}
+                            </a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="{% url 'gallery' album.pk %}">{{ album.name }}</a>
+                                </h4>
+                                <p class="card-text">Gemaakt op {{ album.created_at|date:'d/m/Y' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
