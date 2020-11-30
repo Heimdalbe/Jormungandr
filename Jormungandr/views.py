@@ -24,9 +24,7 @@ def praesidia(request):
         year = request.GET.get("year")
         if year:
             selected_year = PraesidiumYear.objects.filter(start__year=year).get()
-            members = members.filter(praesidium_year=selected_year)
-        else:
-            members = members.filter(praesidium_year=selected_year)
+        members = members.filter(praesidium_year=selected_year)
 
     return render(request, 'Jormungandr/praesidium.html',
                   {'praesidium': members, "years": years, "selectedyear": selected_year})
