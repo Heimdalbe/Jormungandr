@@ -31,13 +31,13 @@ def praesidia(request):
 
 
 def events(request):
-    _events = {g: Event.objects.filter(genre=g).order_by('start') for g in EventGenre.objects.all()}
+    _events = Event.objects.order_by('-start')
     return render(request, 'Jormungandr/events.html', {'events': _events})
 
 
 def event(request, pk):
     _event = get_object_or_404(Event, pk=pk)
-    return render(request, 'Jormungandr/event.html', {'activity': _event})
+    return render(request, 'Jormungandr/event.html', {'event': _event})
 
 
 def albums(request):

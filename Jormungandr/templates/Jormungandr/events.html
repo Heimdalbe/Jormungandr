@@ -1,0 +1,57 @@
+{% extends 'Jormungandr/base.html' %}
+{% load static %}
+{% load user_tags %}
+{% block title %} | Evenementen{% endblock %}
+{% block body %}
+    <div class="body-padding">
+        <div class="container">
+            <div class="section-title pt-5" data-aos="fade-in" data-aos-delay="100">
+                <h2>Evenementen</h2>
+                <p>Hieronder staan al onze evenementen</p>
+            </div>
+            <div class="event-calendar">
+                {% for event in events %}
+                    <div class="row event-calendar-item">
+                        <div class="col-sm-10 offset-sm-1">
+                            <div class="card shadow-lg {% if forloop.counter|divisibleby:2 %}right-border-yellow{% else %}left-border-yellow{% endif %}">
+                                <div class="card-body">
+                                    <div class="row">
+                                        {% if not forloop.counter|divisibleby:2 %}
+                                            <div class="col-sm-3 text-center">
+                                                <a href="{% url 'event' event.pk %}">
+                                                    <div class="event-calendar-item-date">
+                                                        <span><h1>{{ event.start|date:'d' }}</h1></span>
+                                                        <span><h2>{{ event.start|date:'M' }}</h2></span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                        <div class="col-sm-9 {% if forloop.counter|divisibleby:2 %} text-right{% endif %}">
+                                            <p>{{ event.start|date:"H:i" }} -
+                                                {% if event.start|date:"d M Y" == event.end|date:"d M Y" %}
+                                                    {{ event.end|date:"H:i" }}{% else %}{{ event.end|date:"H:i" }}
+                                                    <small>(op {{ event.end|date:"d/m/Y)" }}</small>{% endif %}</p>
+                                            <h2><a href="{% url 'event' event.pk %}">{{ event.name }}</a></h2>
+                                            <p>{{ event.description|markdown|truncatechars_html:60 }}</p>
+                                        </div>
+                                        {% if forloop.counter|divisibleby:2 %}
+                                            <div class="col-sm-3 text-center">
+                                                <a href="{% url 'event' event.pk %}">
+                                                    <div class="event-calendar-item-date">
+                                                        <span><h1>{{ event.start|date:'d' }}</h1></span>
+                                                        <span><h2>{{ event.start|date:'M' }}</h2></span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

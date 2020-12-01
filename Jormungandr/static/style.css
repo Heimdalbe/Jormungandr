@@ -73,7 +73,12 @@ max-width: auto;
 */
 
 .left-border-yellow {
-    border-left: 5px solid #fad62f;
+    border-left: 5px solid #fad62f !important;
+    min-width: fit-content;
+}
+
+.right-border-yellow {
+    border-right: 5px solid #fad62f !important;
     min-width: fit-content;
 }
 
@@ -124,4 +129,39 @@ section.main-box {
 .owl-carousel .owl-item {
     height: 40em;
     width: 100%;
+}
+
+.event-calendar .card {
+    border-radius: 0;
+    border: none;
+}
+
+.event-calendar-item {
+    padding: 1em;
+}
+
+.event-calendar .event-calendar-item .event-calendar-item-date {
+    margin: 0 0.5em 0.5em 0.5em;
+    padding: 1em;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.event-calendar .event-calendar-item .event-calendar-item-date h1 {
+    color: #fad62f;
+}
+
+.event-calendar .event-calendar-item .event-calendar-item-date h2 {
+    color: #fad62f;
+}
+.event-calendar .event-calendar-item .event-calendar-item-date:hover {
+    background-color: black;
+}
+
+.event-calendar .event-calendar-item .event-calendar-item-date h1:hover {
+    color: white;
+}
+
+.event-calendar .event-calendar-item .event-calendar-item-date h2:hover {
+    color: white;
 }
