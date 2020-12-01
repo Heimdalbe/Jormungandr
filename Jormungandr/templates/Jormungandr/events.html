@@ -11,7 +11,7 @@
             </div>
             <div class="event-calendar">
                 {% for event in events %}
-                    <div class="row event-calendar-item">
+                    <div class="row event-calendar-item" data-aos-delay="{{ forloop.counter }}00" data-aos="fade-{% if forloop.counter|divisibleby:2 %}left{% else %}right{% endif %}">
                         <div class="col-sm-10 offset-sm-1">
                             <div class="card shadow-lg {% if forloop.counter|divisibleby:2 %}right-border-yellow{% else %}left-border-yellow{% endif %}">
                                 <div class="card-body">

@@ -30,10 +30,9 @@ urlpatterns = [
     url(r'^events/$', events, name="events"),
     url(r'^event/(?P<pk>[0-9]+)?/$', event, name="event"),
     url(r'^praesidium/$', praesidia, name="praesidia"),
+    url(r'^sendmail/$', send_mail_contact, name="sendmail"),
     url(r'^praesidium/(?P<pk>[0-9]+)?/$', praesidium, name="praesidium"),
     url(r'^(?P<page>.*)/$', cms, name='cms'),
-    url(r'^sendmail', SendMail.as_view(), name="sendmail")
-
 ]
 
 handler404 = 'Jormungandr.views.handler404'

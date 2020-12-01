@@ -82,6 +82,16 @@ max-width: auto;
     min-width: fit-content;
 }
 
+.top-border-yellow {
+    border-top: 5px solid #fad62f !important;
+    min-width: fit-content;
+}
+
+.bottom-border-yellow {
+    border-bottom: 5px solid #fad62f !important;
+    min-width: fit-content;
+}
+
 .inner {
     margin: 15px;
     max-width: 50vw;
@@ -126,7 +136,7 @@ section.main-box {
     margin-bottom: 30px;
 }
 
-.owl-carousel .owl-item {
+.picture-carousel .owl-item {
     height: 40em;
     width: 100%;
 }
@@ -164,4 +174,38 @@ section.main-box {
 
 .event-calendar .event-calendar-item .event-calendar-item-date h2:hover {
     color: white;
+}
+
+.btn-heimdal {
+    color: #fad62f;
+    background-color: black;
+    border-color: black;
+    font-weight: bold;
+}
+
+.btn .btn-heimdal a:hover {
+    color: #fad62f;
+}
+
+.events-carousel .carousel-item .card {
+    height: 15em;
+}
+
+.events-carousel .carousel-item {
+   height: 18em;
+}
+
+.events .card {
+    border-radius: 0;
+    border: black 2px solid;
+}
+
+.events .card .card-footer {
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+
+.events .card .card-footer p {
+    margin: 0;
 }
