@@ -15,6 +15,35 @@
 {% block banner %}{% endblock %}
 <!-- Main Wrapper -->
 <main id="main">
+    {% if contact == 'ok' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div style="margin-top: 100px" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <h3>Succesvol verzonden</h3>
+                        <p>Terug naar <a href="{% url 'index' %}">home</a></p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif contact == 'failed' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div style="margin: 100px" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <h3>Er liep iets mis</h3>
+                        <p>Terug naar <a href="{% url 'index' %}">home</a>. Of probeer het <a href="{{ request.path|urlencode }}#contact">opnieuw</a> </p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
 
     {% block body %}{% endblock %}
@@ -99,8 +128,36 @@
                     </ul>
                 </div>
 
-                {% include 'Jormungandr/contact_footer.html' %}
-
+                <div class="col-lg-6 contact" data-aos="fade-up" data-aos-delay="350">
+                    <h4>Contact</h4>
+                    <form action="{% url 'sendmail' %}?next={{ request.path|urlencode }}" method="post"
+                          class="email-form">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-md-6 form-group">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
+                                       data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <input type="email" class="form-control" name="email" id="email"
+                                       placeholder="Your Email" data-rule="email"
+                                       data-msg="Please enter a valid email" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+                                   data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" required/>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" rows="5" data-rule="required"
+                                      data-msg="Please write something for us" placeholder="Message"
+                                      required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit">Send Message</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -117,36 +174,3 @@
 {% include 'Jormungandr/scripts.html' %}
 </body>
 </html>
-
-<!--<div class="col-md-4 col-sm-6 col-12">-->
-<!--<a href="https://www.facebook.com/cafecomicsans/" target="_blank">-->
-<!--<img-->
-
-<!--src="{% static 'img/sponsors/ComicSansTransparant.png' %}"-->
-<!--class="sponsor" alt="Comic Sans Gent">-->
-<!--</a>-->
-<!--&lt;!&ndash;width="300" height="75"&ndash;&gt;-->
-<!--&lt;!&ndash;sizes="(max-width: 300px) 100vw, 300px"&ndash;&gt;-->
-<!--&lt;!&ndash;srcset="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent-300x75.png 300w, https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent.png 600w"&ndash;&gt;-->
-<!--</div>-->
-<!--<div class="col-md-4 col-sm-6 col-12">-->
-<!--<a href="https://hanspunt.be/" target="_blank">-->
-<!--<img-->
-<!--src="{% static 'img/sponsors/HansPunt.png' %}"-->
-<!--class="sponsor inverted" alt="HansPunt">-->
-<!--</a>-->
-<!--</div>-->
-<!--<div class="col-md-4 col-sm-6 col-12">-->
-<!--<a href="https://www.thezone.be/" target="_blank">-->
-<!--<img-->
-<!--src="{% static 'img/sponsors/TheZone.png' %}"-->
-<!--class="sponsor" alt="The Zone">-->
-<!--</a>-->
-<!--</div>-->
-<!--<div class="col-md-4 col-sm-6 col-12">-->
-<!--<a href="https://www.hogent.be/" target="_blank">-->
-<!--<img-->
-<!--src="{% static 'img/institutes/HoGent_Logo_black.png' %}"-->
-<!--class="sponsor inverted" alt="Hogeschool Gent">-->
-<!--</a>-->
-<!--</div>-->

@@ -1,15 +1,14 @@
 {% extends 'Jormungandr/base.html' %}
 {% load user_tags %}
 {% load static %}
-{% block title %} | Error 500{% endblock %}
+{% block title %} | Verzonden{% endblock %}
 {% block body %}
     <div class="body-padding">
         <section id="services" class="services">
             <div class="container">
                 <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-                    <h2>Er ging iets mis..</h2>
-                    <p>Keer <a href="{% url 'index' %}">hier</a> terug naar home. Indien dit blijft gebeuren contacteer
-                        ons op <a href="mailto:ict@heimdal.be">ict@heimdal.be</a>. </p>
+                    <h2>Deze pagina werd niet gevonden..</h2>
+                    <p>Keer <a href="{% url 'index' %}">hier</a> terug naar home. </p>
                 </div>
             </div>
         </section>

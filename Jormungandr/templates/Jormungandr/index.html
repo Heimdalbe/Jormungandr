@@ -13,79 +13,74 @@
     </section>
 {% endblock %}
 {% block body %}
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team">
-        <div class="container">
 
-            <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-                <h2>Kiescomité</h2>
-                <p>Deze verkiezingen worden u gebracht door het kiescomité, dat bestaat uit volgende topmensen.<br>
-                    Thomas heeft ons verlaten en daarom vonden we topvervanging in onze andere prosenior, Hans.</p>
-            </div>
 
-            <div class="row">
+    {% if events %}
+        <!-- ======= Events Section ======= -->
+        <section id="events" class="events">
+            <div class="container">
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="member" data-aos="fade-up">
-                        <div class="pic"><img src="{% static 'img/team/Ritchie.png' %}" class="img-fluid" alt=""></div>
-                        <div class="member-info">
-                            <h4>Ritchie Van Mele</h4>
-                            <span>Voorzitter</span>
-                            <div class="social" style="font-style: italic">
-                                "Heimdal is geen drankvereniging"
-                            </div>
-                        </div>
-                    </div>
+                <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+                    <h2>Komende evenementen</h2>
                 </div>
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="member" data-aos="fade-up" data-aos-delay="150">
-                        <div class="pic"><img src="{% static 'img/team/Stef.png' %}" class="img-fluid" alt=""></div>
-                        <div class="member-info">
-                            <h4>Stef Bondroit</h4>
+                <div class="owl-carousel events-carousel" data-aos="fade-down" data-aos-delay="100">
+                    {% for event in events %}
+                        <a href="{% url 'event' event.pk %}">
+                            <div class="carousel-item active">
+                                <div class="card text-center p-2 m-2">
+                                    <img src="{% static 'img/Heimdal Banner black.png' %}" class="bottom-border-yellow">
+                                    <div class="card-body">
+                                        <h4>{{ event.name }}</h4>
+                                    </div>
+                                    <div class="card-footer">
+                                        <p>{{ event.start|date }}</p>
+                                    </div>
 
-                            <span>Ondervoorzitter - ICT</span>
-                            <div class="social" style="font-style: italic">
-                                "u moeder ja!"
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </a>
+
+                    {% endfor %}
                 </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="member" data-aos="fade-up" data-aos-delay="300">
-                        <div class="pic"><img src="{% static 'img/team/Hans.png' %}" class="img-fluid" alt=""></div>
-                        <div class="member-info">
-                            <h4>Hans De Boeck</h4>
-                            <span>Secretaris</span>
-                            <div class="social" style="font-style: italic">
-                                "Hanspunt.be for free €€€"
-                            </div>
-                        </div>
-                    </div>
+                <div class="text-center" data-aos="fade-in" data-aos-delay="200">
+                    <a href="{% url 'events' %}" class="btn btn-heimdal">Meer evenementen</a>
                 </div>
-
             </div>
+        </section><!-- End Testimonials Section -->
+    {% endif %}
 
-        </div>
-    </section><!-- End Team Section -->
-
-    <!-- ======= Picture Section ======= -->
-    <section id="pictures" class="pictures section-bg">
-        <div class="container">
-
-            <div class="section-title" data-aos="fade-in" data-aos-delay="100">
-                <h2>Enkele sfeerbeelden</h2>
-            </div>
-
-            <div class="owl-carousel picture-carousel">
-                {% for picture in pictures %}
-                    <div class="carousel-item active">
-                        <img alt="{{ picture.name }}" title="{{ picture.name }}"
-                             src="{{ picture.link }}" class="d-block w-100">
-                    </div>
-                {% endfor %}
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+        <div class="container" data-aos="zoom-in">
+            <div class="text-center">
+                <h3>Onze visie</h3>
+                <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                    anim id est laborum.</p>
+                <a class="cta-btn" href="{% url 'cms' 'overons' %}">Leer ons kennen</a>
             </div>
         </div>
-    </section><!-- End Testimonials Section -->
+    </section><!-- End Cta Section -->
+
+    {% if pictures %}
+        <!-- ======= Picture Section ======= -->
+        <section id="pictures" class="pictures section-bg">
+            <div class="container">
+
+                <div class="section-title" data-aos="fade-in" data-aos-delay="300">
+                    <h2>Enkele sfeerbeelden</h2>
+                </div>
+
+                <div class="owl-carousel picture-carousel" data-aos="fade-left" data-aos-delay="400">
+                    {% for picture in pictures %}
+                        <div class="carousel-item active">
+                            <img alt="{{ picture.name }}" title="{{ picture.name }}"
+                                 src="{{ picture.link }}" class="d-block w-100">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section><!-- End Testimonials Section -->
+    {% endif %}
 {% endblock %}

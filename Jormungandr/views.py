@@ -1,13 +1,21 @@
+from datetime import datetime
+
+import pytz
 from django.shortcuts import render, get_object_or_404, redirect
 
-from django.views import View
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.utils.timezone import make_aware
+
 from Backend.forms import ContactForm
 from Backend.models import *
 
 
 def index(request):
-    return render(request, 'Jormungandr/index.html', {"pictures": Picture.objects.filter(is_carousel_pic=True)})
+    time = datetime.now()
+    dt = make_aware(time)
+
+    return render(request, 'Jormungandr/index.html', {"pictures": Picture.objects.filter(is_carousel_pic=True),
+                                                      'events': Event.objects.filter(start__gt=dt).order_by('start')})
 
 
 def cms(request, page):
@@ -24,22 +32,20 @@ def praesidia(request):
         year = request.GET.get("year")
         if year:
             selected_year = PraesidiumYear.objects.filter(start__year=year).get()
-            members = members.filter(praesidium_year=selected_year)
-        else:
-            members = members.filter(praesidium_year=selected_year)
+        members = members.filter(praesidium_year=selected_year)
 
     return render(request, 'Jormungandr/praesidium.html',
                   {'praesidium': members, "years": years, "selectedyear": selected_year})
 
 
 def events(request):
-    _events = {g: Event.objects.filter(genre=g).order_by('start') for g in EventGenre.objects.all()}
+    _events = Event.objects.filter(start__gt=datetime.now()).order_by('start')
     return render(request, 'Jormungandr/events.html', {'events': _events})
 
 
 def event(request, pk):
     _event = get_object_or_404(Event, pk=pk)
-    return render(request, 'Jormungandr/event.html', {'activity': _event})
+    return render(request, 'Jormungandr/event.html', {'event': _event})
 
 
 def albums(request):
@@ -65,26 +71,21 @@ def handler500(request, *args, **argv):
     return render(request, 'Jormungandr/500.html', status=500)
 
 
-class SendMail(View):
-    def post(self, request):
-        form = ContactForm(request.POST)
+def send_mail_contact(request):
+    form = ContactForm(request.POST)
+    redir = request.GET["next"]
 
-        previous = request.GET["next"]
+    if request.POST:
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
 
-        if not form.is_valid():
-            return redirect(previous)
+        mailbody = "From " + name + " <" + email + ">\n" + message
+        mail = EmailMessage(subject, mailbody, "contact@heimdal.be",
+                            to=["stef.bondroit@gmail.com"])
+        mail.send()
 
-        self.format_send_mail(form.cleaned_data)
-        return redirect(previous)
+        return redirect(redir + "?contact=ok")
 
-    def format_send_mail(self, form):
-        subject = "Mail sent by: {}".format(form.get("name"))
-        message = "Subject: {}\n\n{}\n\n{}\n\nYou can respond to: {}" \
-            .format(form.get("subject"), form.get("message"), "=" * 20, form.get("email"))
-        send_mail(
-            subject,
-            message,
-            "",
-            ["test@heimdal.be"],
-            fail_silently=False
-        )
+    return handler500(request)

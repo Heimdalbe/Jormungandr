@@ -16,6 +16,7 @@
                 <li class="drop-down"><a href="">Over ons</a>
                     <ul>
                         <li><a href="{% url 'cms' 'overons' %}">Over ons</a></li>
+                        <li><a href="{% url 'events' %}">Evenementen</a></li>
                         <li><a href="https://stefbondroit.be" target="_blank">Ereleden</a></li>
                         <li><a href="{% url 'albums' %}">Foto's</a></li>
                     </ul>
@@ -37,7 +38,7 @@
                 {% else %}
                     <li><a href="{% url 'Intranet:index' %}">Leden</a></li>
                 {% endif %}
-                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav><!-- .nav-menu -->
 
