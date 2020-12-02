@@ -39,7 +39,9 @@ def praesidia(request):
 
 
 def events(request):
-    _events = Event.objects.filter(start__gt=datetime.now()).order_by('start')
+    time = datetime.now()
+    dt = make_aware(time)
+    _events = Event.objects.filter(start__gt=dt).order_by('start')
     return render(request, 'Jormungandr/events.html', {'events': _events})
 
 

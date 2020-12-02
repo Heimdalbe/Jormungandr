@@ -158,11 +158,11 @@ section.main-box {
 }
 
 .event-calendar .event-calendar-item .event-calendar-item-date h1 {
-    color: #fad62f;
+    color: white;
 }
 
 .event-calendar .event-calendar-item .event-calendar-item-date h2 {
-    color: #fad62f;
+    color: white;
 }
 .event-calendar .event-calendar-item .event-calendar-item-date:hover {
     background-color: black;
@@ -177,7 +177,7 @@ section.main-box {
 }
 
 .btn-heimdal {
-    color: #fad62f;
+    color: white;
     background-color: black;
     border-color: black;
     font-weight: bold;

@@ -174,7 +174,7 @@
     $(".portfolio-details-carousel").owlCarousel({
         autoplay: false,
         dots: true,
-        loop: true,
+        loop: false,
         responsive: {
             0: {
                 items: 1
