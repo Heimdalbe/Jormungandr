@@ -18,6 +18,8 @@ admin.site.register(PhotoAlbum)
 admin.site.register(Picture)
 admin.site.register(EventGenre)
 admin.site.register(Event)
+admin.site.register(NavTopItem)
+admin.site.register(NavSubItem)
 
 
 class ProfileInline(admin.StackedInline):

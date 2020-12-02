@@ -175,6 +175,7 @@ class PraesidiumMember(models.Model):
         return self.first_name + ": " + self.last_name
 
 
+
 class PraesidiumFunctionYearMember(models.Model):
     praesidium_year = models.ForeignKey(PraesidiumYear, on_delete=models.CASCADE)
     praesidium_member = models.ForeignKey(PraesidiumMember, on_delete=models.CASCADE)
@@ -228,11 +229,31 @@ class Event(models.Model):
     description = MarkdownxField(default=None, null=True)
     url = models.CharField(max_length=1024, blank=True, null=True)
     poster = models.ImageField(upload_to='events')
-    start = models.DateTimeField()
-    end = models.DateTimeField()
+    start = models.DateTimeField(null=True)
+    end = models.DateTimeField(null=True)
     location = models.CharField(max_length=256)
     genre = models.ForeignKey(EventGenre, on_delete=models.CASCADE)
     is_open = models.BooleanField(default=1)
 
     def __str__(self):
         return self.name
+
+
+class NavTopItem(models.Model):
+    titel = models.CharField(max_length=128)
+    order = models.SmallIntegerField()
+    url = models.CharField(max_length=1024, blank=True, null=True)
+
+    def __str__(self):
+        return self.titel
+
+
+class NavSubItem(models.Model):
+    titel = models.CharField(max_length=128)
+    order = models.SmallIntegerField()
+    url = models.CharField(max_length=1024, blank=True, null=True)
+    # NOTE: having no topitem means it will not be displayed
+    parent = models.ForeignKey(NavTopItem, null=True, blank=True,  on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.titel
