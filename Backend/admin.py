@@ -5,7 +5,6 @@ from .models import *
 
 admin.site.register(Choice)
 admin.site.register(CMS)
-admin.site.register(CMSType)
 admin.site.register(Election)
 admin.site.register(Round)
 admin.site.register(UserVotes)

@@ -1,3 +1,5 @@
+from enum import IntEnum
+
 from django.contrib.auth.models import User
 from django.db import models, IntegrityError
 from django.db.models.signals import post_save
@@ -5,28 +7,30 @@ from markdownx.models import MarkdownxField
 from multiselectfield import MultiSelectField
 
 
-class CMSType(models.Model):
-    name = models.CharField(max_length=128)
-    display = models.CharField(max_length=128)
-    displayorder = models.IntegerField(null=True, blank=True)
-
-    def __str__(self):
-        return self.display
-
-
 class CMS(models.Model):
     name = models.CharField(max_length=128)
     title = models.CharField(max_length=128)
     description = MarkdownxField(default=None)
-    type = models.ForeignKey(CMSType, on_delete=models.CASCADE, null=True, blank=True)
-    displayorder = models.IntegerField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Custom Pagina'
+        verbose_name_plural = 'Custom Pagina\'s'
 
     def __str__(self):
         return self.name
 
-    def to_json_serializable(self):
-        return {"name": self.name, "title": self.title, "description": self.description, "type": self.type, "order":
-            self.displayorder}
+
+class UserRole(IntEnum):
+    Admin = 1
+    Developer = 2
+    Praesidium = 3
+    Lid = 4
+    # afspraak : laatste rol is voor publieke pagina's en voor niet-bevestigde leden
+    Anonymous = 5
+
+    @classmethod
+    def choices(cls):
+        return [(key.value, key.name) for key in cls]
 
 
 class Profile(models.Model):
@@ -50,9 +54,9 @@ class Profile(models.Model):
     interesses = MultiSelectField(choices=INTERESSE_CHOICES, blank=True)
     mails = models.BooleanField(default=False)
     policy_approved = models.BooleanField(default=False)
-
     votes = models.PositiveSmallIntegerField(default=1)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='ACTIVE')
+    role = models.IntegerField(choices=UserRole.choices(), default=len(UserRole.choices()))
     election_active = models.BooleanField(default=False)
 
     def __str__(self):
@@ -144,6 +148,10 @@ class PraesidiumYear(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
 
+    class Meta:
+        verbose_name = 'Praesidium Werkjaar'
+        verbose_name_plural = 'Praesidium Werkjaren'
+
     def __str__(self):
         return str(self.start) + " - " + str(self.end)
 
@@ -152,6 +160,10 @@ class PraesidiumFunction(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField()
     order = models.SmallIntegerField()
+
+    class Meta:
+        verbose_name = 'Praesidium Functie'
+        verbose_name_plural = 'Praesidium Functies'
 
     def __str__(self):
         return self.name
@@ -171,15 +183,22 @@ class PraesidiumMember(models.Model):
     twitter_link = models.URLField(blank=True, null=True)
     instagram_link = models.URLField(blank=True, null=True)
 
+    class Meta:
+        verbose_name = 'Data Praesidium Lid'
+        verbose_name_plural = 'Data Praesidium Leden'
+
     def __str__(self):
         return self.first_name + ": " + self.last_name
-
 
 
 class PraesidiumFunctionYearMember(models.Model):
     praesidium_year = models.ForeignKey(PraesidiumYear, on_delete=models.CASCADE)
     praesidium_member = models.ForeignKey(PraesidiumMember, on_delete=models.CASCADE)
     praesidium_function = models.ForeignKey(PraesidiumFunction, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Praesidium Lid'
+        verbose_name_plural = 'Praesidium Leden'
 
     def __str__(self):
         return self.praesidium_year.__str__() + " " + self.praesidium_function.__str__()
@@ -200,6 +219,10 @@ class PhotoAlbum(models.Model):
     created_at = models.DateTimeField()
     order = models.SmallIntegerField()
 
+    class Meta:
+        verbose_name = 'Photo Album'
+        verbose_name_plural = 'Photo Albums'
+
     def __str__(self):
         return self.name
 
@@ -219,6 +242,10 @@ class EventGenre(models.Model):
     name = models.CharField(max_length=64, unique=1)
     description = MarkdownxField(default=None)
     logo = models.ImageField(upload_to='event_type')
+
+    class Meta:
+        verbose_name = 'Event Genre'
+        verbose_name_plural = 'Event Genres'
 
     def __str__(self):
         return self.name
@@ -242,18 +269,31 @@ class Event(models.Model):
 class NavTopItem(models.Model):
     titel = models.CharField(max_length=128)
     order = models.SmallIntegerField()
-    url = models.CharField(max_length=1024, blank=True, null=True)
+    url = models.URLField(default="http://127.0.0.1:8000/")
+    # afspraak : laatste rol is voor publieke pagina's
+    role = models.IntegerField(choices=UserRole.choices(), default=len(UserRole.choices()))
+
+    class Meta:
+        verbose_name = 'Menu Header'
+        verbose_name_plural = 'Menu Headers'
 
     def __str__(self):
         return self.titel
+
+    def get_sub(self):
+        return NavSubItem.objects.filter(parent=self).order_by('order')
 
 
 class NavSubItem(models.Model):
     titel = models.CharField(max_length=128)
     order = models.SmallIntegerField()
-    url = models.CharField(max_length=1024, blank=True, null=True)
+    url = models.URLField(default="http://127.0.0.1:8000/")
     # NOTE: having no topitem means it will not be displayed
     parent = models.ForeignKey(NavTopItem, null=True, blank=True,  on_delete=models.SET_NULL)
+
+    class Meta:
+        verbose_name = 'Menu Item'
+        verbose_name_plural = 'Menu Items'
 
     def __str__(self):
         return self.titel

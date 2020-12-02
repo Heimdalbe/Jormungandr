@@ -13,22 +13,46 @@
 
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class="drop-down"><a href="">Over ons</a>
-                    <ul>
-                        <li><a href="{% url 'cms' 'overons' %}">Over ons</a></li>
-                        <li><a href="{% url 'events' %}">Evenementen</a></li>
-                        <li><a href="https://stefbondroit.be" target="_blank">Ereleden</a></li>
-                        <li><a href="{% url 'albums' %}">Foto's</a></li>
-                    </ul>
-                </li>
-                <li><a href="{% url 'praesidia' %}">Praesidium</a></li>
-                {% if user.is_authenticated %}
+                {% for nav in menu %}
+                        <!--- IF THERE IS EVER A USERROLE ADDED OR DELETED, THIS NUMBER HAS TO BE CHANGED-->
+                    {% if nav.role == 5 %}
+                        {% if nav.navsubitem_set.all %}
+                            <li class="drop-down"><a href="">{{ nav.titel }}</a>
+                                <ul>
+                                    <li><a href="{{ nav.url }}">{{ nav.titel }}</a></li>
+                                    {% for subnav in nav.get_sub%}
+                                        <li><a href="{{ subnav.url }}">{{ subnav.titel }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li><a href="{{ nav.url }}">{{ nav.titel }}</a></li>
+                        {% endif %}
+                    {% else %}
+                        {% if user.is_authenticated and nav.role >= user.profile.role %}
+                            {% if nav.get_sub %}
+                                <li class="drop-down"><a href="">{{ nav.titel }}</a>
+                                    <ul>
+                                        <li><a href="{{ nav.url }}">{{ nav.titel }}</a></li>
+                                        {% for subnav in nav.get_sub %}
+                                            <li><a href="{{ subnav.url }}">{{ subnav.titel }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <li><a href="{{ nav.url }}">{{ nav.titel }}</a></li>
+                            {% endif %}
+                        {% endif %}
+
+                    {% endif %}
+                {% endfor %}
+                {% if user.is_authenticated and user.profile.role < 5 %}
                     <li class="drop-down"><a href="#">Leden</a>
                         <ul>
                             <li><a href="{% url 'Intranet:index' %}">Intranet</a></li>
                             <li><a href="{% url 'Intranet:voting' %}">Stemmen</a></li>
                             <li><a href="{% url 'Intranet:edit_profile' %}">Profiel</a></li>
-                            {% if user|has_group:"ICT" %}
+                            {% if user.profile.role == 1 %}
                                 <a class="dropdown-item" href="/admin">Admin</a>
                             {% endif %}
                             <li><a href="{% url 'Intranet:logout_user' %}">Uitloggen</a></li>
@@ -39,8 +63,9 @@
                     <li><a href="{% url 'Intranet:index' %}">Leden</a></li>
                 {% endif %}
                 <li><a href="#contact">Contact</a></li>
+
             </ul>
-        </nav><!-- .nav-menu -->
+        </nav>
 
     </div>
 </header><!-- End Header -->

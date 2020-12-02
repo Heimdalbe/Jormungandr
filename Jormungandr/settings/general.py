@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'Jormungandr.context_processors.sponsors',
+                'Jormungandr.context_processors.menu',
                 'Jormungandr.context_processors.parameters',
             ],
         },
