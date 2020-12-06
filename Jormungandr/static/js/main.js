@@ -205,18 +205,13 @@
             0: {
                 items: 1,
             },
-            // breakpoint from 480 up
-            300: {
-                items: 2,
-            },
             // breakpoint from 768 up
-            7000: {
+            700: {
+               items: 2,
+            },
+            1200: {
                items: 3,
             },
-            // breakpoint from 1000 up
-            1100: {
-               items: 4,
-            }
         }
     });
 

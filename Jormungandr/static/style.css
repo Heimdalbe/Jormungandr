@@ -183,29 +183,38 @@ section.main-box {
     font-weight: bold;
 }
 
-.btn .btn-heimdal a:hover {
-    color: #fad62f;
+.btn:hover {
+    color: #fad62f !important;
 }
 
 .events-carousel .carousel-item .card {
-    height: 15em;
+    height: 18em;
+}
+
+.events-carousel .carousel-item .card .card-header {
+    vertical-align: center;
+}
+
+.events-carousel .carousel-item .card .card-header h4 {
+    height: 2em;
 }
 
 .events-carousel .carousel-item {
-   height: 18em;
+   height: 20em;
 }
 
 .events .card {
     border-radius: 0;
-    border: black 2px solid;
+    border: 0;
 }
 
-.events .card .card-footer {
+.events .card .card-header {
     border: none;
     background: transparent;
     padding: 0;
 }
 
-.events .card .card-footer p {
+.events .card p {
     margin: 0;
+    color: black !important;
 }

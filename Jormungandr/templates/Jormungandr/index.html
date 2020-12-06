@@ -14,13 +14,12 @@
 {% endblock %}
 {% block body %}
 
-
     {% if events %}
         <!-- ======= Events Section ======= -->
         <section id="events" class="events">
             <div class="container">
 
-                <div class="section-title" data-aos="fade-in" data-aos-delay="100">
+                <div class="section-title" data-aos="fade-left" data-aos-delay="0">
                     <h2>Komende evenementen</h2>
                 </div>
 
@@ -29,13 +28,11 @@
                         <a href="{% url 'event' event.pk %}">
                             <div class="carousel-item active">
                                 <div class="card text-center p-2 m-2">
-                                    <img src="{% static 'img/Heimdal Banner black.png' %}" class="bottom-border-yellow">
-                                    <div class="card-body">
+                                    <div class="card-header">
                                         <h4>{{ event.name }}</h4>
                                     </div>
-                                    <div class="card-footer">
-                                        <p>{{ event.start|date }}</p>
-                                    </div>
+                                    <img src="https://q-xx.bstatic.com/images/hotel/max1024x768/198/198762538.jpg" class="bottom-border-yellow">
+                                    <p>{{ event.start|date:"d/m/Y" }} om {{ event.start|date:"H:i" }}</p>
 
                                 </div>
                             </div>
@@ -44,7 +41,7 @@
                     {% endfor %}
                 </div>
                 <div class="text-center" data-aos="fade-in" data-aos-delay="200">
-                    <a href="{% url 'events' %}" class="btn btn-heimdal">Meer evenementen</a>
+                    <btn href="{% url 'events' %}" class="btn btn-heimdal">Meer evenementen</btn>
                 </div>
             </div>
         </section><!-- End Testimonials Section -->

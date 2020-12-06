@@ -14,13 +14,13 @@
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 {% for nav in menu %}
-                        <!--- IF THERE IS EVER A USERROLE ADDED OR DELETED, THIS NUMBER HAS TO BE CHANGED-->
+                    <!--- IF THERE IS EVER A USERROLE ADDED OR DELETED, THIS NUMBER HAS TO BE CHANGED-->
                     {% if nav.role == 5 %}
                         {% if nav.navsubitem_set.all %}
                             <li class="drop-down"><a href="">{{ nav.titel }}</a>
                                 <ul>
                                     <li><a href="{{ nav.url }}">{{ nav.titel }}</a></li>
-                                    {% for subnav in nav.get_sub%}
+                                    {% for subnav in nav.get_sub %}
                                         <li><a href="{{ subnav.url }}">{{ subnav.titel }}</a></li>
                                     {% endfor %}
                                 </ul>

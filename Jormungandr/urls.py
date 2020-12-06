@@ -18,6 +18,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include
 
+from Jormungandr.settings import secrets
 from Jormungandr.views import *
 
 urlpatterns = [
@@ -35,6 +36,9 @@ urlpatterns = [
     url(r'^(?P<page>.*)/$', cms, name='cms'),
 ]
 
-handler404 = 'Jormungandr.views.handler404'
-handler500 = 'Jormungandr.views.handler500'
+if not secrets.DEBUG:
+    handler400 = 'Jormungandr.views.handler400'
+    handler403 = 'Jormungandr.views.handler403'
+    handler404 = 'Jormungandr.views.handler404'
+    handler500 = 'Jormungandr.views.handler500'
 

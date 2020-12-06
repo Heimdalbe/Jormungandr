@@ -65,6 +65,14 @@ def praesidium(request, pk):
     return render(request, 'Jormungandr/erelid.html', {'praesidium_lid': praesidium_lid})
 
 
+def handler400(request, *args, **argv):
+    return render(request, 'Jormungandr/400.html', status=400)
+
+
+def handler403(request, *args, **argv):
+    return render(request, 'Jormungandr/403.html', status=403)
+
+
 def handler404(request, *args, **argv):
     return render(request, 'Jormungandr/404.html', status=404)
 
@@ -90,4 +98,4 @@ def send_mail_contact(request):
 
         return redirect(redir + "?contact=ok")
 
-    return handler500(request)
+    return handler404(request)
