@@ -7,40 +7,6 @@
 !(function ($) {
     "use strict";
 
-//let data
-//    let modal
-//    let modalOpenable
-//
-//    $(document).ready(function() {
-//        data = JSON.parse("{{quotes|escapejs}}")
-//        let temp = $("#modal")
-//        modalOpenable = !!temp.length
-//        if(modalOpenable)
-//        modal=$("#modal")[0]
-//    })
-//
-//    $("div.extendable").click(function() {
-//        let clicked=$(this)[0]
-//        let id = $(clicked).attr("data-member")
-//        let dataMember=data[id]
-//
-//
-//        let parent = $('<div>', {
-//        id: "modal-container",
-//        "class": "row",
-//        })
-//
-//        dataMember.forEach(s=> {
-//            let nextQuote = $("<div>", {"class": "col"})
-//            let child = $(`<p><strong>${s.title}: </strong>${s.text}</p>`)
-//            child.appendTo(nextQuote)
-//            nextQuote.appendTo(parent)
-//        })
-//
-//        $(modal).modal()
-//    })
-
-
     // Smooth scroll for the navigation menu and links with .scrollto classes
     $(document).on('click', '.nav-menu a, .mobile-nav a, .scrollto', function (e) {
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -111,7 +77,7 @@
     // Toggle .header-scrolled class to #header when page is scrolled
 
     $(window).scroll(function () {
-        if ($(this).scrollTop() > 100) {
+        if ($(this).scrollTop() > 30) {
             $('#header').addClass('header-scrolled');
             $('.drop-down').addClass('header-scrolled');
             $('.mobile-nav-toggle').addClass('header-scrolled');
