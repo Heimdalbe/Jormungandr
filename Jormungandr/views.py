@@ -50,6 +50,10 @@ def event(request, pk):
     return render(request, 'Jormungandr/event.html', {'event': _event})
 
 
+def statuten(request):
+    return render(request, 'Jormungandr/statuten.html')
+
+
 def albums(request):
     _albums = PhotoAlbum.objects.all().order_by('created_at')
     return render(request, 'Jormungandr/gallery.html', {'albums': _albums})

@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^intranet/', include('Intranet.urls')),
     url(r'^$', index, name="index"),
     url(r'^albums/$', albums, name="albums"),
+    url(r'^statuten/$', statuten, name="statuten"),
     url(r'^gallery/(?P<pk>[0-9]+)?/$', gallery, name="gallery"),
     url(r'^events/$', events, name="events"),
     url(r'^event/(?P<pk>[0-9]+)?/$', event, name="event"),
