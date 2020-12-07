@@ -37,7 +37,7 @@ urlpatterns = [
     url(r'^(?P<page>.*)/$', cms, name='cms'),
 ]
 
-if not secrets.DEBUG:
+if secrets.DEBUG:
     handler400 = 'Jormungandr.views.handler400'
     handler403 = 'Jormungandr.views.handler403'
     handler404 = 'Jormungandr.views.handler404'

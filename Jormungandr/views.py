@@ -20,7 +20,10 @@ def index(request):
 
 def cms(request, page):
     page = get_object_or_404(CMS, name=page)
-    return render(request, 'Jormungandr/cms.html', {'page': page})
+    if request.user.profile.role > page.permission:
+        return handler403(request)
+    else:
+        return render(request, 'Jormungandr/cms.html', {'page': page})
 
 
 def praesidia(request):

@@ -7,19 +7,6 @@ from markdownx.models import MarkdownxField
 from multiselectfield import MultiSelectField
 
 
-class CMS(models.Model):
-    name = models.CharField(max_length=128)
-    title = models.CharField(max_length=128)
-    description = MarkdownxField(default=None)
-
-    class Meta:
-        verbose_name = 'Custom Pagina'
-        verbose_name_plural = 'Custom Pagina\'s'
-
-    def __str__(self):
-        return self.name
-
-
 class UserRole(IntEnum):
     Admin = 1
     Developer = 2
@@ -31,6 +18,22 @@ class UserRole(IntEnum):
     @classmethod
     def choices(cls):
         return [(key.value, key.name) for key in cls]
+
+
+class CMS(models.Model):
+    name = models.CharField(max_length=128)
+    title = models.CharField(max_length=128)
+    description = MarkdownxField(default=None)
+    permission = models.IntegerField(choices=UserRole.choices(), default=len(UserRole.choices()),
+                                     help_text="Stel toegangsrechten voor de pagina in. Standaard: voor iedereen "
+                                               "togankelijk")
+
+    class Meta:
+        verbose_name = 'Custom Pagina'
+        verbose_name_plural = 'Custom Pagina\'s'
+
+    def __str__(self):
+        return self.name
 
 
 class Profile(models.Model):
