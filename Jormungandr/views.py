@@ -1,6 +1,5 @@
 from datetime import datetime
 
-import pytz
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.core.mail import EmailMessage
@@ -20,10 +19,14 @@ def index(request):
 
 def cms(request, page):
     page = get_object_or_404(CMS, name=page)
-    if request.user.profile.role > page.permission:
-        return handler403(request)
+    if page.permission < UserRole.Anonymous:
+        if request.user.is_authenticated:
+            if request.user.profile.role <= page.permission:
+                return render(request, 'Jormungandr/cms.html', {'page': page})
     else:
         return render(request, 'Jormungandr/cms.html', {'page': page})
+
+    return handler403(request)
 
 
 def praesidia(request):
