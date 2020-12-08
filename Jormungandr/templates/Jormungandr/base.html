@@ -64,7 +64,7 @@
 
                                 <a href="{{ sponsor.website }}" target="_blank">
                                     <img
-                                            src="{% if sponsor.logo %}https://hanspunt.xcdn.eu/wp-content/uploads/2020/01/hanspunt-white.png?x38390{% else %}{{ sponsor.logo.url }}{% endif %}"
+                                            src="{{ sponsor.logo.url }}"
                                             class="sponsor {% if sponsor.invertedcolor %} inverted {% endif %}"
                                             alt="{{ sponsor.name }}">
                                 </a>

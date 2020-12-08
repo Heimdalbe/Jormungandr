@@ -14,8 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # from django.contrib import admin
+from django.conf import settings
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
 from django.urls import include
 
 from Jormungandr.settings import secrets
@@ -36,6 +39,9 @@ urlpatterns = [
     url(r'^praesidium/(?P<pk>[0-9]+)?/$', praesidium, name="praesidium"),
     url(r'^(?P<page>.*)/$', cms, name='cms'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if secrets.DEBUG:
     handler400 = 'Jormungandr.views.handler400'

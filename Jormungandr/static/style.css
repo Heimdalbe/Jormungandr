@@ -11,6 +11,8 @@ div.noBullet ul {
     border-radius: .25rem
 }
 
+/* Algemene customization */
+
 .body-padding {
     padding: 5em 0 5em 0;
 }
@@ -27,50 +29,17 @@ img.inverted {
     filter: invert(1);
 }
 
-img.sponsor {
-    max-width: 200px
-}
-
-.black {
-    background-color: black;
-}
-
-.black-title {
+.btn-heimdal {
     color: white;
-
+    background-color: black;
+    border-color: black;
+    font-weight: bold;
 }
 
-hr.linebreak {
-    color: darkgray;
-    width: 50%;
-    margin: 0;
+.btn:hover {
+    color: #fad62f !important;
 }
 
-.carouselItem {
-    max-width: 100%;
-}
-
-/*
-.carousel{
-max-height: 75vh;
-max-width: auto;
-}*/
-
-.carousel > * {
-    min-width: none;
-}
-
-.carousel-item > img {
-    margin: auto;
-    object-fit: contain;
-}
-
-/*
-.carousel .item {
-  min-width: 100%;
-  background-color: #fff;
-}
-*/
 
 .left-border-yellow {
     border-left: 5px solid #fad62f !important;
@@ -95,6 +64,40 @@ max-width: auto;
 .inner {
     margin: 15px;
     max-width: 50vw;
+}
+
+/* base.html sponsor */
+
+img.sponsor {
+    max-width: 200px
+}
+
+.black {
+    background-color: black;
+}
+
+.black-title {
+    color: white;
+
+}
+
+hr.linebreak {
+    color: darkgray;
+    width: 50%;
+    margin: 0;
+}
+
+.carouselItem {
+    max-width: 100%;
+}
+
+.carousel > * {
+    min-width: none;
+}
+
+.carousel-item > img {
+    margin: auto;
+    object-fit: contain;
 }
 
 .schildimg {
@@ -136,10 +139,14 @@ section.main-box {
     margin-bottom: 30px;
 }
 
+/* base.html picture carousel */
+
 .picture-carousel .owl-item {
     height: 40em;
     width: 100%;
 }
+
+/* events.html */
 
 .event-calendar .card {
     border-radius: 0;
@@ -176,16 +183,7 @@ section.main-box {
     color: white;
 }
 
-.btn-heimdal {
-    color: white;
-    background-color: black;
-    border-color: black;
-    font-weight: bold;
-}
-
-.btn:hover {
-    color: #fad62f !important;
-}
+/* base.html */
 
 .events-carousel .carousel-item .card {
     height: 18em;
@@ -193,6 +191,11 @@ section.main-box {
 
 .events-carousel .carousel-item .card .card-header {
     vertical-align: center;
+}
+
+.events-carousel .carousel-item .card img {
+    max-height: 12.5em;
+    object-fit: contain;
 }
 
 .events-carousel .carousel-item .card .card-header h4 {
@@ -217,4 +220,11 @@ section.main-box {
 .events .card p {
     margin: 0;
     color: black !important;
+}
+
+/* event.html */
+
+.portfolio-details-container .portfolio-details-carousel img {
+    max-height: 30em;
+    object-fit: contain;
 }

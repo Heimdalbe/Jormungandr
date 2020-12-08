@@ -31,7 +31,7 @@
                                     <div class="card-header">
                                         <h4>{{ event.name }}</h4>
                                     </div>
-                                    <img src="https://q-xx.bstatic.com/images/hotel/max1024x768/198/198762538.jpg" class="bottom-border-yellow">
+                                    <img src="{{ event.poster.url }}" class="bottom-border-yellow img-fluid">
                                     <p>{{ event.start|date:"d/m/Y" }} om {{ event.start|date:"H:i" }}</p>
 
                                 </div>

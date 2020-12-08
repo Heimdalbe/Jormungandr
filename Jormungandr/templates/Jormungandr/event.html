@@ -17,15 +17,13 @@
         </section>
     </div>
 
-    <!-- ======= Portfolio Details Section ======= -->
     <section class="portfolio-details">
         <div class="container">
 
             <div class="portfolio-details-container">
-
                 <div class="owl-carousel portfolio-details-carousel" data-aos-delay="100" data-aos="fade-left">
-                    <img src="{% if not event.poster %}{{ event.poster.url }}{% else %}https://cdn.getyourguide.com/img/tour/5ca4db0039bf6.jpeg/148.jpg{% endif %}"
-                         class="img-fluid" alt="">
+                    <img src="{{ event.poster.url }}"
+                         class="img-fluid" alt="{{ event.name }}">
                 </div>
 
                 <div class="portfolio-info shadow-lg top-border-yellow" data-aos-delay="200" data-aos="fade-up">
@@ -50,6 +48,6 @@
                 </p>
             </div>
         </div>
-    </section><!-- End Portfolio Details Section -->
+    </section>
 
 {% endblock %}
