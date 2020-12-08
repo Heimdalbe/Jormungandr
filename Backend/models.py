@@ -26,7 +26,7 @@ class CMS(models.Model):
     description = MarkdownxField(default=None)
     permission = models.IntegerField(choices=UserRole.choices(), default=len(UserRole.choices()),
                                      help_text="Stel toegangsrechten voor de pagina in. Standaard: voor iedereen "
-                                               "togankelijk")
+                                               "toegankelijk")
 
     class Meta:
         verbose_name = 'Custom Pagina'
