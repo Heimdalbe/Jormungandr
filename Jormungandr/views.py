@@ -61,12 +61,14 @@ def statuten(request):
 
 
 def albums(request):
-    _albums = PhotoAlbum.objects.all().order_by('created_at')
+    _albums = PhotoAlbum.objects.filter(visible=True).order_by('created_at')
     return render(request, 'Jormungandr/gallery.html', {'albums': _albums})
 
 
 def gallery(request, pk):
     _album = get_object_or_404(PhotoAlbum, pk=pk)
+    if not _album.visible:
+        return handler403(request)
     return render(request, 'Jormungandr/pictures.html', {'album': _album})
 
 

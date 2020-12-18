@@ -221,6 +221,7 @@ class PhotoAlbum(models.Model):
     name = models.CharField(max_length=100)
     created_at = models.DateTimeField()
     order = models.SmallIntegerField()
+    visible = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = 'Photo Album'
