@@ -8,21 +8,19 @@
             <h2>Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een groep studenten. Studenten
                 die graag andere mensen, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in Geeky
                 Stuff, samen wilt brengen.</h2>
-            <a href="#team" class="btn-get-started scrollto"><i class="bx bx-chevrons-down"></i></a>
+            <a href="#events" class="btn-get-started scrollto"><i class="bx bx-chevrons-down"></i></a>
         </div>
     </section>
 {% endblock %}
 {% block body %}
+    <!-- ======= Events Section ======= -->
+    <section id="events" class="events">
+        <div class="container">
 
-    {% if events %}
-        <!-- ======= Events Section ======= -->
-        <section id="events" class="events">
-            <div class="container">
-
-                <div class="section-title" data-aos="fade-left" data-aos-delay="0">
-                    <h2>Komende evenementen</h2>
-                </div>
-
+            <div class="section-title" data-aos="fade-left" data-aos-delay="0">
+                <h2>Komende evenementen</h2>
+            </div>
+            {% if events %}
                 <div class="owl-carousel events-carousel" data-aos="fade-down" data-aos-delay="100">
                     {% for event in events %}
                         <a href="{% url 'event' event.pk %}">
@@ -33,28 +31,31 @@
                                     </div>
                                     <img src="{{ event.poster.url }}" class="bottom-border-yellow img-fluid">
                                     <p>{{ event.start|date:"d/m/Y" }} om {{ event.start|date:"H:i" }}</p>
-
                                 </div>
                             </div>
                         </a>
-
                     {% endfor %}
                 </div>
-                <div class="text-center" data-aos="fade-in" data-aos-delay="200">
-                    <btn href="{% url 'events' %}" class="btn btn-heimdal">Meer evenementen</btn>
-                </div>
+            {% endif %}
+            <div class="text-center" data-aos="fade-in" data-aos-delay="200">
+                {% if not events %}
+                    <h4 class="pb-4">Voorlopig geen nieuwe activiteiten aan te kondigen..</h4>
+                {% endif %}
+                <a href="{% url 'events' %}" class="btn btn-heimdal">Meer evenementen</a>
             </div>
-        </section><!-- End Testimonials Section -->
-    {% endif %}
+        </div>
+    </section><!-- End Testimonials Section -->
 
     <!-- ======= Cta Section ======= -->
     <section id="cta" class="cta">
         <div class="container" data-aos="zoom-in">
             <div class="text-center">
-                <h3>Onze visie</h3>
-                <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                    anim id est laborum.</p>
+                <h3>Wij zijn Heimdal</h3>
+                <p> De studentenvereniging voor geeks en gamers. Samen met onze leden willen wij een leuke community
+                    creëren voor iedereen met dezelfde interesses. Dit gaat van een leuke babbel in ons clubcafé de
+                    Comic Sans tot een Lanparty in de resto D van HOGENT tot een leuke teambuilding/Doop in het
+                    Citadelpark. Daarnaast willen wij doorheen het jaar tal van activiteiten organiseren om onze leden
+                    in de watten te leggen.</p>
                 <a class="cta-btn" href="{% url 'cms' 'overons' %}">Leer ons kennen</a>
             </div>
         </div>
