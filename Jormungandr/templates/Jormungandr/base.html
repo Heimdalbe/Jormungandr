@@ -35,7 +35,8 @@
                 <div class="col-sm-12">
                     <div style="margin: 100px" class="alert alert-danger alert-dismissible fade show" role="alert">
                         <h3>Er liep iets mis</h3>
-                        <p>Terug naar <a href="{% url 'index' %}">home</a>. Of probeer het <a href="{{ request.path|urlencode }}#contact">opnieuw</a> </p>
+                        <p>Terug naar <a href="{% url 'index' %}">home</a>. Of probeer het <a
+                                href="{{ request.path|urlencode }}#contact">opnieuw</a></p>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -54,30 +55,19 @@
         <div class="container">
             <div class="section-title" data-aos="fade-in" data-aos-delay="100">
                 <h2 class="black-title">Onze sponsors</h2>
-
                 <div class="section-title" data-aos="fade-in" data-aos-delay="100">
                     <div class="row h-100">
-
                         {% for sponsor in sponsors %}
 
                             <div class="col-md-4 col-sm-6 col-12 my-auto">
 
                                 <a href="{{ sponsor.website }}" target="_blank">
-                                    <img
-                                            src="{{ sponsor.logo.url }}"
-                                            class="sponsor {% if sponsor.invertedcolor %} inverted {% endif %}"
-                                            alt="{{ sponsor.name }}">
+                                    <img src="{{ sponsor.logo.url }}"
+                                        class="sponsor{% if sponsor.inverted_color %} inverted{% endif %}"
+                                        alt="{{ sponsor.name }}">
                                 </a>
                             </div>
-
-                            <!--&lt;!&ndash;width="300" height="75"&ndash;&gt;-->
-                            <!--&lt;!&ndash;sizes="(max-width: 300px) 100vw, 300px"&ndash;&gt;-->
-                            <!--&lt;!&ndash;srcset="https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent-300x75.png 300w, https://heimdal.xcdn.eu/wp-content/uploads/2018/04/hogent.png 600w"&ndash;&gt;-->
-
-
                         {% endfor %}
-
-
                     </div>
                 </div>
             </div>
