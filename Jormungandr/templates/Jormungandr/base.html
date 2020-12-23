@@ -58,9 +58,7 @@
                 <div class="section-title" data-aos="fade-in" data-aos-delay="100">
                     <div class="row h-100">
                         {% for sponsor in sponsors %}
-
-                            <div class="col-md-4 col-sm-6 col-12 my-auto">
-
+                            <div class="col-md-4 col-sm-6 col-12 my-auto pt-3">
                                 <a href="{{ sponsor.website }}" target="_blank">
                                     <img src="{{ sponsor.logo.url }}"
                                         class="sponsor{% if sponsor.inverted_color %} inverted{% endif %}"
