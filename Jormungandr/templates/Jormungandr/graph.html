@@ -1,0 +1,16 @@
+{% extends 'Jormungandr/base.html' %}
+{% load static %}
+{% block title %} | Graph {% endblock %}
+{% block body %}
+
+    <div class="graph-container"></div>
+
+
+<script src="{% static 'js/graph.js' %}"></script>
+<script type="text/javascript">
+    py_data = {{ nodes | safe }}
+
+
+</script>
+
+{% endblock %}
