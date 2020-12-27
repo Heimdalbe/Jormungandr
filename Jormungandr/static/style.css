@@ -228,3 +228,10 @@ section.main-box {
     max-height: 30em;
     object-fit: contain;
 }
+
+#graph-container{
+height: 75vh;
+width: 100vw;
+margin: auto;
+margin-top: 5vh;
+}

@@ -5,6 +5,7 @@ from django.db import models, IntegrityError
 from django.db.models.signals import post_save
 from markdownx.models import MarkdownxField
 from multiselectfield import MultiSelectField
+from enum import Enum
 
 
 class UserRole(IntEnum):
@@ -293,7 +294,7 @@ class NavSubItem(models.Model):
     order = models.SmallIntegerField()
     url = models.URLField(default="http://127.0.0.1:8000/")
     # NOTE: having no topitem means it will not be displayed
-    parent = models.ForeignKey(NavTopItem, null=True, blank=True,  on_delete=models.SET_NULL)
+    parent = models.ForeignKey(NavTopItem, null=True, blank=True, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = 'Menu Item'
@@ -301,3 +302,43 @@ class NavSubItem(models.Model):
 
     def __str__(self):
         return self.titel
+
+
+class NodeDisplayType(models.TextChoices):
+    FULL = "Full name"
+    FIRSTNAMEFULL = "First name full, last name initial"
+    INITIALS = "Initials"
+    FIRSTINITIAL = "First name initial"
+    NONE = "None"
+
+
+class GraphNode(models.Model):
+    name = models.CharField(max_length=128)
+    photo = models.ImageField(upload_to="node_fills")
+    display = models.CharField(max_length=50, choices=NodeDisplayType.choices, default=NodeDisplayType.NONE)
+    parent = models.ForeignKey("self", blank=True, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.name + (" with parent " + self.parent.name if self.parent is not None else "")
+
+    def display_name(self):
+        if self.display == NodeDisplayType.FULL:
+            return self.name
+        elif self.display == NodeDisplayType.FIRSTNAMEFULL:
+            full = self.name.split()
+            first = full.pop(0)
+            return first + " " + self.__toInitials(full)
+        elif self.display == NodeDisplayType.INITIALS:
+            return self.__toInitials(self.name.split())
+        elif self.display == NodeDisplayType.FIRSTINITIAL:
+            return self.name.split()[0][0] + "."
+        return "?"
+
+    def to_JSON_Object(self):
+        return {}
+
+    def __toInitials(self, string):
+        output = ""
+        for i in string:
+            output += i[0].upper() + ". "
+        return output.strip()
