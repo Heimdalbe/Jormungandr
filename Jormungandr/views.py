@@ -8,6 +8,8 @@ from django.utils.timezone import make_aware
 from Backend.forms import ContactForm
 from Backend.models import *
 
+from Jormungandr.util.tools import graph_nodes_to_json
+
 import json
 
 
@@ -80,20 +82,8 @@ def praesidium(request, pk):
 
 
 def graph(request):
-    result = {"nodes": [], "edges": []}
-
-    for node in GraphNode.objects.all():
-        result["nodes"].append({
-            "id": node.name,
-            "height": 50,
-            "display": node.display_name(),
-            "fill": {
-                "src": "https://upload.wikimedia.org/wikipedia/en/9/9a/Trollface_non-free.png"
-            }
-        })
-        result["edges"].append({"from": node.parent.name, "to": node.name}) if node.parent else ()
-
-    return render(request, 'Jormungandr/graph.html', {"graph_nodes": json.dumps(result)})
+    return render(request, 'Jormungandr/graph.html',
+                  {"graph_nodes": json.dumps(graph_nodes_to_json(GraphNode.objects.all()))})
 
 
 def handler400(request, *args, **argv):

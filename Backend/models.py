@@ -327,18 +327,18 @@ class GraphNode(models.Model):
         elif self.display == NodeDisplayType.FIRSTNAMEFULL:
             full = self.name.split()
             first = full.pop(0)
-            return first + " " + self.__toInitials(full)
+            return first + " " + self.__to_initials(full)
         elif self.display == NodeDisplayType.INITIALS:
-            return self.__toInitials(self.name.split())
+            return self.__to_initials(self.name.split())
         elif self.display == NodeDisplayType.FIRSTINITIAL:
             return self.name.split()[0][0] + "."
         return "?"
 
-    def to_JSON_Object(self):
-        return {}
-
-    def __toInitials(self, string):
+    def __to_initials(self, string):
         output = ""
         for i in string:
             output += i[0].upper() + ". "
         return output.strip()
+
+    def get_y(self):
+        return 0 if self.parent is None else self.parent.get_y() + 1
