@@ -69,7 +69,12 @@ img.inverted {
 /* base.html sponsor */
 
 img.sponsor {
-    max-width: 200px
+    max-width: 200px;
+    transition: transform .2s;
+}
+
+img.sponsor:hover {
+    transform: scale(1.5);
 }
 
 .black {
