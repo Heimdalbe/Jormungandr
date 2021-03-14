@@ -56,8 +56,12 @@ def events(request):
 
 
 def event(request, pk):
+    if request.method == 'POST':
+        print("post")
     _event = get_object_or_404(Event, pk=pk)
-    return render(request, 'Jormungandr/event.html', {'event': _event})
+    reg = EventRegistration.objects.filter(event=_event).order_by('date')
+    print(reg)
+    return render(request, 'Jormungandr/event.html', {'event': _event, 'registrations': reg})
 
 
 def statuten(request):

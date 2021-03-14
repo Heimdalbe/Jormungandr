@@ -14,6 +14,7 @@ def graph_nodes_to_json(nodes):
                 "src": "https://upload.wikimedia.org/wikipedia/en/9/9a/Trollface_non-free.png"
             },
 
+
         })
         result["edges"].append({"from": node.parent.name, "to": node.name}) if node.parent else ()
 

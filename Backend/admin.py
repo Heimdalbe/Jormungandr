@@ -20,6 +20,7 @@ admin.site.register(Event)
 admin.site.register(NavTopItem)
 admin.site.register(NavSubItem)
 admin.site.register(GraphNode)
+admin.site.register(EventRegistration)
 
 
 class ProfileInline(admin.StackedInline):
