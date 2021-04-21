@@ -317,7 +317,7 @@ class NodeDisplayType(models.TextChoices):
 
 class GraphNode(models.Model):
     name = models.CharField(max_length=128)
-    photo = models.ImageField(upload_to="node_fills")
+    photo = models.URLField(max_length=256)
     display = models.CharField(max_length=50, choices=NodeDisplayType.choices, default=NodeDisplayType.NONE)
     parent = models.ForeignKey("self", blank=True, null=True, on_delete=models.SET_NULL)
 
