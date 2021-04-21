@@ -59,9 +59,7 @@ def event(request, pk):
     if request.method == 'POST':
         print("post")
     _event = get_object_or_404(Event, pk=pk)
-    reg = EventRegistration.objects.filter(event=_event).order_by('date')
-    print(reg)
-    return render(request, 'Jormungandr/event.html', {'event': _event, 'registrations': reg})
+    return render(request, 'Jormungandr/event.html', {'event': _event})
 
 
 def statuten(request):
@@ -118,7 +116,7 @@ def send_mail_contact(request):
 
         mailbody = "From " + name + " <" + email + ">\n" + message
         mail = EmailMessage(subject, mailbody, "contact@heimdal.be",
-                            to=["stef.bondroit@gmail.com"])
+                            to=["gate@heimdal.be"])
         mail.send()
 
         return redirect(redir + "?contact=ok")

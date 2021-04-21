@@ -7,7 +7,7 @@
     <section class="breadcrumbs">
         <div class="d-flex justify-content-between align-items-center">
             <h2>Event {{ event.name }} <span class="badge badge-pill badge-warning ml-1">{% if event.is_open %}
-                    Open{% else %}Enkel leden{% endif %}</h2>
+                Open{% else %}Enkel leden{% endif %}</span></h2>
             <ol>
                 <li><a href="{% url 'index' %}">Home</a></li>
                 <li><a href="{% url 'events' %}">Evenementen</a></li>
@@ -35,21 +35,9 @@
                     <li><strong>Voor</strong>: {% if event.is_open %}
                         Iedereen{% else %}Onze leden{% endif %}
                     </li>
-                    <li><strong>Plaatsen</strong>:
-                        {% if event.max_registered is Null %}
-                        Onbeperkt
-                        {% else %}
-                        {{ registrations|length }}/{{ event.max_registered }}
-                        {% endif %}
-                    </li>
+
                     <div class="text-center pt-4">
                         <a href="{{ event.url }}" target="_blank" class="btn btn-heimdal">Meer info</a>
-                    </div>
-                    <div class="text-center pt-4">
-                        <form action="get" action="">
-                            <!--TODO fix form-->
-                            <button class="btn btn-heimdal" type="submit">Inschrijven</button>
-                        </form>
                     </div>
                 </ul>
             </div>
