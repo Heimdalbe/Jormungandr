@@ -48,8 +48,11 @@ class Profile(models.Model):
         ('ANDERS', 'Anders')
     }
     INTERESSE_CHOICES = (
-        ('LOL', 'League Of Legends'),
-        ('CS:GO', 'CS:GO')
+        ('GAMES', 'Games'),
+        ('ANIME', 'Anime'),
+        ('COSPLAY', 'Cosplay'),
+        ('TABLETOPS', 'Tabletop Games'),
+        ('SUPERHEROES', 'Superheroes')
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
