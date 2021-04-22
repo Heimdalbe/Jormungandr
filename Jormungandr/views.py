@@ -4,7 +4,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.core.mail import EmailMessage
 from django.utils.timezone import make_aware
-
 from Backend.forms import ContactForm
 from Backend.models import *
 
