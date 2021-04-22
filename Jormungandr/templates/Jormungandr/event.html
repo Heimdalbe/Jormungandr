@@ -3,51 +3,53 @@
 {% load user_tags %}
 {% block title %} | {{ event.name }}{% endblock %}
 {% block body %}
-    <div class="container">
-        <section class="breadcrumbs">
-            <div class="d-flex justify-content-between align-items-center">
-                <h2>Event {{ event.name }} <span class="badge badge-pill badge-warning ml-1">{% if event.is_open %}
-                    Open{% else %}Enkel leden{% endif %}</h2>
-                <ol>
-                    <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="{% url 'events' %}">Evenementen</a></li>
-                    <li>Event {{ event.name }}</li>
-                </ol>
-            </div>
-        </section>
-    </div>
-
-    <section class="portfolio-details">
-        <div class="container">
-
-            <div class="portfolio-details-container">
-                <div class="owl-carousel portfolio-details-carousel" data-aos-delay="100" data-aos="fade-left">
-                    <img src="{{ event.poster.url }}"
-                         class="img-fluid" alt="{{ event.name }}">
-                </div>
-
-                <div class="portfolio-info shadow-lg top-border-yellow" data-aos-delay="200" data-aos="fade-up">
-                    <h3>{{ event.name }}</h3>
-                    <ul>
-                        <li><strong>Start</strong>: {{ event.start|date:"d/m/Y H:i" }}</li>
-                        <li><strong>Einde</strong>: {{ event.end|date:"d/m/Y H:i" }}</li>
-                        <li><strong>Locatie</strong>: {{ event.location }}</li>
-                        <li><strong>Voor</strong>: {% if event.is_open %}
-                            Iedereen{% else %}Onze leden{% endif %}</li>
-                        <div class="text-center pt-4">
-                            <a href="{{ event.url }}" target="_blank" class="btn btn-heimdal">Meer info</a>
-                        </div>
-                    </ul>
-                </div>
-
-            </div>
-
-            <div class="portfolio-description" data-aos-delay="300" data-aos="fade-up">
-                <p>
-                    {{ event.description|markdown }}
-                </p>
-            </div>
+<div class="container">
+    <section class="breadcrumbs">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Event {{ event.name }} <span class="badge badge-pill badge-warning ml-1">{% if event.is_open %}
+                Open{% else %}Enkel leden{% endif %}</span></h2>
+            <ol>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'events' %}">Evenementen</a></li>
+                <li>Event {{ event.name }}</li>
+            </ol>
         </div>
     </section>
+</div>
+
+<section class="portfolio-details">
+    <div class="container">
+
+        <div class="portfolio-details-container">
+            <div class="owl-carousel portfolio-details-carousel" data-aos-delay="100" data-aos="fade-left">
+                <img src="{{ event.poster.url }}"
+                     class="img-fluid" alt="{{ event.name }}">
+            </div>
+
+            <div class="portfolio-info shadow-lg top-border-yellow" data-aos-delay="200" data-aos="fade-up">
+                <h3>{{ event.name }}</h3>
+                <ul>
+                    <li><strong>Start</strong>: {{ event.start|date:"d/m/Y H:i" }}</li>
+                    <li><strong>Einde</strong>: {{ event.end|date:"d/m/Y H:i" }}</li>
+                    <li><strong>Locatie</strong>: {{ event.location }}</li>
+                    <li><strong>Voor</strong>: {% if event.is_open %}
+                        Iedereen{% else %}Onze leden{% endif %}
+                    </li>
+
+                    <div class="text-center pt-4">
+                        <a href="{{ event.url }}" target="_blank" class="btn btn-heimdal">Meer info</a>
+                    </div>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="portfolio-description" data-aos-delay="300" data-aos="fade-up">
+            <p>
+                {{ event.description|markdown }}
+            </p>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

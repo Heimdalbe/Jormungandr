@@ -35,8 +35,9 @@ urlpatterns = [
     url(r'^events/$', events, name="events"),
     url(r'^event/(?P<pk>[0-9]+)?/$', event, name="event"),
     url(r'^praesidium/$', praesidia, name="praesidia"),
+    url(r'^stamboom/$', graph, name="stamboom"),
     url(r'^sendmail/$', send_mail_contact, name="sendmail"),
-    url(r'^praesidium/(?P<pk>[0-9]+)?/$', praesidium, name="praesidium"),
+    url(r'^praesidium/(?P<pk>[0-9]+)?$', praesidium, name="praesidium"),
     url(r'^(?P<page>.*)/$', cms, name='cms'),
 ]
 
@@ -48,4 +49,3 @@ if secrets.DEBUG:
     handler403 = 'Jormungandr.views.handler403'
     handler404 = 'Jormungandr.views.handler404'
     handler500 = 'Jormungandr.views.handler500'
-

@@ -19,7 +19,7 @@ admin.site.register(EventGenre)
 admin.site.register(Event)
 admin.site.register(NavTopItem)
 admin.site.register(NavSubItem)
-
+admin.site.register(GraphNode)
 
 class ProfileInline(admin.StackedInline):
     model = Profile

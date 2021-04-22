@@ -7,6 +7,10 @@ from django.utils.timezone import make_aware
 from Backend.forms import ContactForm
 from Backend.models import *
 
+from Jormungandr.util.tools import graph_nodes_to_json
+
+import json
+
 
 def index(request):
     time = datetime.now()
@@ -76,6 +80,11 @@ def praesidium(request, pk):
     return render(request, 'Jormungandr/erelid.html', {'praesidium_lid': praesidium_lid})
 
 
+def graph(request):
+    return render(request, 'Jormungandr/graph.html',
+                  {"graph_nodes": json.dumps(graph_nodes_to_json(GraphNode.objects.all()))})
+
+
 def handler400(request, *args, **argv):
     return render(request, 'Jormungandr/400.html', status=400)
 
@@ -104,7 +113,7 @@ def send_mail_contact(request):
 
         mailbody = "From " + name + " <" + email + ">\n" + message
         mail = EmailMessage(subject, mailbody, "contact@heimdal.be",
-                            to=["stef.bondroit@gmail.com"])
+                            to=["gate@heimdal.be"])
         mail.send()
 
         return redirect(redir + "?contact=ok")

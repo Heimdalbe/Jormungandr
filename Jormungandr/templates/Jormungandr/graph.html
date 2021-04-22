@@ -1,0 +1,49 @@
+{% extends 'Jormungandr/base.html' %}
+{% load static %}
+{% block title %} | Graph {% endblock %}
+{% block body %}
+
+<div id="graph-container"></div>
+
+
+<script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-graph.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-data-adapter.min.js"></script>
+<script type="text/javascript">
+    data = {{ graph_nodes | safe }}
+
+            var chart = anychart.graph(data);
+            // set title
+            chart.title("Heimdal peter/meter stamboom");
+            // access nodes
+            var nodes = chart.nodes();
+
+            chart.nodes().tooltip().useHtml(true);
+            chart.nodes().tooltip().format(
+            "<span style='font-weight:bold'>{%display}</span>"
+            );
+
+            chart.edges().tooltip().useHtml(true);
+            chart.edges().tooltip().format(
+            "<span style='font-weight:bold'>Peter/meter: {%from}<br>Petekind/metekind: {%to}</span>"
+            );
+
+            // set the size of nodes
+            nodes.normal().height(30);
+            nodes.hovered().height(45);
+            nodes.selected().height(45);
+
+            chart.interactivity().hoverGap(30);
+
+            // set the stroke of nodes
+            nodes.normal().stroke(null);
+            nodes.hovered().stroke("#333333", 3);
+            nodes.selected().stroke("#333333", 3);
+            // draw chart
+            chart.container("graph-container").draw();
+
+
+</script>
+<script src="{% static 'js/graph.js' %}"></script>
+
+{% endblock %}

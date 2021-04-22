@@ -5,6 +5,7 @@ from django.db import models, IntegrityError
 from django.db.models.signals import post_save
 from markdownx.models import MarkdownxField
 from multiselectfield import MultiSelectField
+from enum import Enum
 
 
 class UserRole(IntEnum):
@@ -47,8 +48,11 @@ class Profile(models.Model):
         ('ANDERS', 'Anders')
     }
     INTERESSE_CHOICES = (
-        ('LOL', 'League Of Legends'),
-        ('CS:GO', 'CS:GO')
+        ('GAMES', 'Games'),
+        ('ANIME', 'Anime'),
+        ('COSPLAY', 'Cosplay'),
+        ('TABLETOPS', 'Tabletop Games'),
+        ('SUPERHEROES', 'Superheroes')
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -265,6 +269,7 @@ class Event(models.Model):
     location = models.CharField(max_length=256)
     genre = models.ForeignKey(EventGenre, on_delete=models.CASCADE)
     is_open = models.BooleanField(default=1)
+    max_registered = models.PositiveSmallIntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -293,7 +298,7 @@ class NavSubItem(models.Model):
     order = models.SmallIntegerField()
     url = models.URLField(default="http://127.0.0.1:8000/")
     # NOTE: having no topitem means it will not be displayed
-    parent = models.ForeignKey(NavTopItem, null=True, blank=True,  on_delete=models.SET_NULL)
+    parent = models.ForeignKey(NavTopItem, null=True, blank=True, on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = 'Menu Item'
@@ -301,3 +306,43 @@ class NavSubItem(models.Model):
 
     def __str__(self):
         return self.titel
+
+
+class NodeDisplayType(models.TextChoices):
+    FULL = "Full name"
+    FIRSTNAMEFULL = "First name full, last name initial"
+    INITIALS = "Initials"
+    FIRSTINITIAL = "First name initial"
+    NONE = "None"
+
+
+class GraphNode(models.Model):
+    name = models.CharField(max_length=128)
+    photo = models.URLField(max_length=256)
+    display = models.CharField(max_length=50, choices=NodeDisplayType.choices, default=NodeDisplayType.NONE)
+    parent = models.ForeignKey("self", blank=True, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.name + (" with parent " + self.parent.name if self.parent is not None else "")
+
+    def display_name(self):
+        if self.display == NodeDisplayType.FULL:
+            return self.name
+        elif self.display == NodeDisplayType.FIRSTNAMEFULL:
+            full = self.name.split()
+            first = full.pop(0)
+            return first + " " + self.__to_initials(full)
+        elif self.display == NodeDisplayType.INITIALS:
+            return self.__to_initials(self.name.split())
+        elif self.display == NodeDisplayType.FIRSTINITIAL:
+            return self.name.split()[0][0] + "."
+        return "?"
+
+    def __to_initials(self, string):
+        output = ""
+        for i in string:
+            output += i[0].upper() + ". "
+        return output.strip()
+
+    def get_y(self):
+        return 0 if self.parent is None else self.parent.get_y() + 1

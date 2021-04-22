@@ -41,3 +41,27 @@ class ContactForm(forms.Form):
                "data-msg": "Please write something for us", "rows": "5"}))
 
 
+#
+# class EventRegistrationForm(forms.Form):
+#     name = forms.CharField(required=True, widget=forms.TextInput(
+#         attrs={"class": "form-control", "type": "text", "id": "name",
+#                "placeholder": "Name", "data-rule": "required",
+#                "data-msg": "Please enter your full name"}))
+#     email = forms.EmailField(required=True, widget=forms.TextInput(
+#         attrs={"class": "form-control", "type": "email", "id": "email",
+#                "placeholder": "Your Email", "data-rule": "email",
+#                "data-msg": "Please enter a valid email"}))
+#     comment = forms.CharField(required=True, widget=forms.Textarea(
+#         attrs={"class": "form-control", "type": "text", "id": "comment",
+#                "placeholder": "Additional comments"}))
+#     user_id = forms.IntegerField(
+#         widget=forms.HiddenInput(attrs={"type": "number", "id": "id"}))
+
+#
+# class EventRegistrationForm(ModelForm):
+#     class Meta:
+#         model = EventRegistration
+#         fields = ['name', 'email', 'comment', 'user', 'event']
+#
+#         def lock(self, field: str, value: bool):
+#             self.fields[field].widget.attrs['readonly'] = value

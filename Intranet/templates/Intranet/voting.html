@@ -6,50 +6,68 @@
     <section id="services" class="services">
         <div class="container">
             {% if message %}
-                <div class="alert alert-success" role="alert">{{ message }}</div>
+            <div class="alert alert-success" role="alert">{{ message }}</div>
             {% endif %}
             {% if erMessage %}
-                <div class="alert alert-danger" role="alert">{{ erMessage }}</div>
+            <div class="alert alert-danger" role="alert">{{ erMessage }}</div>
             {% endif %}
-            {% if not user.profile.election_active %}
-                <div class="custAlert alert-danger">
-                   Je bent nog niet op actief gezet. Stuur Stef een bericht om te kunnen stemmen.
-                </div>
+
+            {% if not elections %}
+
+
+            {% elif not user.profile.election_active and not elections %}
+            <div class="custAlert alert-danger">
+                Je bent nog niet op actief gezet. Stuur de ICT een bericht om te kunnen stemmen.
+            </div>
             {% endif %}
             {% if not user.profile.can_vote %}
-                <div class="custAlert alert-danger">
-                    Uw naam en voornaam ontbreken op je <a href="{% url 'Intranet:edit_profile' %}" class="alert-link">profiel</a>. Je kan nog niet stemmen.
-                </div>
+            <div class="custAlert alert-danger">
+                Uw naam en voornaam ontbreken op je <a href="{% url 'Intranet:edit_profile' %}" class="alert-link">profiel</a>.
+                Je kan nog niet stemmen.
+            </div>
             {% endif %}
             <h1>Verkiezing</h1>
-            <p>Hieronder komen alle functies online en verschijnt ronde per ronde. Deze zullen op het juiste moment open gezet worden om te kunnen stemmen. Hetzelfde met de resultaten.<br>
-            Om te kunnen stemmen word je op actief gezet als je aanwezig bent tijdens de ronde. Indien je je naam en voornaam op je
+            <p>Hieronder komen alle functies online en verschijnt ronde per ronde. Deze zullen op het juiste moment open
+                gezet worden om te kunnen stemmen. Hetzelfde met de resultaten.<br>
+                Om te kunnen stemmen word je op actief gezet als je aanwezig bent tijdens de ronde. Indien je je naam en
+                voornaam op je
                 profiel nog niet ingevuld hebt op je <a href="{% url 'Intranet:edit_profile' %}">profiel</a>.</p>
+
+            {% if elections %}
+
             <h2>Rondes:</h2>
             {% for election in elections %}
-                <div class="card mb-5">
-                    <div class="card-header">
-                        {{ election.titel }}
-                    </div>
-                    <p class="card-text col-sm-12 pt-3">{{ election.uitleg }}</p>
-                    <div class="card-body">
-                        <table class="table">
-                            {% for round in election.getRounds %}
-                            <div class="offset-md-1 row">
-                                <p class="card-text col-sm-7">{{ round.titel }}</p>
-                                {% if round.actief %}
-                                <a href="{% url 'Intranet:detail' round.id %}" class="btn btn-primary col-sm-2 m-1">Stem</a>
-                                {% endif %}
-                                {% if round.resultatenactief or user|has_group:'Kiescomite' %}
-                                <a href="{% url 'Intranet:results' round.id %}" class="btn btn-primary col-sm-2 m-1">Resultaten</a>
-                                {% endif %}
-                            </div>
-                            {% endfor %}
-                        </table>
-
-                    </div>
+            <div class="card mb-5">
+                <div class="card-header">
+                    {{ election.titel }}
                 </div>
+                <p class="card-text col-sm-12 pt-3">{{ election.uitleg }}</p>
+                <div class="card-body">
+                    <table class="table">
+                        {% for round in election.getRounds %}
+                        <div class="offset-md-1 row">
+                            <p class="card-text col-sm-7">{{ round.titel }}</p>
+                            {% if round.actief %}
+                            <a href="{% url 'Intranet:detail' round.id %}" class="btn btn-primary col-sm-2 m-1">Stem</a>
+                            {% endif %}
+                            {% if round.resultatenactief or user|has_group:'Kiescomite' %}
+                            <a href="{% url 'Intranet:results' round.id %}" class="btn btn-primary col-sm-2 m-1">Resultaten</a>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </table>
+
+                </div>
+            </div>
             {% endfor %}
+
+            {% else %}
+
+            <div class="custAlert alert-danger">
+                Er zijn momenteel geen verkiezingen.
+            </div>
+
+            {% endif %}
         </div>
     </section>
 </div>

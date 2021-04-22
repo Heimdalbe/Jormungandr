@@ -58,7 +58,7 @@ img.inverted {
 
 .bottom-border-yellow {
     border-bottom: 5px solid #fad62f !important;
-    min-width: fit-content;
+   /* min-width: fit-content;*/
 }
 
 .inner {
@@ -69,7 +69,12 @@ img.inverted {
 /* base.html sponsor */
 
 img.sponsor {
-    max-width: 200px
+    max-width: 200px;
+    transition: transform .2s;
+}
+
+img.sponsor:hover {
+    transform: scale(1.5);
 }
 
 .black {
@@ -227,4 +232,11 @@ section.main-box {
 .portfolio-details-container .portfolio-details-carousel img {
     max-height: 30em;
     object-fit: contain;
+}
+
+#graph-container{
+height: 75vh;
+width: 100vw;
+margin: auto;
+margin-top: 5vh;
 }
