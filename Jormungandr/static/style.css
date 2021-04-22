@@ -58,7 +58,7 @@ img.inverted {
 
 .bottom-border-yellow {
     border-bottom: 5px solid #fad62f !important;
-    min-width: fit-content;
+   /* min-width: fit-content;*/
 }
 
 .inner {

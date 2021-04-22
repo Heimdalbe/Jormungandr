@@ -274,6 +274,7 @@ class Event(models.Model):
     def __str__(self):
         return self.name
 
+
 class NavTopItem(models.Model):
     titel = models.CharField(max_length=128)
     order = models.SmallIntegerField()
