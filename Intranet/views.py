@@ -4,7 +4,8 @@ from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
 from django.shortcuts import render, redirect, get_object_or_404
 
 from Backend.forms import *
-from Backend.models import Election, Round, Choice, UserVotes
+from Backend.models import Election, Round, Choice, UserVotes, UserRole
+from Jormungandr.views import handler403
 
 
 @login_required
@@ -108,6 +109,9 @@ def access_denied(request):
 @login_required
 @user_passes_test(lambda u: u.profile.policy_approved == True, login_url='/intranet/access_denied')
 def voting(request):
+    if request.user.profile.role == UserRole.Anonymous:
+        return handler403(request)
+
     context = {'elections': Election.objects.filter(visible=True).order_by('order')}
     if 'status' in request.session:
         try:
@@ -130,6 +134,9 @@ def voting(request):
 
 @login_required
 def detail(request, pk):
+    if request.user.profile.role == UserRole.Anonymous:
+        return handler403(request)
+
     round = Round.objects.filter(pk=pk).first()
     users = Profile.objects.filter(election_active=True)
     if round.actief:
@@ -141,6 +148,12 @@ def detail(request, pk):
 
 @login_required
 def vote(request, pk):
+    if request.user.profile.role == UserRole.Anonymous:
+        return handler403(request)
+
+    if not request.user.profile.election_active or not request.user.profile.can_vote:
+        return redirect('/intranet/voting')
+
     round = get_object_or_404(Round, pk=pk)
     if round.actief:
         try:
@@ -180,6 +193,9 @@ def vote(request, pk):
 
 @login_required
 def results(request, pk):
+    if request.user.profile.role == UserRole.Anonymous:
+        return handler403(request)
+
     round = get_object_or_404(Round, pk=pk)
     roundVotes = UserVotes.objects.filter(round=round)
     if request.user.groups.filter(name='Kiescomite').count() != 0 or round.resultatenactief:

@@ -119,7 +119,7 @@ class Round(models.Model):
 class Choice(models.Model):
     round = models.ForeignKey(Round, on_delete=models.CASCADE)
     keuze = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+    votes = models.IntegerField(default=0, editable=False)
 
     def __str__(self):
         return self.round.__str__() + " - " + self.keuze

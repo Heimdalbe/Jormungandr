@@ -52,7 +52,7 @@
                             <li><a href="{% url 'Intranet:index' %}">Intranet</a></li>
                             <li><a href="{% url 'Intranet:voting' %}">Stemmen</a></li>
                             <li><a href="{% url 'Intranet:edit_profile' %}">Profiel</a></li>
-                            {% if user.profile.role == 3 %}
+                            {% if user.profile.role >= 3 %}
                                 <a class="dropdown-item" href="/admin">Website-beheer</a>
                             {% endif %}
                             <li><a href="{% url 'Intranet:logout_user' %}">Uitloggen</a></li>
