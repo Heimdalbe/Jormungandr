@@ -12,7 +12,7 @@ def graph_nodes_to_json(nodes):
                 "src": node.photo
             },
         })
-        result["edges"].append({"from": node.parent.name, "to": node.name}) if node.parent else ()
+        result["edges"].append({"from": node.parent.display_name(), "to": node.display_name()}) if node.parent else ()
 
         index += 1
 
