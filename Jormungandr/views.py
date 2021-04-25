@@ -118,7 +118,7 @@ def send_mail_contact(request):
             "https://api.eu.mailgun.net/v3/mg.stefbondroit.be/messages",
             auth=("api", MAILGUN_KEY),
             data={"from": "Noreply <noreply@mg.stefbondroit.be>",
-                  "to": ["stef.bondroit@gmail.com"],
+                  "to": ["gate@heimdal.be"],
                   "subject": subject,
                   "text": mailbody})
 
