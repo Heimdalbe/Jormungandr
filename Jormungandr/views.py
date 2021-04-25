@@ -1,11 +1,13 @@
 from datetime import datetime
 
+import requests
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.core.mail import EmailMessage
 from django.utils.timezone import make_aware
 from Backend.forms import ContactForm
 from Backend.models import *
+from Jormungandr.settings.secrets import MAILGUN_KEY
 
 from Jormungandr.util.tools import graph_nodes_to_json
 
@@ -102,7 +104,6 @@ def handler500(request, *args, **argv):
 
 
 def send_mail_contact(request):
-    form = ContactForm(request.POST)
     redir = request.GET["next"]
 
     if request.POST:
@@ -112,9 +113,17 @@ def send_mail_contact(request):
         message = request.POST['message']
 
         mailbody = "From " + name + " <" + email + ">\n" + message
-        mail = EmailMessage(subject, mailbody, "contact@heimdal.be",
-                            to=["gate@heimdal.be"])
-        mail.send()
+
+        post = requests.post(
+            "https://api.eu.mailgun.net/v3/mg.stefbondroit.be/messages",
+            auth=("api", MAILGUN_KEY),
+            data={"from": "Noreply <noreply@mg.stefbondroit.be>",
+                  "to": ["stef.bondroit@gmail.com"],
+                  "subject": subject,
+                  "text": mailbody})
+
+        if post.status_code != 200:
+            return redirect(redir + "?contact=failed")
 
         return redirect(redir + "?contact=ok")
 
