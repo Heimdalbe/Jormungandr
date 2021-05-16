@@ -115,6 +115,10 @@ class Round(models.Model):
     def __str__(self):
         return self.election.titel + ": " + self.titel
 
+    @property
+    def sorted_choice_set(self):
+        return self.choice_set.order_by('keuze') # Used to ensure proper ordering despite caching
+
 
 class Choice(models.Model):
     round = models.ForeignKey(Round, on_delete=models.CASCADE)
