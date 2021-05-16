@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for choice in round.choice_set.all %}
+                    {% for choice in round.sorted_choice_set %}
                     <tr>
                         <td scope="col">{{ choice.keuze }}</td>
                         <td scope="col">{{ choice.votes }}</td>

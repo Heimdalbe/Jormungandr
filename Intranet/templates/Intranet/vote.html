@@ -16,7 +16,7 @@
 
                 <form action="{% url 'Intranet:vote' round.id %}" method="post">
                 {% csrf_token %}
-                {% for choice in round.sorted_choice_set.all %}
+                {% for choice in round.sorted_choice_set %}
                     <div class="form-check">
                         <input class="form-check-input" style="width: 1em; height: 1em;" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
                         <label for="choice{{ forloop.counter }}">{{ choice.keuze }}</label><br>
