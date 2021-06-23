@@ -142,7 +142,7 @@ class Round(models.Model):
                 res.append(ChoicesDTO(obj.keuze, obj.votes, 0))
         else:
             for obj in choices:
-                res.append(ChoicesDTO(obj.keuze, obj.votes, round(obj.votes / sum, 4)))
+                res.append(ChoicesDTO(obj.keuze, obj.votes, obj.votes / sum))
         return res
 
 
