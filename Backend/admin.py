@@ -62,6 +62,7 @@ class CustomProfileAdmin(admin.ModelAdmin):
     actions = ['activate_user', 'de_activate_user']
     list_display = ['user', '__str__', 'role', 'election_active', 'votes']
     list_filter = ['election_active', 'role']
+    ordering = ['role']
 
     def activate_user(self, request, queryset):
         activated = queryset.update(election_active=True)
