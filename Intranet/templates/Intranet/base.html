@@ -15,6 +15,22 @@
 {% block banner %}{% endblock %}
 <!-- Main Wrapper -->
 <main id="main">
+    {% if deleted == 'ok' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div style="margin-top: 100px" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <h3>Succesvol verwijderd</h3>
+                        <p>Terug naar <a href="{% url 'Intranet:index' %}">home</a></p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
     {% block body %}{% endblock %}
 </main>
 <!-- ======= Footer ======= -->

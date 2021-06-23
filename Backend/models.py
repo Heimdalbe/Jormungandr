@@ -7,6 +7,8 @@ from markdownx.models import MarkdownxField
 from multiselectfield import MultiSelectField
 from enum import Enum
 
+from Backend.dto import ChoicesDTO
+
 
 class UserRole(IntEnum):
     Admin = 1
@@ -101,8 +103,13 @@ class Election(models.Model):
     def __str__(self):
         return self.titel
 
-    def getRounds(self):
-        return self.round_set.filter(visible=True).order_by('titel')
+    @property
+    def get_rounds(self):
+        return self.round_set.order_by('titel')
+
+    def add_round(self, titel, actief, visible, resultatenactief):
+        return Round.objects.create(election=self, titel=titel, actief=actief, visible=visible,
+                                    resultatenactief=resultatenactief)
 
 
 class Round(models.Model):
@@ -115,9 +122,28 @@ class Round(models.Model):
     def __str__(self):
         return self.election.titel + ": " + self.titel
 
+    def add_choice(self, choice):
+        Choice.objects.create(round=self, keuze=choice)
+        return 0
+
     @property
     def sorted_choice_set(self):
-        return self.choice_set.order_by('keuze') # Used to ensure proper ordering despite caching
+        return self.choice_set.order_by('keuze')  # Used to ensure proper ordering despite caching
+
+    @property
+    def choices_results(self):
+        choices = self.choice_set.order_by('keuze')
+        sum = 0
+        for obj in choices:
+            sum += obj.votes
+        res = []
+        if sum == 0:
+            for obj in choices:
+                res.append(ChoicesDTO(obj.keuze, obj.votes, 0))
+        else:
+            for obj in choices:
+                res.append(ChoicesDTO(obj.keuze, obj.votes, round(obj.votes / sum, 4)))
+        return res
 
 
 class Choice(models.Model):

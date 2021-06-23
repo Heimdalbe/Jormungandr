@@ -1,0 +1,28 @@
+{% extends 'Jormungandr/base.html' %}
+{% load user_tags %}
+{% block title %} | Edit{% endblock %}
+{% block body %}
+    <div class="body-padding">
+        <section id="services" class="services">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'Intranet:voting' %}">Verkiezing</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ election.titel }}
+                            - Nieuwe ronde</li>
+                    </ol>
+                </nav>
+
+                <h2 class="mt-5">Nieuwe ronde</h2>
+                <div class="p-4 mt-4 shadow-lg">
+                    <form action="{% url 'Intranet:election_add_round' election.id %}?uri={{ request.path|urlencode }}" method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button class="btn btn-success m-2" type="submit">Toevoegen</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

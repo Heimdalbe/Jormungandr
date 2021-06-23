@@ -1,0 +1,97 @@
+{% extends 'Intranet/base.html' %}
+{% load user_tags %}
+{% block title %} | Resultaten{% endblock %}
+{% block body %}
+    <div class="body-padding">
+        <section id="services" class="services">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'Intranet:voting' %}">Verkiezing</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ round.election.titel }}
+                            - {{ round.titel }}</li>
+                    </ol>
+                </nav>
+                <h1 class="mb-3">Resultaten voor:</h1>
+                <h2 class="mb-5">{{ round.election.titel }}: {{ round.titel }}</h2>
+
+                {% if user|has_group:'Kiescomite' %}
+                    <div class="row col-sm-12 my-5 text-center">
+                        <div class="col-sm-3 py-2">
+                            <label>Zichtbaar:</label>
+                            <input class="form-check-input" type="checkbox" data-toggle="toggle"
+                                   data-size="small"
+                                   data-on="On" data-off="Off"
+                                   {% if round.visible %}checked{% endif %}
+                                   name="visible" id="visible"
+                                   onchange="location.href = '{% url 'Intranet:round_change_visible' round.pk %}?uri={{ request.path|urlencode }}';">
+                        </div>
+                        <div class="col-sm-3 py-2">
+                            <label>Actief:</label>
+                            <input class="form-check-input" type="checkbox" data-toggle="toggle"
+                                   data-size="small"
+                                   data-on="On" data-off="Off"
+                                   {% if round.actief %}checked{% endif %}
+                                   name="actief" id="actief"
+                                   onchange="location.href = '{% url 'Intranet:round_change_actief' round.pk %}?uri={{ request.path|urlencode }}';">
+                        </div>
+                        <div class="col-sm-3 py-2">
+                            <label>Resultaten actief:</label>
+                            <input class="form-check-input" type="checkbox" data-toggle="toggle"
+                                   data-size="small"
+                                   data-on="On" data-off="Off"
+                                   {% if round.resultatenactief %}checked{% endif %}
+                                   name="resultatenactief" id="resultatenactief"
+                                   onchange="location.href = '{% url 'Intranet:round_change_resultaten' round.pk %}?uri={{ request.path|urlencode }}';">
+                        </div>
+                        <div class="col-sm-3 py-2">
+                            <a href="{% url 'Intranet:round_delete' round.pk %}"
+                               class="btn btn-danger">
+                                Delete ronde
+                            </a>
+                        </div>
+
+                    </div>
+                {% endif %}
+
+                <table class="table mb-5">
+                    <thead>
+                    <tr>
+                        <th scope="col">Keuze</th>
+                        <th scope="col">Aantal stemmen</th>
+                        <th scope="col">Percentage</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for choice in round.choices_results %}
+                        <tr>
+                            <td scope="col">{{ choice.keuze }}</td>
+                            <td scope="col">{{ choice.votes }}</td>
+                            <td scope="col">{{ choice.percentage }}%</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+                <h2>Mensen die gestemd hebben</h2>
+                <table class="table mb-5">
+                    <thead>
+                    <tr>
+                        <th scope="col">Naam</th>
+                        <th scope="col">Aantal stemmen gespendeerd</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for persoon in round.round_votes.all %}
+                        <tr>
+                            <td scope="col">{{ persoon.user.last_name }} {{ persoon.user.first_name }}</td>
+                            <td scope="col">{{ persoon.votes }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+{% endblock %}

@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django import forms
 
-from Backend.models import Profile
+from Backend.models import Profile, Election, Round
 
 
 class EditUserForm(ModelForm):
@@ -41,6 +41,30 @@ class ContactForm(forms.Form):
                "data-msg": "Please write something for us", "rows": "5"}))
 
 
+class ElectionForm(ModelForm):
+    class Meta:
+        model = Election
+        fields = ['titel', 'uitleg', 'visible', 'order']
+
+    def __init__(self, *args, **kwargs):
+        super(ElectionForm, self).__init__(*args, **kwargs)
+        self.fields['titel'].widget.attrs = {'class': 'form-control col-sm-6 mb-2'}
+        self.fields['uitleg'].widget.attrs = {'class': 'form-control mb-2'}
+        self.fields['visible'].widget.attrs = {'class': 'form-control col-sm-2 mb-2'}
+        self.fields['order'].widget.attrs = {'class': 'form-control col-sm-2 my-2'}
+
+
+class RoundForm(ModelForm):
+    class Meta:
+        model = Round
+        fields = ['titel', 'actief', 'visible', 'resultatenactief']
+
+    def __init__(self, *args, **kwargs):
+        super(RoundForm, self).__init__(*args, **kwargs)
+        self.fields['titel'].widget.attrs = {'class': 'form-control col-sm-6 mb-2'}
+        self.fields['actief'].widget.attrs = {'class': 'form-control col-sm-2 mb-2'}
+        self.fields['visible'].widget.attrs = {'class': 'form-control col-sm-2 mb-2'}
+        self.fields['resultatenactief'].widget.attrs = {'class': 'form-control col-sm-2'}
 #
 # class EventRegistrationForm(forms.Form):
 #     name = forms.CharField(required=True, widget=forms.TextInput(

@@ -1,0 +1,101 @@
+{% extends 'Jormungandr/base.html' %}
+{% load user_tags %}
+{% block title %} | Stemmen{% endblock %}
+{% block body %}
+    <div class="body-padding">
+        <section id="services" class="services">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'Intranet:voting' %}">Verkiezing</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ round.election.titel }}
+                            - {{ round.titel }}</li>
+                    </ol>
+                </nav>
+
+                <h2>{{ round.election.titel }}: {{ round.titel }}</h2>
+
+                {% if user|has_group:'Kiescomite' %}
+                    <div class="row col-sm-12 my-5 text-center">
+                        <div class="col-sm-3 py-2">
+                            <label>Zichtbaar:</label>
+                            <input class="form-check-input" type="checkbox" data-toggle="toggle"
+                                   data-size="small"
+                                   data-on="On" data-off="Off"
+                                   {% if round.visible %}checked{% endif %}
+                                   name="visible" id="visible"
+                                   onchange="location.href = '{% url 'Intranet:round_change_visible' round.pk %}?uri={{ request.path|urlencode }}';">
+                        </div>
+                        <div class="col-sm-3 py-2">
+                            <label>Actief:</label>
+                            <input class="form-check-input" type="checkbox" data-toggle="toggle"
+                                   data-size="small"
+                                   data-on="On" data-off="Off"
+                                   {% if round.actief %}checked{% endif %}
+                                   name="actief" id="actief"
+                                   onchange="location.href = '{% url 'Intranet:round_change_actief' round.pk %}?uri={{ request.path|urlencode }}';">
+                        </div>
+                        <div class="col-sm-3 py-2">
+                            <label>Resultaten actief:</label>
+                            <input class="form-check-input" type="checkbox" data-toggle="toggle"
+                                   data-size="small"
+                                   data-on="On" data-off="Off"
+                                   {% if round.resultatenactief %}checked{% endif %}
+                                   name="resultatenactief" id="resultatenactief"
+                                   onchange="location.href = '{% url 'Intranet:round_change_resultaten' round.pk %}?uri={{ request.path|urlencode }}';">
+                        </div>
+                        <div class="col-sm-3 py-2">
+                            <a href="{% url 'Intranet:round_delete' round.pk %}"
+                               class="btn btn-danger">
+                                Delete ronde
+                            </a>
+                        </div>
+
+                    </div>
+                {% endif %}
+
+                <div class="pb-5 mt-4">
+                    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+                    <form action="{% url 'Intranet:round_vote' round.id %}" method="post">
+                        {% csrf_token %}
+                        {% for choice in round.sorted_choice_set %}
+                            <div class="form-check">
+                                <input class="form-check-input" style="width: 1em; height: 1em;" type="radio"
+                                       name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                                <label for="choice{{ forloop.counter }}">{{ choice.keuze }}</label><br>
+                            </div>
+                        {% endfor %}
+                        <div class="offset-md-2 col-sm-4 mt-4">
+                            <button class="btn btn-block btn-success" type="submit">Stem</button>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <h2>Mensen die kunnen stemmen</h2>
+                    <table class="table mb-5">
+                        <thead>
+                        <tr>
+                            <th scope="col">Naam</th>
+                            <th scope="col">Aantal stemmen te spenderen</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for persoon in users %}
+                            {% if persoon.can_vote %}
+                                <tr>
+
+                                    <td scope="col">{{ persoon.user.last_name }} {{ persoon.user.first_name }}</td>
+                                    <td scope="col">{{ persoon.votes }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
