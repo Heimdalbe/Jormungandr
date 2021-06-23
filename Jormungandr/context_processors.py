@@ -20,9 +20,4 @@ def parameters(request):
     except:
         deleted = "NA"
 
-    try:
-        option_more_than_0_votes = request.GET["option_more_than_0_votes"]
-    except:
-        option_more_than_0_votes = "NA"
-
-    return {'contact': contact, 'deleted': deleted, 'option_more_than_0_votes': option_more_than_0_votes}
+    return {'contact': contact, 'deleted': deleted}

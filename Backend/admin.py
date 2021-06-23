@@ -31,31 +31,11 @@ class ProfileInline(admin.StackedInline):
 
 class CustomUserAdmin(UserAdmin):
     inlines = (ProfileInline,)
-    actions = ['activate_user', 'de_activate_user']
 
     def get_inline_instances(self, request, obj=None):
         if not obj:
             return list()
         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
-
-    def activate_user(self, request, queryset):
-        activated = queryset.update(election_active=True)
-        self.message_user(request, ngettext(
-            '%d lid was successfully marked as active for the election.',
-            '%d leden were successfully marked as active for the election.',
-            activated,
-        ) % activated, messages.SUCCESS)
-
-    def de_activate_user(self, request, queryset):
-        activated = queryset.update(election_active=False)
-        self.message_user(request, ngettext(
-            '%d lid was successfully marked as active for the election.',
-            '%d leden were successfully marked as active for the election.',
-            activated,
-        ) % activated, messages.SUCCESS)
-
-    activate_user.short_description = 'Activeer election user'
-    de_activate_user.short_description = 'Activeer election user'
 
 
 class CustomProfileAdmin(admin.ModelAdmin):
