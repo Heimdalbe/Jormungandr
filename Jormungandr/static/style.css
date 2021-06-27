@@ -240,3 +240,11 @@ width: 100vw;
 margin: auto;
 margin-top: 5vh;
 }
+
+/* Toggle Button */
+.toggle-on.btn {
+    padding-left: 0.5em;
+}
+.toggle-off.btn {
+    padding-left: 0.5em;
+}

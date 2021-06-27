@@ -37,35 +37,83 @@
                     profiel nog niet ingevuld hebt op je <a href="{% url 'Intranet:edit_profile' %}">profiel</a>.</p>
 
                 {% if elections %}
-
-                    <h2>Rondes:</h2>
+                    <h2 id="elections">Rondes:</h2>
                     {% for election in elections %}
-                        <div class="card mb-5">
-                            <div class="card-header">
-                                {{ election.titel }}
+                        {% if election.visible or user|has_group:'Kiescomite' %}
+                            <div class="card mb-5" id="election{{ election.pk }}">
+                                <div class="card-header">
+                                    {{ election.titel }}
+                                    {% if user|has_group:'Kiescomite' %}
+                                        <span class="float-right">
+                                            <span class="p-2 m-1">
+                                                <label>Zichtbaar:</label>
+                                                <input class="form-check-input" type="checkbox" data-toggle="toggle"
+                                                       data-size="small"
+                                                       data-on="On" data-off="Off"
+                                                       {% if election.visible %}checked{% endif %}
+                                                       name="ageConsent" id="ageConsent"
+                                                       onchange="location.href = '{% url 'Intranet:election_change_visible' election.pk %}?uri={{ request.path|urlencode }}';">
+                                            </span>
+                                            <a href="{% url 'Intranet:election_add_round' election.pk %}"
+                                               class="btn btn-sm btn-success">
+                                                Nieuwe ronde
+                                            </a>
+                                            <a href="{% url 'Intranet:election_delete' election.pk %}"
+                                               class="btn btn-sm btn-danger">
+                                                Delete election
+                                            </a>
+                                        </span>
+                                    {% endif %}
+                                </div>
+                                <p class="card-text col-sm-12 pt-3">{{ election.uitleg }}</p>
+                                <div class="card-body">
+                                    <table class="table">
+                                        {% for round in election.get_rounds %}
+                                            {% if round.visible or user|has_group:'Kiescomite' %}
+                                                <div class="offset-md-1 row">
+                                                    <p class="card-text col-sm-7">
+                                                        {% if not user|has_group:'Kiescomite' %}
+                                                            {{ round.titel }}
+                                                        {% else %}
+                                                            <a class="btn btn-sm btn-outline-info"
+                                                               href="{% url 'Intranet:round_edit' round.pk %}">{{ round.titel }}</a>
+                                                        {% endif %}
+                                                        {% if not round.visible and user|has_group:'Kiescomite' %}
+                                                            (niet zichtbaar voor niet-kiescomite)
+                                                        {% endif %}
+                                                    </p>
+                                                    {% if round.actief and round.visible or user|has_group:'Kiescomite' %}
+                                                        <a href="{% url 'Intranet:round_detail' round.id %}"
+                                                           class="btn btn-primary {% if not user.profile.election_active or not user.profile.can_vote %}disabled{% endif %} col-sm-2 m-1">Stem</a>
+                                                    {% endif %}
+                                                    {% if round.resultatenactief and round.visible or user|has_group:'Kiescomite' %}
+                                                        <a href="{% url 'Intranet:round_results' round.id %}"
+                                                           class="btn btn-primary col-sm-2 m-1">Resultaten</a>
+                                                    {% endif %}
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </table>
+                                </div>
                             </div>
-                            <p class="card-text col-sm-12 pt-3">{{ election.uitleg }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    {% if user|has_group:'Kiescomite' %}
+                        <div id="form" class="card mb-5">
+                            <div class="card-header">
+                                Nieuwe Election
+                            </div>
                             <div class="card-body">
-                                <table class="table">
-                                    {% for round in election.getRounds %}
-                                        <div class="offset-md-1 row">
-                                            <p class="card-text col-sm-7">{{ round.titel }}</p>
-                                            {% if round.actief %}
-                                                <a href="{% url 'Intranet:detail' round.id %}"
-                                                   class="btn btn-primary {% if not user.profile.election_active or not user.profile.can_vote %}disabled{% endif %} col-sm-2 m-1">Stem</a>
-                                            {% endif %}
-                                            {% if round.resultatenactief or user|has_group:'Kiescomite' %}
-                                                <a href="{% url 'Intranet:results' round.id %}"
-                                                   class="btn btn-primary col-sm-2 m-1">Resultaten</a>
-                                            {% endif %}
-                                        </div>
-                                    {% endfor %}
-                                </table>
+                                <form action="{% url 'Intranet:add_election' %}"
+                                      method="post">
+                                    {% csrf_token %}
+                                    {{ election_form }}
+                                    <button class="btn btn-primary mt-2" type="submit">Toevoegen</button>
+                                </form>
 
                             </div>
                         </div>
-                    {% endfor %}
-
+                    {% endif %}
                 {% else %}
 
                     <div class="custAlert alert-danger">

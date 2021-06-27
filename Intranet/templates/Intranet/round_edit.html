@@ -1,0 +1,108 @@
+{% extends 'Jormungandr/base.html' %}
+{% load user_tags %}
+{% block title %} | Edit{% endblock %}
+{% block body %}
+    <div class="body-padding">
+        <section id="services" class="services">
+            {% if option_more_than_0_votes > 0 %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="alert alert-danger alert-dismissible fade show"
+                                 role="alert">
+                                <h3>Optie heeft al meer dan 0 stemmen</h3>
+                                <p>Forceer <a
+                                        href="{% url 'Intranet:round_option_delete' round.pk option_more_than_0_votes %}?uri={{ request.path|urlencode }}&force=true">hier</a>
+                                </p>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'Intranet:voting' %}">Verkiezing</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ round.election.titel }}
+                            - {{ round.titel }}</li>
+                    </ol>
+                </nav>
+
+                <h2 class="mt-5">
+                    {{ round.election.titel }}: {{ round.titel }}
+                </h2>
+                {% if user|has_group:'Kiescomite' %}
+                    <div class="row col-sm-12 my-5 text-center">
+                        <div class="col-sm-3 py-2">
+                            <label>Zichtbaar:</label>
+                            <input class="form-check-input" type="checkbox" data-toggle="toggle"
+                                   data-size="small"
+                                   data-on="On" data-off="Off"
+                                   {% if round.visible %}checked{% endif %}
+                                   name="visible" id="visible"
+                                   onchange="location.href = '{% url 'Intranet:round_change_visible' round.pk %}?uri={{ request.path|urlencode }}';">
+                        </div>
+                        <div class="col-sm-3 py-2">
+                            <label>Actief:</label>
+                            <input class="form-check-input" type="checkbox" data-toggle="toggle"
+                                   data-size="small"
+                                   data-on="On" data-off="Off"
+                                   {% if round.actief %}checked{% endif %}
+                                   name="actief" id="actief"
+                                   onchange="location.href = '{% url 'Intranet:round_change_actief' round.pk %}?uri={{ request.path|urlencode }}';">
+                        </div>
+                        <div class="col-sm-3 py-2">
+                            <label>Resultaten actief:</label>
+                            <input class="form-check-input" type="checkbox" data-toggle="toggle"
+                                   data-size="small"
+                                   data-on="On" data-off="Off"
+                                   {% if round.resultatenactief %}checked{% endif %}
+                                   name="resultatenactief" id="resultatenactief"
+                                   onchange="location.href = '{% url 'Intranet:round_change_resultaten' round.pk %}?uri={{ request.path|urlencode }}';">
+                        </div>
+                        <div class="col-sm-3 py-2">
+                            <a href="{% url 'Intranet:round_delete' round.pk %}"
+                               class="btn btn-danger">
+                                Delete ronde
+                            </a>
+                        </div>
+
+                    </div>
+                {% endif %}
+
+                <div class="pb-5 mt-4">
+                    <h3>Keuzes</h3>
+                    <ul class="list-group">
+                        {% for choice in round.sorted_choice_set %}
+                            <li class="list-group-item">
+                                {{ choice.keuze }}
+                                <span class="float-right">
+                                    <a class="btn btn-danger"
+                                       href="{% url 'Intranet:round_option_delete' choice.round.pk choice.pk %}?uri={{ request.path|urlencode }}&force=false"><i
+                                            class="icofont-trash"></i></a>
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="p-4 mt-4 shadow-lg">
+                    <form action="{% url 'Intranet:round_add_choice' round.id %}?uri={{ request.path|urlencode }}"
+                          method="post">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="choice" class="col-sm-2 col-form-label">Choice</label>
+                            <div class="col-sm-6 m-2">
+                                <input type="text" class="form-control" id="choice" name="choice">
+                            </div>
+                            <button class="btn btn-success mx-2" type="submit">Toevoegen</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

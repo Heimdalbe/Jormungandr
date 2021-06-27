@@ -15,4 +15,9 @@ def parameters(request):
     except:
         contact = "NA"
 
-    return {'contact': contact}
+    try:
+        deleted = request.GET["deleted"]
+    except:
+        deleted = "NA"
+
+    return {'contact': contact, 'deleted': deleted}

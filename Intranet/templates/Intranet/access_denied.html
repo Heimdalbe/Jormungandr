@@ -2,20 +2,18 @@
 {% block title %} | Acces Denied{% endblock %}
 
 {% block body %}
-<div class="wrapper style1">
-    <div class="inner">
-        <section class="container">
-            <div class="row pb-5">
-                <div class="col-sm-12">
-                    <h1 class="pb-3">Toegang geweigerd</h1>
-                    <p>Dit komt waarschijnlijk omdat u niet akkoord bent met onze privacy policy, je kan deze op je <a href="{% url 'Intranet:edit_profile' %}">profiel</a> aanpassen.</p>
-                    <p>Mogelijks bevind je je op een pagina waar je niet hoort te zijn...</p>
-                    <p>U kan <a href="{% url 'Intranet:index' %}">hier</a> terugkeren naar de vorige pagina.</p>
-                    <img src="https://thumbs.dreamstime.com/b/binary-code-dark-green-backdrop-access-denied-digital-background-matrix-hacker-concept-140154338.jpg" style="width: 30em;">
-                </div>
+    <section class="container text-center mt-3">
+        <div class="row pb-5">
+            <div class="col-sm-12">
+                <h1 class="pb-3">Toegang geweigerd</h1>
+                <p>Dit komt waarschijnlijk omdat u niet akkoord bent met onze privacy policy, je kan deze op je <a
+                        href="{% url 'Intranet:edit_profile' %}">profiel</a> aanpassen.</p>
+                <p>Mogelijks bevind je je op een pagina waar je niet hoort te zijn...</p>
+                <p>U kan <a href="{% url 'Intranet:index' %}">hier</a> terugkeren naar de vorige pagina.</p>
+                <img src="https://thumbs.dreamstime.com/b/binary-code-dark-green-backdrop-access-denied-digital-background-matrix-hacker-concept-140154338.jpg"
+                     style="width: 30em;">
             </div>
-        </section>
-    </div>
-</div>
+        </div>
+    </section>
 {% endblock %}
 
