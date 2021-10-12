@@ -25,7 +25,7 @@ exit
 virtualenv Jormungandr
 cd Jormungandr
 source bin/activate
-pip install Django //and other requirements
+pip install Django //and other requirements OF pip install -r requirements.txt
 git clone git@gitlab.com:heimdal-gent/jormungandr.git
 ```
 
