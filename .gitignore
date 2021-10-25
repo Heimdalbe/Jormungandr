@@ -11,3 +11,4 @@ secrets.py
 /static/
 .vscode/
 /Backend/migrations/
+/venv/

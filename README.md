@@ -1,7 +1,7 @@
 ## Install in production
 
-Jormungandr is served witk nginx and passenger.
-We use a postgresql database, already installen on the server.
+Jormungandr is served with nginx and passenger.
+We use a postgresql database, already installed on the server.
 
 ```
 virtualenv Jormungandr
@@ -43,6 +43,7 @@ which will make a new sqlite instance, dont use this in production
 
 ```
 python manage.py makemigrations
+python manage.py makemigrations Backend
 python manage.py migrate
 python manage.py runserver
 python manage.py createsuperuser
