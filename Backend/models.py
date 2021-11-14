@@ -376,3 +376,15 @@ class GraphNode(models.Model):
 
     def get_y(self):
         return 0 if self.parent is None else self.parent.get_y() + 1
+
+
+class FooterPage(models.Model):
+    name = models.CharField(max_length=128)
+    url = models.URLField()
+    order = models.IntegerField()
+
+    def __str__(self):
+        return self.name + ': ' + self.url
+
+    class Meta:
+        ordering = ['order']
