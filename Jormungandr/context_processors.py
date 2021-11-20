@@ -1,4 +1,4 @@
-from Backend.models import Sponsor, NavTopItem
+from Backend.models import Sponsor, NavTopItem, ImageUrl
 
 
 def sponsors(request):
@@ -21,3 +21,9 @@ def parameters(request):
         deleted = "NA"
 
     return {'contact': contact, 'deleted': deleted}
+
+
+def image_urls(request):
+    # We only need the key to access it and the url it contains
+    urls = {s.key: s.url for s in ImageUrl.objects.all()}
+    return {'urls': urls}

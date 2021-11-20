@@ -27,3 +27,7 @@ def has_group(user, group_name):
 def markdown(data):
     return SafeString(markdownify(data))
 
+
+@register.filter
+def lookup(dictionary,  key):
+    return dictionary.get(key)

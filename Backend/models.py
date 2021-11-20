@@ -376,3 +376,16 @@ class GraphNode(models.Model):
 
     def get_y(self):
         return 0 if self.parent is None else self.parent.get_y() + 1
+
+
+class ImageUrl(models.Model):
+    name = models.CharField(max_length=256)
+    key = models.CharField(max_length=64)
+    url = models.URLField()
+    usage = models.CharField(help_text='Explain where this url is to be used', max_length=2048)
+    default_width = models.CharField(
+        max_length=512,
+        help_text='Helps you remember what size you need it to be if you change it, e.g. \'600X400\'')
+
+    def __str__(self):
+        return self.name + ': ' + self.key
