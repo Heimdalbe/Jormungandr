@@ -19,7 +19,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
-from django.urls import include
+from django.urls import include, re_path
 
 from Jormungandr.settings import secrets
 from Jormungandr.views import *
@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^markdownx/', include('markdownx.urls')),
     url(r'^intranet/', include('Intranet.urls')),
+    re_path(r'portal/', include('Portal.urls')),
     url(r'^$', index, name="index"),
     url(r'^albums/$', albums, name="albums"),
     url(r'^statuten/$', statuten, name="statuten"),

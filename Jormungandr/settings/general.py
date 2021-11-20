@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'multiselectfield',
     'Jormungandr',
     'Backend',
-    'Intranet'
+    'Intranet',
+    'Portal'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,17 @@
+{% extends 'Portal/base.html' %}
+{% block title %} | Acces Denied{% endblock %}
+
+{% block body %}
+    <section class="container text-center mt-3">
+        <div class="row pb-5">
+            <div class="col-sm-12">
+                <h1 class="pb-3">Toegang geweigerd</h1>
+                <p>Dit komt waarschijnlijk omdat u geen machtigingen hebt om hier te zijn. <a href="{% url 'Intranet:login_user'%}">Log in op je praesidiumaccount</a> als je hier toegang tot zou moeten hebben.</p>
+                <p>U kan <a href="{% url 'index' %}">hier</a> terugkeren naar de home page.</p>
+                <img src="https://thumbs.dreamstime.com/b/binary-code-dark-green-backdrop-access-denied-digital-background-matrix-hacker-concept-140154338.jpg"
+                     style="width: 30em;">
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
