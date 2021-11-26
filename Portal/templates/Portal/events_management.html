@@ -1,0 +1,20 @@
+{% extends 'Portal/base.html' %}
+{% load user_tags %}
+
+{% block body %}
+<section class="container text-center mt-5">
+    <div class="row pb-5">
+
+        <div class="col-sm-12">
+
+            <p>Test</p>
+
+        </div>
+    </div>
+</section>
+<style>
+    .card {
+        background-image: url({{ urls|lookup:'portal_card' }})
+    }
+</style>
+{% endblock %}

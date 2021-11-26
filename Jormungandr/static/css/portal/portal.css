@@ -1,49 +1,432 @@
-.card-container {
-    perspective: 700px;
-    width: fit-content;
-    margin: auto;
-}
-
 .card {
-    box-shadow: 1.25rem 1.25rem 1.5rem 0.25rem rgba(0,0,0,.25)!important;
+    box-shadow: 1rem 1rem 1.5rem 0.25rem rgba(0,0,0,.25)!important;
     border: none;
+    margin-top: 4vh;
+    display: flex;
+    align-items: center; /* Vertical center alignment */
+    justify-content: center; /* Horizontal center alignment */
 }
 
-.card-flip, .card-container {
-    transform-style: preserve-3d;
-    transition: all 0.7s ease;
+a.card {
+    text-decoration: none;
+    color: inherit;
 }
 
-.card-flip div {
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
+a.card:hover{
+    color: darkgrey;
 }
 
-
-
-.card-container:hover .card-flip {
-    transform: rotateY(180deg);
-    transition-delay: 0.75s;
+.card-title {
+    font-size: clamp(2rem, 90%, 5rem);
 }
 
-.card-flip {
-    display: grid; grid-template: 1fr / 1fr;
-    grid-template-areas: "frontAndBack";
-    transform-style: preserve-3d;
-    transition: all 0.7s ease;
-}
+.deck-1 > .card {
+  flex-basis: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0; }
 
-.front {
-    grid-area: frontAndBack;
-}
+.deck-2 > .card {
+  flex-basis: calc(50% - 30px);
+  max-width: calc(50% - 30px); }
 
-.back {
-    transform: rotateY(-180deg);
-    grid-area: frontAndBack;
-    transform: rotateY(-180deg);
-}
+.deck-3 > .card {
+  flex-basis: calc(33.3333333333% - 30px);
+  max-width: calc(33.3333333333% - 30px); }
 
-.description {
-    padding: 10px;
-    padding-top: 30px;
-}
+.deck-4 > .card {
+  flex-basis: calc(25% - 30px);
+  max-width: calc(25% - 30px); }
+
+.deck-5 > .card {
+  flex-basis: calc(20% - 30px);
+  max-width: calc(20% - 30px); }
+
+.deck-6 > .card {
+  flex-basis: calc(16.6666666667% - 30px);
+  max-width: calc(16.6666666667% - 30px); }
+
+.deck-7 > .card {
+  flex-basis: calc(14.2857142857% - 30px);
+  max-width: calc(14.2857142857% - 30px); }
+
+.deck-8 > .card {
+  flex-basis: calc(12.5% - 30px);
+  max-width: calc(12.5% - 30px); }
+
+.deck-9 > .card {
+  flex-basis: calc(11.1111111111% - 30px);
+  max-width: calc(11.1111111111% - 30px); }
+
+.deck-10 > .card {
+  flex-basis: calc(10% - 30px);
+  max-width: calc(10% - 30px); }
+
+.deck-11 > .card {
+  flex-basis: calc(9.0909090909% - 30px);
+  max-width: calc(9.0909090909% - 30px); }
+
+.deck-12 > .card {
+  flex-basis: calc(8.3333333333% - 30px);
+  max-width: calc(8.3333333333% - 30px); }
+
+.deck-1 > .card {
+  flex-basis: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0; }
+
+.deck-2 > .card {
+  flex-basis: calc(50% - 30px);
+  max-width: calc(50% - 30px);
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.deck-3 > .card {
+  flex-basis: calc(33.3333333333% - 30px);
+  max-width: calc(33.3333333333% - 30px);
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.deck-4 > .card {
+  flex-basis: calc(25% - 30px);
+  max-width: calc(25% - 30px);
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.deck-5 > .card {
+  flex-basis: calc(20% - 30px);
+  max-width: calc(20% - 30px);
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.deck-6 > .card {
+  flex-basis: calc(16.6666666667% - 30px);
+  max-width: calc(16.6666666667% - 30px);
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.deck-7 > .card {
+  flex-basis: calc(14.2857142857% - 30px);
+  max-width: calc(14.2857142857% - 30px);
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.deck-8 > .card {
+  flex-basis: calc(12.5% - 30px);
+  max-width: calc(12.5% - 30px);
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.deck-9 > .card {
+  flex-basis: calc(11.1111111111% - 30px);
+  max-width: calc(11.1111111111% - 30px);
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.deck-10 > .card {
+  flex-basis: calc(10% - 30px);
+  max-width: calc(10% - 30px);
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.deck-11 > .card {
+  flex-basis: calc(9.0909090909% - 30px);
+  max-width: calc(9.0909090909% - 30px);
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.deck-12 > .card {
+  flex-basis: calc(8.3333333333% - 30px);
+  max-width: calc(8.3333333333% - 30px);
+  margin-left: 15px;
+  margin-right: 15px; }
+
+@media (min-width: 576px) {
+  .deck-sm-1 > .card {
+    flex-basis: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0; }
+
+  .deck-sm-2 > .card {
+    flex-basis: calc(50% - 30px);
+    max-width: calc(50% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-sm-3 > .card {
+    flex-basis: calc(33.3333333333% - 30px);
+    max-width: calc(33.3333333333% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-sm-4 > .card {
+    flex-basis: calc(25% - 30px);
+    max-width: calc(25% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-sm-5 > .card {
+    flex-basis: calc(20% - 30px);
+    max-width: calc(20% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-sm-6 > .card {
+    flex-basis: calc(16.6666666667% - 30px);
+    max-width: calc(16.6666666667% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-sm-7 > .card {
+    flex-basis: calc(14.2857142857% - 30px);
+    max-width: calc(14.2857142857% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-sm-8 > .card {
+    flex-basis: calc(12.5% - 30px);
+    max-width: calc(12.5% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-sm-9 > .card {
+    flex-basis: calc(11.1111111111% - 30px);
+    max-width: calc(11.1111111111% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-sm-10 > .card {
+    flex-basis: calc(10% - 30px);
+    max-width: calc(10% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-sm-11 > .card {
+    flex-basis: calc(9.0909090909% - 30px);
+    max-width: calc(9.0909090909% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-sm-12 > .card {
+    flex-basis: calc(8.3333333333% - 30px);
+    max-width: calc(8.3333333333% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; } }
+@media (min-width: 768px) {
+  .deck-md-1 > .card {
+    flex-basis: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0; }
+
+  .deck-md-2 > .card {
+    flex-basis: calc(50% - 30px);
+    max-width: calc(50% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-md-3 > .card {
+    flex-basis: calc(33.3333333333% - 30px);
+    max-width: calc(33.3333333333% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-md-4 > .card {
+    flex-basis: calc(25% - 30px);
+    max-width: calc(25% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-md-5 > .card {
+    flex-basis: calc(20% - 30px);
+    max-width: calc(20% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-md-6 > .card {
+    flex-basis: calc(16.6666666667% - 30px);
+    max-width: calc(16.6666666667% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-md-7 > .card {
+    flex-basis: calc(14.2857142857% - 30px);
+    max-width: calc(14.2857142857% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-md-8 > .card {
+    flex-basis: calc(12.5% - 30px);
+    max-width: calc(12.5% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-md-9 > .card {
+    flex-basis: calc(11.1111111111% - 30px);
+    max-width: calc(11.1111111111% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-md-10 > .card {
+    flex-basis: calc(10% - 30px);
+    max-width: calc(10% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-md-11 > .card {
+    flex-basis: calc(9.0909090909% - 30px);
+    max-width: calc(9.0909090909% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-md-12 > .card {
+    flex-basis: calc(8.3333333333% - 30px);
+    max-width: calc(8.3333333333% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; } }
+@media (min-width: 992px) {
+  .deck-lg-1 > .card {
+    flex-basis: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0; }
+
+  .deck-lg-2 > .card {
+    flex-basis: calc(50% - 30px);
+    max-width: calc(50% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-lg-3 > .card {
+    flex-basis: calc(33.3333333333% - 30px);
+    max-width: calc(33.3333333333% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-lg-4 > .card {
+    flex-basis: calc(25% - 30px);
+    max-width: calc(25% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-lg-5 > .card {
+    flex-basis: calc(20% - 30px);
+    max-width: calc(20% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-lg-6 > .card {
+    flex-basis: calc(16.6666666667% - 30px);
+    max-width: calc(16.6666666667% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-lg-7 > .card {
+    flex-basis: calc(14.2857142857% - 30px);
+    max-width: calc(14.2857142857% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-lg-8 > .card {
+    flex-basis: calc(12.5% - 30px);
+    max-width: calc(12.5% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-lg-9 > .card {
+    flex-basis: calc(11.1111111111% - 30px);
+    max-width: calc(11.1111111111% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-lg-10 > .card {
+    flex-basis: calc(10% - 30px);
+    max-width: calc(10% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-lg-11 > .card {
+    flex-basis: calc(9.0909090909% - 30px);
+    max-width: calc(9.0909090909% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-lg-12 > .card {
+    flex-basis: calc(8.3333333333% - 30px);
+    max-width: calc(8.3333333333% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; } }
+@media (min-width: 1200px) {
+  .deck-xl-1 > .card {
+    flex-basis: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0; }
+
+  .deck-xl-2 > .card {
+    flex-basis: calc(50% - 30px);
+    max-width: calc(50% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-xl-3 > .card {
+    flex-basis: calc(33.3333333333% - 30px);
+    max-width: calc(33.3333333333% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-xl-4 > .card {
+    flex-basis: calc(25% - 30px);
+    max-width: calc(25% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-xl-5 > .card {
+    flex-basis: calc(20% - 30px);
+    max-width: calc(20% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-xl-6 > .card {
+    flex-basis: calc(16.6666666667% - 30px);
+    max-width: calc(16.6666666667% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-xl-7 > .card {
+    flex-basis: calc(14.2857142857% - 30px);
+    max-width: calc(14.2857142857% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-xl-8 > .card {
+    flex-basis: calc(12.5% - 30px);
+    max-width: calc(12.5% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-xl-9 > .card {
+    flex-basis: calc(11.1111111111% - 30px);
+    max-width: calc(11.1111111111% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-xl-10 > .card {
+    flex-basis: calc(10% - 30px);
+    max-width: calc(10% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-xl-11 > .card {
+    flex-basis: calc(9.0909090909% - 30px);
+    max-width: calc(9.0909090909% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; }
+
+  .deck-xl-12 > .card {
+    flex-basis: calc(8.3333333333% - 30px);
+    max-width: calc(8.3333333333% - 30px);
+    margin-left: 15px;
+    margin-right: 15px; } }
