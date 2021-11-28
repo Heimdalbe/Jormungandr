@@ -65,3 +65,9 @@ class RoundForm(ModelForm):
         self.fields['actief'].widget.attrs = {'class': 'form-control col-sm-2 mb-2'}
         self.fields['visible'].widget.attrs = {'class': 'form-control col-sm-2 mb-2'}
         self.fields['resultatenactief'].widget.attrs = {'class': 'form-control col-sm-2'}
+
+
+class EventManagementForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(EventManagementForm, self).__init__(*args, **kwargs)
+    # TODO Add
