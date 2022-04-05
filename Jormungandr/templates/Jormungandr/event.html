@@ -36,9 +36,11 @@
                         Iedereen{% else %}Onze leden{% endif %}
                     </li>
 
-                    <div class="text-center pt-4">
-                        <a href="{{ event.url }}" target="_blank" class="btn btn-heimdal">Meer info</a>
-                    </div>
+                    {% if event.url is not None %}
+                        <div class="text-center pt-4">
+                            <a href="{{ event.url }}" target="_blank" class="btn btn-heimdal">Meer info</a>
+                        </div>
+                    {% endif %}
                 </ul>
             </div>
 
