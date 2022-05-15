@@ -28,14 +28,9 @@
                 <div class="row portfolio-container" data-aos="fade-up">
                     {% for picture in album.picture_set.all %}
                         <div class="col-lg-4 col-md-6 portfolio-item">
-                            <div class="portfolio-wrap">
+                            <a href="{{ picture.link }}" data-fslightbox="gallery">
                                 <img src="{{ picture.link }}" class="img-fluid" alt="{{ picture.name }}">
-                                <div class="portfolio-links">
-                                    <a href="{{ picture.link }}" data-gall="portfolioGallery"
-                                       class="venobox"
-                                       title="{{ picture.name }}"><i class="bx bx-plus"></i></a>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     {% endfor %}
                 </div>
