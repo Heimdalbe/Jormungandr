@@ -14,3 +14,29 @@
     display: flex;
     justify-content: space-between;
 }
+
+
+.checkbox-col{
+    width: 1.5em;
+}
+
+.checkbox-col> {
+    margin: auto;
+}
+
+#selectAll{
+    accent-color: #ffd700;
+}
+
+.checkbox {
+     accent-color: #CCAD00;
+}
+
+.smol{
+   width: 1.5em;
+}
+
+.thead{
+    background-color: #1A1A1A;
+    color: white;
+}

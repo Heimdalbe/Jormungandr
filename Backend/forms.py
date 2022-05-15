@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django import forms
 
-from Backend.models import Profile, Election, Round
+from Backend.models import Profile, Election, Round, Event
 
 
 class EditUserForm(ModelForm):
@@ -67,7 +67,10 @@ class RoundForm(ModelForm):
         self.fields['resultatenactief'].widget.attrs = {'class': 'form-control col-sm-2'}
 
 
-class EventManagementForm(forms.Form):
+class EventForm(ModelForm):
+    class Meta:
+        model = Event
+        fields = "__all__"
+
     def __init__(self, *args, **kwargs):
-        super(EventManagementForm, self).__init__(*args, **kwargs)
-    # TODO Add
+        super(EventForm, self).__init__(*args, **kwargs)

@@ -300,6 +300,7 @@ class Event(models.Model):
     genre = models.ForeignKey(EventGenre, on_delete=models.CASCADE)
     is_open = models.BooleanField(default=1)
     max_registered = models.PositiveSmallIntegerField(null=True, blank=True)
+    is_visible = models.BooleanField(default=0)
 
     def __str__(self):
         return self.name
