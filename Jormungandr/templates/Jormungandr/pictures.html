@@ -25,13 +25,11 @@
                 </p>
             </div>
             {% if album.picture_set.all %}
-                <div class="row portfolio-container" data-aos="fade-up">
+                <div id="gallery">
                     {% for picture in album.picture_set.all %}
-                        <div class="col-lg-4 col-md-6 portfolio-item">
-                            <a href="{{ picture.link }}" data-fslightbox="gallery">
-                                <img src="{{ picture.link }}" class="img-fluid" alt="{{ picture.name }}">
-                            </a>
-                        </div>
+                        <a href="{{ picture.link }}" data-fslightbox="gallery">
+                            <img src="{{ picture.link }}" class="img-fluid" alt="{{ picture.name }}">
+                        </a>
                     {% endfor %}
                 </div>
             {% else %}
