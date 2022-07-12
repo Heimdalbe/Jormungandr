@@ -9,9 +9,10 @@
                 <div class="col-sm-12">
                     <h3>Log In</h3><br>
                     {% if error_message %}
-                        <p><strong>{{ error_message }}</strong></p>
+                    <p><strong>{{ error_message }}</strong></p>
                     {% endif %}
-                    <form class="form-horizontal" role="form" action="{% url 'Intranet:login_user'%}" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" action="{% url 'Intranet:login_user'%}" method="post"
+                          enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group row">
                             <label class="control-label col-sm-3" for="id_username">
@@ -26,7 +27,8 @@
                                 Password:
                             </label>
                             <div class="col-sm-4">
-                                <input class="form-control" id="id_password" maxlength="30" name="password" type="password">
+                                <input class="form-control" id="id_password" maxlength="30" name="password"
+                                       type="password">
                             </div>
                         </div>
                         <div class="offset-md-2 col-sm-4 pt-4">
@@ -34,9 +36,22 @@
                         </div>
                     </form>
                 </div>
-                <div class="pt-5">
-                    Nog geen account? Klik<a href="{% url 'Intranet:register' %}"> hier</a> om te registreren.
+                <div class="col pt-5">
+                    <div class="row">
+                        <div>
+                            Nog geen account? Klik<a href="{% url 'Intranet:register' %}"> hier</a> om te registreren.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div>
+                            Wachtwoord vergeten? <a href="{% url 'Intranet:password_reset' %}">Klik dan hier om deze te
+                            resetten.</a>
+                        </div>
+                    </div>
                 </div>
+
+                <br>
+
             </div>
         </div>
     </section>

@@ -29,6 +29,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Jormungandr',
+    'Backend',
+    'Intranet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,9 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'markdownx',
     'multiselectfield',
-    'Jormungandr',
-    'Backend',
-    'Intranet'
 ]
 
 MIDDLEWARE = [
