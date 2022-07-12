@@ -64,7 +64,7 @@ def statuten(request):
 
 
 def albums(request):
-    _albums = PhotoAlbum.objects.filter(visible=True).order_by('created_at')
+    _albums = PhotoAlbum.objects.filter(visible=True).order_by('-created_at')
     return render(request, 'Jormungandr/gallery.html', {'albums': _albums})
 
 
