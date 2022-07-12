@@ -1,4 +1,4 @@
-from Backend.models import Sponsor, NavTopItem
+from Backend.models import Sponsor, NavTopItem, FooterPage
 
 
 def sponsors(request):
@@ -21,3 +21,9 @@ def parameters(request):
         deleted = "NA"
 
     return {'contact': contact, 'deleted': deleted}
+
+
+def footer_pages(request):
+    pages = FooterPage.objects.all()
+    print(pages)
+    return {'footer_pages': FooterPage.objects.all()}

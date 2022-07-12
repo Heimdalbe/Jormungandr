@@ -9,7 +9,7 @@
                 <ol>
                     <li><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'albums' %}">Foto's</a></li>
-                    <li>Album {{ album.name }}</li>
+                    <li>{{ album.name }}</li>
                 </ol>
             </div>
         </section>
@@ -21,22 +21,15 @@
             <div class="section-title" data-aos="fade-in" data-aos-delay="100">
                 <h2>Foto's</h2>
                 <p>
-                    Gepost op {{ album.created_at|date:'d/m/Y' }}
+                    {{ album.created_at|date:'d M Y' }}
                 </p>
             </div>
             {% if album.picture_set.all %}
-                <div class="row portfolio-container" data-aos="fade-up">
+                <div id="gallery">
                     {% for picture in album.picture_set.all %}
-                        <div class="col-lg-4 col-md-6 portfolio-item">
-                            <div class="portfolio-wrap">
-                                <img src="{{ picture.link }}" class="img-fluid" alt="">
-                                <div class="portfolio-links">
-                                    <a href="{{ picture.link }}" data-gall="portfolioGallery"
-                                       class="venobox"
-                                       title="{{ picture.name }}"><i class="bx bx-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="{{ picture.link }}" data-fslightbox="gallery">
+                            <img src="{{ picture.link }}" class="img-fluid" alt="{{ picture.name }}">
+                        </a>
                     {% endfor %}
                 </div>
             {% else %}

@@ -69,6 +69,7 @@ TEMPLATES = [
                 'Jormungandr.context_processors.sponsors',
                 'Jormungandr.context_processors.menu',
                 'Jormungandr.context_processors.parameters',
+                'Jormungandr.context_processors.footer_pages',
             ],
         },
     },

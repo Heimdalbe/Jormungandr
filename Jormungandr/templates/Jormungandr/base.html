@@ -3,19 +3,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Heimdal {% block title %}{% endblock %}</title>
 
-    <meta name="description" content="Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een groep studenten. Studenten die graag andere mensen, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in Geeky Stuff, samen wilt brengen." />
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <link rel="canonical" href="https://heimdal.be/" />
-    <meta property="og:locale" content="nl_NL" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Heimdal - Studentenvereniging van Geeks" />
-    <meta property="og:description" content="Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een groep studenten. Studenten die graag andere mensen, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in Geeky Stuff, samen wilt brengen." />
-    <meta property="og:url" content="https://heimdal.be/" />
-    <meta property="og:site_name" content="Heimdal" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="description"
+          content="Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een groep studenten. Studenten die graag andere mensen, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in Geeky Stuff, samen wilt brengen."/>
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+    <link rel="canonical" href="https://heimdal.be/"/>
+    <meta property="og:locale" content="nl_NL"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="Heimdal - Studentenvereniging van Geeks"/>
+    <meta property="og:description"
+          content="Heimdal is een studentenvereniging opgebouwd uit eigen initiatief door een groep studenten. Studenten die graag andere mensen, die geassocieerd zijn met de Hogeschool Gent en geïnteresseerd zijn in Geeky Stuff, samen wilt brengen."/>
+    <meta property="og:url" content="https://heimdal.be/"/>
+    <meta property="og:site_name" content="Heimdal"/>
+    <meta name="twitter:card" content="summary_large_image"/>
 
     <!-- Favicons -->
     <link href="{% static 'img/favicon.png' %}" rel="icon">
@@ -28,34 +30,34 @@
 <!-- Main Wrapper -->
 <main id="main">
     {% if contact == 'ok' %}
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div style="margin-top: 100px" class="alert alert-success alert-dismissible fade show" role="alert">
-                        <h3>Succesvol verzonden</h3>
-                        <p>Terug naar <a href="{% url 'index' %}">home</a></p>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div style="margin-top: 100px" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h3>Succesvol verzonden</h3>
+                    <p>Terug naar <a href="{% url 'index' %}">home</a></p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
     {% elif contact == 'failed' %}
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div style="margin: 100px" class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <h3>Er liep iets mis</h3>
-                        <p>Terug naar <a href="{% url 'index' %}">home</a>. Of probeer het <a
-                                href="{{ request.path|urlencode }}#contact">opnieuw</a></p>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div style="margin: 100px" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <h3>Er liep iets mis</h3>
+                    <p>Terug naar <a href="{% url 'index' %}">home</a>. Of probeer het <a
+                            href="{{ request.path|urlencode }}#contact">opnieuw</a></p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
     {% endif %}
 
 
@@ -70,13 +72,13 @@
                 <div class="section-title" data-aos="fade-in" data-aos-delay="100">
                     <div class="row h-100">
                         {% for sponsor in sponsors %}
-                            <div class="col-md-4 col-sm-6 col-12 my-auto pt-3">
-                                <a href="{{ sponsor.website }}" target="_blank">
-                                    <img src="{{ sponsor.logo.url }}"
-                                        class="sponsor{% if sponsor.inverted_color %} inverted{% endif %}"
-                                        alt="{{ sponsor.name }}">
-                                </a>
-                            </div>
+                        <div class="col-md-4 col-sm-6 col-12 my-auto pt-3">
+                            <a href="{{ sponsor.website }}" target="_blank">
+                                <img src="{{ sponsor.logo.url }}"
+                                     class="sponsor{% if sponsor.inverted_color %} inverted{% endif %}"
+                                     alt="{{ sponsor.name }}">
+                            </a>
+                        </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -120,11 +122,9 @@
                 <div class="col-lg-2 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="150">
                     <h4>Handige Links</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{% url 'index' %}">Home</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{% url 'cms' 'overons' %}">Over ons</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{% url 'praesidium' %}">Praesidium</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{% url 'events' %}">Evenementen</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="{% url 'albums' %}">Foto's</a></li>
+                        {% for page in footer_pages %}
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{page.url}}">{{ page.name }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
 
