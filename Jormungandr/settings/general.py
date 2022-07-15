@@ -113,6 +113,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'files')
 MEDIA_URL = '/files/'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.staticfiles_storage'
 
 LOGIN_URL = '/intranet/login_user'
