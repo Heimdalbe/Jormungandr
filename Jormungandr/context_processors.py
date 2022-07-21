@@ -24,6 +24,4 @@ def parameters(request):
 
 
 def footer_pages(request):
-    pages = FooterPage.objects.all()
-    print(pages)
     return {'footer_pages': FooterPage.objects.all()}
