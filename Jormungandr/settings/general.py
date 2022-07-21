@@ -113,6 +113,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'files')
 MEDIA_URL = '/files/'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.staticfiles_storage'
 
 LOGIN_URL = '/intranet/login_user'
+
+# Change the default generated key from AutoField to BigAutoField
+# This will make migrating to Django 4 later easier as AutoField will be deprecated
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
