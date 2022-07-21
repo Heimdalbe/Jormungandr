@@ -17,7 +17,7 @@ def index(request):
     dt = make_aware(time)
 
     return render(request, 'Jormungandr/index.html', {"pictures": Picture.objects.filter(is_carousel_pic=True),
-                                                      'events': Event.objects.filter(start__gt=dt).order_by('start')})
+                                                      'events': Event.objects.filter(end__gt=dt).order_by('start')})
 
 
 def cms(request, page):
@@ -50,7 +50,7 @@ def praesidia(request):
 def events(request):
     time = datetime.now()
     dt = make_aware(time)
-    _events = Event.objects.filter(start__gt=dt).order_by('start')
+    _events = Event.objects.filter(end__gt=dt).order_by('start')
     return render(request, 'Jormungandr/events.html', {'events': _events})
 
 
