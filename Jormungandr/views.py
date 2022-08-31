@@ -2,8 +2,8 @@ from datetime import datetime
 
 import requests
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 
-from django.utils.timezone import make_aware
 from Backend.models import *
 from Jormungandr.settings.secrets import MAILGUN_KEY
 
@@ -13,8 +13,7 @@ import json
 
 
 def index(request):
-    time = datetime.now()
-    dt = make_aware(time)
+    dt = timezone.now()
 
     return render(request, 'Jormungandr/index.html', {"pictures": Picture.objects.filter(is_carousel_pic=True),
                                                       'events': Event.objects.filter(end__gt=dt).order_by('start')})
@@ -48,8 +47,7 @@ def praesidia(request):
 
 
 def events(request):
-    time = datetime.now()
-    dt = make_aware(time)
+    dt = timezone.now()
     _events = Event.objects.filter(end__gt=dt).order_by('start')
     return render(request, 'Jormungandr/events.html', {'events': _events})
 
