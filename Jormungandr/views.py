@@ -1,11 +1,9 @@
-from datetime import datetime
-
 import requests
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
 from Backend.models import *
-from Jormungandr.settings.secrets import MAILGUN_KEY
+from Jormungandr.settings.general import MAILGUN_KEY
 
 from Jormungandr.util.tools import graph_nodes_to_json
 
