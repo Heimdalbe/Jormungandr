@@ -7,8 +7,10 @@
 db.sqlite3
 files/
 .idea/
-secrets.py
 /static/
 .vscode/
 /Backend/migrations/
 /venv/
+
+.env
+.production.env
