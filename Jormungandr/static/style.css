@@ -248,3 +248,8 @@ margin-top: 5vh;
 .toggle-off.btn {
     padding-left: 0.5em;
 }
+
+
+.cms-content * {
+    list-style-type: none;
+}
