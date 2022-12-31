@@ -1,7 +1,7 @@
 """untitled URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.0/topics/http/urls/
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -21,7 +21,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.urls import include
 
-from Jormungandr.settings import secrets
+from Jormungandr.settings import general
 from Jormungandr.views import *
 
 urlpatterns = [
@@ -44,7 +44,7 @@ urlpatterns = [
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if secrets.DEBUG:
+if general.DEBUG:
     handler400 = 'Jormungandr.views.handler400'
     handler403 = 'Jormungandr.views.handler403'
     handler404 = 'Jormungandr.views.handler404'
