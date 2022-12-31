@@ -45,7 +45,9 @@ def praesidia(request):
 
 
 def events(request):
+
     dt = timezone.now()
+
     _events = Event.objects.filter(end__gt=dt).order_by('start')
     return render(request, 'Jormungandr/events.html', {'events': _events})
 
