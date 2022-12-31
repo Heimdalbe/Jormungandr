@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+
+import dj_database_url
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -20,44 +22,35 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # LOAD ALL ENVIRONMENT VARIABLES
 load_dotenv()
 
-# SECURITY WARNING: keep the secret key used in production secret! default
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.getenv("DEBUG", default="0"))
+DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
 
 # Set all allowed hosts
-hosts = os.getenv('ALLOWED_HOSTS', default=None).split(',')
-ALLOWED_HOSTS = [
-    str(host) for host in hosts
-]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(' ')
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# In your .env file, write sqlite:///<path to Jormungandr>/Jormungandr/db.sqlite3
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-} if DEBUG else {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('DBNAME', default=''),
-        'USER': os.getenv('DBUSER', default=''),
-        'PASSWORD': os.getenv('DBPASSWORD', default=''),
-        'HOST': os.getenv('DBHOST', default='localhost'),
-        'PORT': '5432',
-    }
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),
 }
 
 # Email stuff
 MAILGUN_KEY = os.getenv('MAILGUN_KEY', default='')
 
 # Debug = False values
-SECURE_CONTENT_TYPE_NOSNIFF = int(os.getenv('NOSNIFF', default='1'))
-SECURE_BROWSER_XSS_FILTER = int(os.getenv('XSS_FILTER', default='1'))
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# SAMEORIGIN in Debug
+X_FRAME_OPTIONS = 'DENY'
 
 # Application definition
 
@@ -77,6 +70,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -146,7 +140,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'files')
 MEDIA_URL = '/files/'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_URL = '/intranet/login_user'
 
