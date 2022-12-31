@@ -8,8 +8,8 @@ db.sqlite3
 files/
 .idea/
 /static/
+static/
 .vscode/
-/Backend/migrations/
 /venv/
 
 .env
