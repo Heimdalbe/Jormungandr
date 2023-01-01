@@ -76,7 +76,8 @@
                             <a href="{{ sponsor.website }}" target="_blank">
                                 <img src="{{ sponsor.logo.url }}"
                                      class="sponsor{% if sponsor.inverted_color %} inverted{% endif %}"
-                                     alt="{{ sponsor.name }}">
+                                     alt="{{ sponsor.name }}"
+                                     onerror="this.onerror=null; this.style.width='200px';">
                             </a>
                         </div>
                         {% endfor %}
