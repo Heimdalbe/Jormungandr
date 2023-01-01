@@ -8,7 +8,8 @@ db.sqlite3
 files/
 .idea/
 /static/
-static/
+/data
+
 .vscode/
 /venv/
 
