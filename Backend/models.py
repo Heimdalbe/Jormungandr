@@ -184,13 +184,14 @@ class UserVotes(models.Model):
 class PraesidiumYear(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
+    display_name = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Praesidium Werkjaar'
         verbose_name_plural = 'Praesidium Werkjaren'
 
     def __str__(self):
-        return str(self.start) + " - " + str(self.end)
+        return self.display_name if self.display_name is not None else str(self.start) + " - " + str(self.end)
 
 
 class PraesidiumFunction(models.Model):
