@@ -29,7 +29,8 @@
                                     <div class="card-header">
                                         <h4>{{ event.name }}</h4>
                                     </div>
-                                    <img src="{{ event.poster.url }}" class="bottom-border-yellow img-fluid">
+                                    <img src="{{ event.poster.url }}" class="bottom-border-yellow img-fluid"
+                                         onerror="this.onerror=null; this.src='{% static "img/LegeBanner.jpg" %}'">
                                     <p>{{ event.start|date:"d/m/Y" }} om {{ event.start|date:"H:i" }}</p>
                                 </div>
                             </div>

@@ -22,8 +22,8 @@
 
         <div class="portfolio-details-container">
             <div class="owl-carousel portfolio-details-carousel" data-aos-delay="100" data-aos="fade-left">
-                <img src="{{ event.poster.url }}"
-                     class="img-fluid" alt="{{ event.name }}">
+                <img src="{{ event.poster.url }}" class="img-fluid" alt="{{ event.name }}"
+                    onerror="this.onerror=null; this.src='{% static "img/LegeBanner.jpg" %}'">
             </div>
 
             <div class="portfolio-info shadow-lg top-border-yellow" data-aos-delay="200" data-aos="fade-up">
