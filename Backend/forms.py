@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django import forms
+from django.contrib.auth.forms import PasswordResetForm
 
 from Backend.models import Profile, Election, Round
 
@@ -65,3 +66,16 @@ class RoundForm(ModelForm):
         self.fields['actief'].widget.attrs = {'class': 'form-control col-sm-2 mb-2'}
         self.fields['visible'].widget.attrs = {'class': 'form-control col-sm-2 mb-2'}
         self.fields['resultatenactief'].widget.attrs = {'class': 'form-control col-sm-2'}
+
+
+class UserPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(UserPasswordResetForm, self).__init__(*args, **kwargs)
+
+    email = forms.EmailField(label='', widget=forms.EmailInput(attrs={
+        'class': 'form-control',
+        'id': 'id_email',
+        'placeholder': 'johndoe@email.com',
+        'type': 'email',
+        'name': 'email'
+    }))
