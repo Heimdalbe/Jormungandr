@@ -16,11 +16,15 @@
                                     <select onchange="submit()" name="year" id="year"
                                             class="form-control praesidia-select">
                                         {% for year in years %}
-                                            <option value="{{ year.start|date:'Y' }}"
-                                                    {% if year.start|date:'Y' == selectedyear.start|date:'Y' %}selected="selected"
-                                                    {% endif %}>
-                                                {{ year.start|date:'Y' }} - {{ year.end|date:'Y' }}
-                                            </option>
+                                                <option value="{{ year.start|date:'Y' }}"
+                                                        {% if year.start|date:'Y' == selectedyear.start|date:'Y' %}selected="selected"
+                                                        {% endif %}>
+                                                    {% if year.display_name %}
+                                                        {{ year.display_name }}
+                                                    {% else %}
+                                                        {{ year.start|date:'Y' }} - {{ year.end|date:'Y' }}
+                                                    {% endif %}
+                                                </option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -31,11 +35,25 @@
 
                 {% if praesidium %}
                     <div class="section-title pt-5" data-aos="fade-in" data-aos-delay="100">
-                        <h2>Praesidium {{ selectedyear.start|date:'Y' }} - {{ selectedyear.end|date:'Y' }}</h2>
-                        <p>
-                            Dit jaar geven onderstaande mensen het beste van zichzelf om alles in goede banen te leiden
-                            binnen Heimdal.
-                        </p>
+                        {% if praesidium.0.praesidium_function|lower == "superschacht"|lower %}
+                            <h2>Superschachten van Heimdal</h2>
+                            <p>
+                                Deze schachtjes hebben zich volop gegeven tijdens hun schachtenjaar en de meeste schachtenpuntjes
+                                verzameld.
+                            </p>
+                        {% elif praesidium.0.praesidium_function|lower == "erelid"|lower %}
+                            <h2>Ereleden van Heimdal</h2>
+                            <p>
+                                Deze ereleden hebben jaren lang het uiterste gegeven voor de vereniging en daarom staan
+                                ze hier in de bloemetjes.
+                            </p>
+                        {% else %}
+                            <h2>Praesidium {{ selectedyear.start|date:'Y' }} - {{ selectedyear.end|date:'Y' }}</h2>
+                            <p>
+                                Dit jaar geven onderstaande mensen het beste van zichzelf om alles in goede banen te leiden
+                                binnen Heimdal.
+                            </p>
+                        {% endif %}
                     </div>
 
                     <div class="row pt-5">
@@ -44,7 +62,8 @@
                                 <!--Base info-->
                                 <div class="member extendable" data-aos="fade-up">
                                     <div class="pic"><img src="{{ lid.praesidium_member.photo }}" class="img-fluid"
-                                                          alt="{{ lid.praesidium_member.first_name }} {{ lid.praesidium_member.last_name }}">
+                                                          alt="{{ lid.praesidium_member.first_name }} {{ lid.praesidium_member.last_name }}"
+                                                          loading="lazy">
                                     </div>
                                     <div class="member-info">
                                         <h4>{{ lid.praesidium_member.first_name }} {{ lid.praesidium_member.last_name }}</h4>
