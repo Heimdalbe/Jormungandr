@@ -212,7 +212,6 @@ class PraesidiumMember(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20, blank=True, null=True)
-    photo = models.URLField(null=True)
     quote = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=200, blank=True, null=True)
     trivia = MarkdownxField()
@@ -233,6 +232,7 @@ class PraesidiumFunctionYearMember(models.Model):
     praesidium_year = models.ForeignKey(PraesidiumYear, on_delete=models.CASCADE)
     praesidium_member = models.ForeignKey(PraesidiumMember, on_delete=models.CASCADE)
     praesidium_function = models.ForeignKey(PraesidiumFunction, on_delete=models.CASCADE)
+    photo = models.URLField(null=True)
 
     class Meta:
         verbose_name = 'Praesidium Lid'
