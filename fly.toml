@@ -4,6 +4,7 @@ app = "jormungandr"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
+primary_region = "ams"
 
 [deploy]
   release_command = "python manage.py migrate --noinput"
