@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^stamboom/$', graph, name="stamboom"),
     url(r'^sendmail/$', send_mail_contact, name="sendmail"),
     url(r'^praesidium/(?P<pk>[0-9]+)?$', praesidium, name="praesidium"),
+    url(r'^img_upload/', img_upload, name="img_upload"),
     url(r'^(?P<page>.*)/$', cms, name='cms'),
 ]
 

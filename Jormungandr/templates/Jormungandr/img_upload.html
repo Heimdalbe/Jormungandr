@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upload images</title>
+    <link href="{% static 'img/favicon.png' %}" rel="icon">
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+    {% include 'Jormungandr/stylesheets.html' %}
+  </head>
+  <body class="p-4 bg-stone-50 font-roboto">
+    {% include 'Jormungandr/navigation.html' %}
+    <div class="max-w-6xl mx-auto p-16 pt-32">
+        <div class="p-2 rounded-lg shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
+          <div class="m-2 flxt-4xex justify-between">
+            <h1 class="tel">Upload images</h1>
+          </div>
+          <form role="form" action="{% url 'img_upload'%}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="m-2">
+              <textarea class="my-2 w-full p-1 border-2 border-stone-400 rounded-[.2rem] resize-none" name="image_links" id="imageLinksTextarea" rows="10" placeholder="Image links" ondrop="newLine(event)"></textarea>
+              <label for="searchInput">album :</label>
+              <select class="mb-2 p-1 w-full border-2 border-stone-400 rounded-[.2rem]" id="searchInput" name="album" />
+                {% for album in albums %}
+                    <option value="{{ album.name }}">{{ album.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="flex justify-center">
+              <button class="my-2 p-2 px-4 text-white bg-blue-500 rounded-[.2rem]" type="submit" id="submitBtn">Done</button>
+            </div>
+          </form>
+        </div>
+    </div>
+
+  </body>
+  {% include 'Jormungandr/scripts.html' %}
+  <script>
+    function newLine(event) {
+      event.preventDefault();
+      var data = event.dataTransfer.getData("text");
+      event.target.value += data + "\n";
+    }
+
+    function searchInputChanged() {
+      // Add your JavaScript logic here
+      var inputValue = document.getElementById('searchInput').value;
+    }
+
+    // Fetch the JSON data from images.json
+    fetch('/images.json')
+      .then(response => response.json())
+      .then(data => genAlbumList(data.albums))
+      .catch(error => console.error('Error fetching data:', error));
+
+    // DANGER: GPT WORKS AHEAD
+    async function convertImageUrls() {
+      const textarea = document.getElementById('imageLinksTextarea');
+      const albumInput = document.getElementById('searchInput');
+      const albumsDatalist = document.getElementById('albums-datalist');
+
+      try {
+        // Fetch existing data from images.json
+        const existingResponse = await fetch('/images.json');
+        const existingData = await existingResponse.json();
+
+        const albumName = albumInput.value || albumsDatalist.value;
+
+        // Process existing albums
+        let existingAlbum = existingData.albums.find(album => album.name === albumName);
+
+        if (!existingAlbum) {
+          // If the album doesn't exist, create a new one
+          existingAlbum = {
+            name: albumName || "default",
+            images: []
+          };
+          existingData.albums.push(existingAlbum);
+        }
+
+        // Process new images from the textarea
+        const newImages = textarea.value.split('\n').map(line => {
+          if (line.trim() !== '') {
+            const imageUrl = line.replace(/^(https?:\/\/)?(?:www\.)?(?:i\.)?imgur\.com\/(.+?)(?:\.(?:png|jpeg|jpg))?$/i, 'https://i.imgur.com/$2');
+            return {
+              link: `${imageUrl}.jpeg`,
+              thumbnail: `${imageUrl}l.jpeg`,
+              alt: "img"
+            };
+          }
+          return null;
+        }).filter(image => image !== null);
+
+        // Merge new images into the existing album
+        existingAlbum.images = [...existingAlbum.images, ...newImages];
+
+        // Update the JSON data on the server
+        const updateResponse = await fetch('http://localhost:3000/update-images', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(existingData),
+        });
+
+        if (updateResponse.ok) {
+          alert('Images uploaded successfully!');
+          window.location.href = '/src/html/index.html';
+        } else {
+          alert('Failed to update images.json');
+        }
+      } catch (error) {
+        console.error('Error fetching or updating existing data:', error);
+      }
+    }
+
+  </script>
+</html>
