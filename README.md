@@ -109,7 +109,7 @@ exit
         echo "SECRET_KEY=1234
         DEBUG=true
         ALLOWED_HOSTS=.localhost 127.0.0.1 [::1]
-        DATABASE_URL=
+        DATABASE_URL=sqlite:///$(pwd)/db.sqlite3
         CSRF_TRUSTED_ORIGINS=" > .env
         ```
 
