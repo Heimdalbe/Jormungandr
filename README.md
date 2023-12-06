@@ -109,7 +109,7 @@ exit
         echo "SECRET_KEY=1234
         DEBUG=true
         ALLOWED_HOSTS=.localhost 127.0.0.1 [::1]
-        DATABASE_URL="
+        DATABASE_URL=" > .env
         ```
 
 12. Set `DATABASE_URL` in the `.env` file:
