@@ -100,7 +100,7 @@ exit
         echo "SECRET_KEY=1234
         DEBUG=true
         ALLOWED_HOSTS=.localhost 127.0.0.1 [::1]
-        DATABASE_URL=
+        DATABASE_URL=sqlite:///$(pwd)/db.sqlite3
         CSRF_TRUSTED_ORIGINS="| Out-File -FilePath .env -Encoding ascii
         ```
 
@@ -114,11 +114,7 @@ exit
         CSRF_TRUSTED_ORIGINS=" > .env
         ```
 
-12. Set `DATABASE_URL` in the `.env` file:
-
-    - Example: `sqlite:///C:/Users/jonah/Documents/code/Jormungandr/db.sqlite3`
-
-13. Run the migration commands:
+12. Run the migration commands:
 
     ```sh
     python manage.py makemigrations
@@ -126,13 +122,13 @@ exit
     python manage.py migrate
     ```
 
-14. Create a superuser:
+13. Create a superuser:
 
     ```sh
     python manage.py createsuperuser
     ```
 
-15. Run the server:
+14. Run the server:
 
     ```sh
     python manage.py runserver
