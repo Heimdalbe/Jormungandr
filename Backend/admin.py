@@ -24,6 +24,17 @@ admin.site.register(GraphNode)
 admin.site.register(FooterPage)
 
 
+class NavSubItemInline(admin.TabularInline):
+    model = NavSubItem
+    extra = 1
+
+
+class NavTopItemAdmin(admin.ModelAdmin):
+    inlines = [
+        NavSubItemInline,
+    ]
+
+
 class PictureInline(admin.TabularInline):
     model = Picture
     extra = 1
@@ -83,3 +94,6 @@ admin.site.register(Profile, CustomProfileAdmin)
 admin.site.unregister(PhotoAlbum)
 admin.site.unregister(Picture)
 admin.site.register(PhotoAlbum, PhotoAlbumAdmin)
+admin.site.unregister(NavSubItem)
+admin.site.unregister(NavTopItem)
+admin.site.register(NavTopItem, NavTopItemAdmin)
