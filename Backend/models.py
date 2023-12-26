@@ -1,6 +1,7 @@
 from enum import IntEnum
 
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db import models, IntegrityError
 from django.db.models.signals import post_save
 from markdownx.models import MarkdownxField
@@ -267,11 +268,21 @@ class PhotoAlbum(models.Model):
 
 
 class Picture(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=300, blank=True, null=True)
-    link = models.CharField(max_length=150, unique=True)
+    name = models.CharField(max_length=300)
     is_carousel_pic = models.BooleanField(default=False)
     album = models.ForeignKey(PhotoAlbum, on_delete=models.CASCADE)
+
+    """
+    Validate the file size of the given image. 
+    This so that absurdly large images aren't permitted (Reference to the 20MB banner that was once created.)
+    """
+    def validate_image(fieldfile_obj):
+        filesize = fieldfile_obj.file.size
+        mb_limit = 5.0
+        if filesize > mb_limit*1024*1024:
+            raise ValidationError("Max file size is %sMB" % str(mb_limit))
+
+    file = models.ImageField(upload_to="album", null=True, validators=[validate_image])
 
     def __str__(self):
         return self.album.__str__() + " - " + self.name

@@ -16,7 +16,7 @@
                                 <a href="{% url 'gallery' album.pk %}">
                                     {% if album.picture_set.all %}
                                         {% with album.picture_set.all|first as image %}
-                                            <img src="{{ image.link }}" class="card-img-top" alt="{{ image.name }}"
+                                            <img src="{{ image.file.url }}" class="card-img-top" alt="{{ image.name }}"
                                                  loading="lazy">
                                         {% endwith %}
                                     {% else %}

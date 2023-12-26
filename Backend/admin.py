@@ -1,5 +1,6 @@
 from django.contrib import admin, messages
 from django.contrib.auth.admin import UserAdmin
+from django.urls import resolve
 from django.utils.translation import ngettext
 
 from .models import *
@@ -21,6 +22,17 @@ admin.site.register(NavTopItem)
 admin.site.register(NavSubItem)
 admin.site.register(GraphNode)
 admin.site.register(FooterPage)
+
+
+class PictureInline(admin.TabularInline):
+    model = Picture
+    extra = 1
+
+
+class PhotoAlbumAdmin(admin.ModelAdmin):
+    inlines = [
+        PictureInline,
+    ]
 
 
 class ProfileInline(admin.StackedInline):
@@ -68,3 +80,6 @@ class CustomProfileAdmin(admin.ModelAdmin):
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Profile, CustomProfileAdmin)
+admin.site.unregister(PhotoAlbum)
+admin.site.unregister(Picture)
+admin.site.register(PhotoAlbum, PhotoAlbumAdmin)
