@@ -232,7 +232,7 @@ class PraesidiumFunctionYearMember(models.Model):
     praesidium_year = models.ForeignKey(PraesidiumYear, on_delete=models.CASCADE)
     praesidium_member = models.ForeignKey(PraesidiumMember, on_delete=models.CASCADE)
     praesidium_function = models.ForeignKey(PraesidiumFunction, on_delete=models.CASCADE)
-    photo = models.URLField(null=True)
+    photo = models.ImageField(upload_to='praesidia/%Y/', null=True)
 
     class Meta:
         verbose_name = 'Praesidium Lid'
