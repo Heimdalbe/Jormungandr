@@ -133,16 +133,22 @@ class Round(models.Model):
     @property
     def choices_results(self):
         choices = self.choice_set.order_by('keuze')
-        sum = 0
-        for obj in choices:
-            sum += obj.votes
+
+        total_votes = sum(
+            obj.votes for obj in choices
+            if obj.keuze.lower() != "onthouding"
+        )
+
         res = []
-        if sum == 0:
-            for obj in choices:
-                res.append(ChoicesDTO(obj.keuze, obj.votes, 0))
-        else:
-            for obj in choices:
-                res.append(ChoicesDTO(obj.keuze, obj.votes, obj.votes / sum))
+
+        for obj in choices:
+            percentage = 0
+
+            if total_votes > 0 and obj.keuze.lower() != "onthouding":
+                percentage = obj.votes / total_votes
+
+            res.append(ChoicesDTO(obj.keuze, obj.votes, percentage))
+
         return res
 
 
