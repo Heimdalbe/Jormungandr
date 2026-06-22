@@ -133,22 +133,16 @@ class Round(models.Model):
     @property
     def choices_results(self):
         choices = self.choice_set.order_by('keuze')
-
-        total_votes = sum(
-            obj.votes for obj in choices
-            if obj.keuze.lower() != "onthouding"
-        )
-
-        res = []
-
+        sum = 0
         for obj in choices:
-            percentage = 0
-
-            if total_votes > 0 and obj.keuze.lower() != "onthouding":
-                percentage = obj.votes / total_votes
-
-            res.append(ChoicesDTO(obj.keuze, obj.votes, percentage))
-
+            sum += obj.votes
+        res = []
+        if sum == 0:
+            for obj in choices:
+                res.append(ChoicesDTO(obj.keuze, obj.votes, 0))
+        else:
+            for obj in choices:
+                res.append(ChoicesDTO(obj.keuze, obj.votes, obj.votes / sum))
         return res
 
 
@@ -190,13 +184,14 @@ class UserVotes(models.Model):
 class PraesidiumYear(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
+    display_name = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Praesidium Werkjaar'
         verbose_name_plural = 'Praesidium Werkjaren'
 
     def __str__(self):
-        return str(self.start) + " - " + str(self.end)
+        return self.display_name if self.display_name is not None else str(self.start) + " - " + str(self.end)
 
 
 class PraesidiumFunction(models.Model):
@@ -217,7 +212,6 @@ class PraesidiumMember(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20, blank=True, null=True)
-    photo = models.URLField(null=True)
     quote = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=200, blank=True, null=True)
     trivia = MarkdownxField()
@@ -238,6 +232,7 @@ class PraesidiumFunctionYearMember(models.Model):
     praesidium_year = models.ForeignKey(PraesidiumYear, on_delete=models.CASCADE)
     praesidium_member = models.ForeignKey(PraesidiumMember, on_delete=models.CASCADE)
     praesidium_function = models.ForeignKey(PraesidiumFunction, on_delete=models.CASCADE)
+    photo = models.URLField(null=True)
 
     class Meta:
         verbose_name = 'Praesidium Lid'

@@ -28,7 +28,7 @@
                 <div id="gallery">
                     {% for picture in album.picture_set.all %}
                         <a href="{{ picture.link }}" data-fslightbox="gallery">
-                            <img src="{{ picture.link }}" class="img-fluid" alt="{{ picture.name }}">
+                            <img src="{{ picture.link }}" class="img-fluid" alt="{{ picture.name }}" loading="lazy">
                         </a>
                     {% endfor %}
                 </div>
