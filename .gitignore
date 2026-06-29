@@ -11,7 +11,7 @@ files/
 static/
 .vscode/
 /venv/
-certs/
 
+init.sql
 .env
 .production.env
