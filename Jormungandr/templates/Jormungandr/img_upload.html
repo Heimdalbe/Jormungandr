@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upload images</title>
+    <link href="{% static 'img/favicon.png' %}" rel="icon">
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+    {% include 'Jormungandr/stylesheets.html' %}
+  </head>
+  <body class="p-4 bg-stone-50 font-roboto">
+    {% include 'Jormungandr/navigation.html' %}
+    <div class="max-w-6xl mx-auto p-16 pt-32">
+        <div class="p-2 rounded-lg shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
+          <div class="m-2 flxt-4xex justify-between">
+            <h1 class="tel">Upload images</h1>
+          </div>
+          <form role="form" action="{% url 'img_upload'%}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="m-2">
+              <textarea class="my-2 w-full p-1 border-2 border-stone-400 rounded-[.2rem] resize-none" name="image_links" id="imageLinksTextarea" rows="10" placeholder="Image links" ondrop="newLine(event)"></textarea>
+              <label for="searchInput">album :</label>
+              <select class="mb-2 p-1 w-full border-2 border-stone-400 rounded-[.2rem]" id="searchInput" name="album" />
+                {% for album in albums %}
+                    <option value="{{ album.name }}">{{ album.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="flex justify-center">
+              <button class="my-2 p-2 px-4 text-white bg-blue-500 rounded-[.2rem]" type="submit" id="submitBtn">Done</button>
+            </div>
+          </form>
+        </div>
+    </div>
+
+  </body>
+  {% include 'Jormungandr/scripts.html' %}
+  <script>
+    function newLine(event) {
+      event.preventDefault();
+      var data = event.dataTransfer.getData("text");
+      event.target.value += data + "\n";
+    }
+  </script>
+</html>
